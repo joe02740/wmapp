@@ -1,0 +1,291 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'IM Fell English', serif !important;
+}
+
+body {
+  font-family: 'IM Fell English', serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.App {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+/* Animation effects */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Hover effects */
+.hover-transform {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hover-transform:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Enhanced rounded corners */
+.rounded-lg {
+  border-radius: 2rem !important;
+}
+
+/* Add subtle shadows to cards */
+.shadow-card {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.shadow-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced text readability */
+h2, p {
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Header styles */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1B3664;
+  color: white;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-title {
+  color: #FFD700;
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 0 auto;
+  /* position in center regardless of other elements */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.auth-buttons {
+  margin-left: auto;
+}
+
+/* Hamburger menu icon */
+.menu-button {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 110;
+}
+
+.hamburger-icon {
+  width: 25px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #FFD700;
+  border-radius: 2px;
+}
+
+/* Side menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: #1B3664;
+  padding: 2rem 0;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #FFD700;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.side-menu ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.side-menu li {
+  padding: 0.8rem 1.5rem;
+  color: white;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.side-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: #FFD700;
+}
+
+.side-menu li.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: #FFD700;
+  font-weight: bold;
+}
+
+/* User info in side menu */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid #FFD700;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.user-email {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+/* Main content area */
+.app-main {
+  flex-grow: 1;
+  width: 100%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.welcome-message h2 {
+  color: #1B3664;
+  margin-bottom: 1rem;
+}
+
+.sign-in-btn {
+  background-color: #1B3664;
+  color: #FFD700;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Custom scrollbar for chat area */
+.chat-messages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(27, 54, 100, 0.5) transparent;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(27, 54, 100, 0.5);
+  border-radius: 3px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+  
+  .app-title {
+    font-size: 1.4rem;
+  }
+  
+  .side-menu {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.2rem;
+  }
+  
+  .side-menu {
+    width: 100%;
+  }
+}

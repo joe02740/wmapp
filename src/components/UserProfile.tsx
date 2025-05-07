@@ -1,0 +1,268 @@
+import { useState, useEffect } from 'react';
+import { useUser } from '@clerk/clerk-react';
+import './UserProfile.css';
+
+interface UsageData {
+  user_id: string;
+  subscription_tier: string;
+  subscription_end_date: string | null;
+  usage: {
+    daily: number;
+    daily_limit: number;
+    monthly: number;
+    monthly_limit: number;
+    total: number;
+  };
+  recent_queries: {
+    query: string;
+    scope: string;
+    tokens_used: number;
+    created_at: string;
+  }[];
+}
+
+const UserProfile = () => {
+  const { user } = useUser();
+  const [usageData, setUsageData] = useState<UsageData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedTier, setSelectedTier] = useState<string>('');
+  
+  // Plan prices map
+  const tierPrices: { [key: string]: number } = {
+    'free': 0,
+    'basic': 9.99,
+    'pro': 29.99
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchUsageData();
+    }
+  }, [user]);
+
+  const fetchUsageData = async () => {
+    if (!user) return;
+    
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/usage?user_id=${user.id}`);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching usage data: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      setUsageData(data);
+      setSelectedTier(data.subscription_tier);
+    } catch (err) {
+      console.error('Error fetching usage data:', err);
+      setError('Failed to load your usage data. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpgradeSubscription = async () => {
+    if (!user || !selectedTier || selectedTier === usageData?.subscription_tier) return;
+    
+    try {
+      setLoading(true);
+      
+      // If downgrading to free tier, process immediately
+      if (selectedTier === 'free') {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: user.id,
+            tier: selectedTier
+          }),
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Error updating subscription: ${response.status}`);
+        }
+        
+        // Refresh usage data after updating subscription
+        await fetchUsageData();
+        alert(`Your subscription has been updated to ${selectedTier} tier!`);
+      } else {
+        // For paid tiers, redirect to Stripe Checkout
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: user.id,
+            tier: selectedTier
+          }),
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Error creating checkout session: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Redirect to Stripe Checkout
+        window.location.href = data.checkoutUrl;
+      }
+    } catch (err) {
+      console.error('Error updating subscription:', err);
+      setError(err instanceof Error ? err.message : 'Failed to update your subscription. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  const formatTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  };
+
+  if (loading && !usageData) {
+    return <div className="loading">Loading your profile...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
+  return (
+    <div className="user-profile">
+      <h2>Your Profile</h2>
+      
+      {usageData && (
+        <>
+          <div className="profile-section">
+            <h3>Subscription</h3>
+            <div className="subscription-info">
+              <p>Current Tier: <span className="tier-badge">{usageData.subscription_tier}</span></p>
+              {usageData.subscription_end_date && (
+                <p>Expires: {formatDate(usageData.subscription_end_date)}</p>
+              )}
+            </div>
+          </div>
+          
+          <div className="profile-section">
+            <h3>Usage Statistics</h3>
+            <div className="usage-stats">
+              <div className="usage-meter">
+                <p>Daily Usage</p>
+                <div className="meter">
+                  <div 
+                    className="meter-fill" 
+                    style={{ 
+                      width: `${Math.min(100, (usageData.usage.daily / usageData.usage.daily_limit) * 100)}%`,
+                      backgroundColor: usageData.usage.daily > usageData.usage.daily_limit * 0.8 ? '#e74c3c' : '#3498db'
+                    }}
+                  ></div>
+                </div>
+                <p className="meter-text">
+                  {usageData.usage.daily} of {usageData.usage.daily_limit} queries
+                </p>
+              </div>
+              
+              <div className="usage-meter">
+                <p>Monthly Usage</p>
+                <div className="meter">
+                  <div 
+                    className="meter-fill" 
+                    style={{ 
+                      width: `${Math.min(100, (usageData.usage.monthly / usageData.usage.monthly_limit) * 100)}%`,
+                      backgroundColor: usageData.usage.monthly > usageData.usage.monthly_limit * 0.8 ? '#e74c3c' : '#3498db'
+                    }}
+                  ></div>
+                </div>
+                <p className="meter-text">
+                  {usageData.usage.monthly} of {usageData.usage.monthly_limit} queries
+                </p>
+              </div>
+              
+              <p className="total-usage">Total Queries: {usageData.usage.total}</p>
+            </div>
+          </div>
+          
+          <div className="profile-section">
+            <h3>Recent Queries</h3>
+            {usageData.recent_queries.length > 0 ? (
+              <div className="recent-queries">
+                {usageData.recent_queries.map((query, index) => (
+                  <div key={index} className="query-item">
+                    <div className="query-text">"{query.query}"</div>
+                    <div className="query-meta">
+                      <span>{query.scope}</span>
+                      <span>{formatDate(query.created_at)} at {formatTime(query.created_at)}</span>
+                      <span>{query.tokens_used} tokens</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No queries yet.</p>
+            )}
+          </div>
+          
+          <div className="profile-section">
+            <h3>Upgrade Subscription</h3>
+            <div className="subscription-plans">
+              <div className={`plan ${selectedTier === 'free' ? 'selected' : ''}`} onClick={() => setSelectedTier('free')}>
+                <h4>Free</h4>
+                <p className="price">$0 / month</p>
+                <ul>
+                  <li>1 query per day</li>
+                  <li>10 queries per month</li>
+                  <li>Basic response quality</li>
+                </ul>
+                <div className="plan-badge">Current: {usageData.subscription_tier === 'free' ? 'Yes' : 'No'}</div>
+              </div>
+              
+              <div className={`plan ${selectedTier === 'basic' ? 'selected' : ''}`} onClick={() => setSelectedTier('basic')}>
+                <h4>Basic</h4>
+                <p className="price">$9.99 / month</p>
+                <ul>
+                  <li>10 queries per day</li>
+                  <li>100 queries per month</li>
+                  <li>Standard response quality</li>
+                </ul>
+                <div className="plan-badge">Current: {usageData.subscription_tier === 'basic' ? 'Yes' : 'No'}</div>
+              </div>
+              
+              <div className={`plan ${selectedTier === 'pro' ? 'selected' : ''}`} onClick={() => setSelectedTier('pro')}>
+                <h4>Professional</h4>
+                <p className="price">$29.99 / month</p>
+                <ul>
+                  <li>50 queries per day</li>
+                  <li>500 queries per month</li>
+                  <li>Premium response quality</li>
+                </ul>
+                <div className="plan-badge">Current: {usageData.subscription_tier === 'pro' ? 'Yes' : 'No'}</div>
+              </div>
+            </div>
+            
+            <button 
+              className="upgrade-button"
+              disabled={selectedTier === usageData.subscription_tier || loading}
+              onClick={handleUpgradeSubscription}
+            >
+              {loading ? 'Processing...' : `Upgrade to ${selectedTier !== usageData.subscription_tier ? selectedTier : 'selected'} tier`}
+            </button>
+            <p className="disclaimer">* Free downgrades are processed immediately. Paid upgrades require payment information.</p>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default UserProfile;

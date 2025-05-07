@@ -1,41 +1,68 @@
-﻿# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
-
-# Production
-/build
-/frontend/build
-
-# Environments
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-/backend/venv/
-__pycache__/
-*.py[cod]
-*.class
-
 # Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.log
+pnpm-debug.log*
+lerna-debug.log*
 
-# Editor directories and files
+# Virtual Environment
+venv/
+backend/venv/
+**/venv/
+env/
+.env
+.venv
+env/
+ENV/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Local development settings
+.env.local
+.env.development.local
+
+# IDE files
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# Node modules
+node_modules/
+
+# Build outputs
+/build
+/dist
+
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-# OS generated files
-.DS_Store
-Thumbs.db
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

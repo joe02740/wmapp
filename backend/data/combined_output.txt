@@ -1,0 +1,1733 @@
+
+
+=== Image (3).jpg ===
+
+Welcome ‘Aboard
+
+February, 2004
+This report is brought to you by your Massachusetts Weights & Measures Association.
+
+I first wrote this report in response to a perceived need. The Division of Standards
+sends a package of information to all new Sealers but it is focused, as it should be, on the
+state law. The Division is limited on what it can say. I found there was no source available
+for all the little details that help this job make sense. I was not alone in feeling unprepared for
+the job. Given that there is usually only one Sealer in Town there just was not a lot of
+information available. I started asking questions and taking notes. These reports are a
+collection of what I found.
+
+I need to thank all of you who have found value in what I have written and said so. It
+is always nice to get positive feedback.
+
+The original report was distributed in early 2001 and proved so popular we had to go
+to reprints in October 2003. The need is still there as new people are appointed. It is a look at
+what we do as Sealers.
+
+Thope this reflects some of what the new Sealer needs to know. Making this
+document available does not imply endorsement and the contents are entirely my
+responsibility, mistakes and all. The opinions are mine but they are based on inputs from
+many Sealers.
+
+This book is an expansion of the earlier book and it includes much taken from
+meetings over the years. Thank you for helping me develop this document.
+
+Joe Shea
+Deputy Sealer
+Duxbury, MA
+
+
+=== Image (4).jpg ===
+
+Introduction
+
+Welcome to the always-interesting world of Weights and Measures as practiced in the
+Commonwealth of Massachusetts. This report is a cobbled assembly of tips opinions and
+facts gleaned from a few years of attending meetings, completing 5 correspondence courses ,
+a few NIST courses on related topics and digesting the great deal of information shared by
+the old hands. The training given at meetings is also invaluable. Many long term Sealers are
+always there and have been very generous with time and help. If you want help it will
+probably be there. In particular I have to recognize the efforts of the Boys and Girls from
+Barnstable. The Sealers/ Inspectors from the Cape gave much time to help me and others
+learn some of the ropes. Steve Agostinelli has been mentor, instructor and overall guru for
+others and myself. The Division of Standards took me in and helped me get up to speed on
+some aspects of this work. They too deserve thanks. I have had help in reviewing this from
+various members of the Executive Committee of the Mass. Weights and Measures
+Association.
+
+There is nothing here that will “make you a Sealer”. I will not be addressing the specifics
+of testing and evaluation. I will be giving you information to supplement the sometimes-dry
+technical language found in the laws and NIST Handbooks. I also hope to share tips and
+background information. ;
+
+In piecing this revised edition together I have used a lot of sources from the Sealer
+community. I have to acknowledge copying some information generously offered. This
+revision probably would not work but for the “new” information added. Some of this
+collected wisdom comes from people who have been around so long the original study
+courses were written on clay tablets.
+
+I am assuming that most of you reading this will be new to the job. The purpose here
+is to share some heads up information. This report will hopefully address the gaps in
+information and at least point you to the answers. I will not be quoting much law here but
+will be sharing some conventional wisdom. I will endeavor not to give you any bad
+information. I would appreciate any constructive criticism.
+
+The Division of Standards will have sent you an information package containing the
+appropriate laws and regulations. It will also address the entire process of getting and
+remaining certified. They will also send you the form for the current years Annual Report. It
+is not expected to change from year to year. I have included the current one for you to see
+what information you will need to gather. Some Sealers have the Annual Report on a
+template in their computers and only have to fill in the blanks. For those of you on the cutting
+edge ask around at the next meeting, someone will have it.
+
+The information presented here will duplicate some of the information in the package
+sent out by the Division. It is repeated here because even the old hands will get this and the
+information is still valid.
+
+
+=== Image (5).jpg ===
+
+I believe it is important that you know that Sealing in this millennium is just NOT the
+cakewalk that some old heads remember, if indeed it ever was. I still encounter new Sealers
+who took the job with no clue as to the broad areas, which we cover. They rely on a distant
+memory of what some old timer did or did not do a few years ago. This is “not your fathers
+Oldsmobile.” Things have really changed. The electronic age has brought us remarkable
+levels of accuracy but it has also brought a more sophisticated technology. At the same time a
+huge increase in the volume and value of goods has occurred. We inspect and test but do far
+less adjusting than before. There may be some seriously uninformed people out there that
+you may have to educate a bit to get your salary or expenses updated. The changes in
+technology and commerce have been dramatic yet many jurisdictions operate today as though
+nothing has changed in the last 25 or 50 years. That is a mistake, as you will come to
+understand.
+
+In this report I am just scratching the surface of the information you will need to
+“have. 1 am making no attempt to usurp anyone else’s turf or to interpret laws and regulations.
+Apply what you learn here then modify it to fit you. Many jurisdictions have a wide variety
+of equipment to test and inspect. Some are very specialized. Some of you will have
+production facilities and a few will have rail yards. A lucky few will have only digital scales,
+modem gas pumps, no oil trucks or taximeters and adequate pay and tools.
+
+Disclaimer
+
+In this document a number of sources and service providers are mentioned. I am
+referring to the equipment you will be using or renting. You should know that in all cases
+there is likely a wider selection available. Consult with others in the industry or the Division
+of Standards office. In the performance of your duties an owner might ask you for advice, on
+locating a new scale or service provider. The very best advice you can give would be to refer
+all queries to the yellow pages. Do not get caught up in the recommending game.
+
+Equity in the Market Place
+
+Is the short name for what we strive to achieve. An excellent summary of activities
+can be found in Handbook 82 on Weights and Measures Administration. “The importance to
+a community of adequate weights and measures supervision can scarcely be overestimated.
+Next to the personal safety and health of the people, one of the most important of the
+fundamental obligations of the State or municipality to its citizens is this of the regulation of
+commercial weighing and measuring instruments and the exercise of reasonable control over
+the users thereof. There is no single individual in a community whose interests are not
+affected by these considerations, for weighing and measuring operations, to a greater or
+lesser degree, enter into the distribution of all the necessities of life, particularly of food and
+fuel.”
+
+“ The functions of the weights and measures official are to safeguard the entire public
+whom he (she) serves in all matters involving the commercial determination of quantity — to
+see to it that, whenever merchandise or service is bought or sold by weight or measure, a just
+
+
+=== Image (6).jpg ===
+
+weight or a just measure is delivered, and that fraud, carelessness and misrepresentation in all
+“quantity” aspects of such transactions are eliminated.”
+
+Division of Standards
+
+The Boss ( Commissioner ) is David Rodrigues. The Assistant
+Director is Mark Merante. The phone number is 617-727-3480.
+
+The Training Officer conducts the testing and record keeping for the initial
+
+~ qualification and ongoing required training. Steve also coilates the annual reports you will be
+
+submitting each January . He has other duties within the Division as assigned.
+The comissioner and director attend many of our meetings so you can usually speak to
+someone from the Division of Standards on a face-to-face basis.
+
+There are several others who spend much time in the field. If you have a problem in
+the field it is likely that the commissioner will dispatch an Inspector to your aid if the matter cannot
+be resolved over the phone. A list of the Division of Standards Inspectors and telephone
+numbers is appended. The Field Inspectors from the Division usually attend the statewide
+meetings of this association. Thus you can nurture a working relationship with the people
+who will come to your assistance when needed.
+
+These Inspectors are responsible for enforcement of Standards including
+those of concern to us and for many specialized tests. They also perform random inspections
+in all jurisdictions and carry out programs set up by the Division of Standards. They can and
+do come to your community on a random basis to see if all is going well. Usually you will
+not know they have been there unless a problem is revealed.
+
+The Division also handles the licensing for Hawkers and Peddlers, Transient
+Vendors, Auctioneers, Motor Vehicle Fuel and Oil Dealers and Automobile Damage Repair
+Shops.
+
+They are very helpful as a resource to any one trying to get started and to help when
+things get tough.
+
+This is the Office that gets your Annual Report in January.
+METROLOGY
+
+This is a fancy name for the science of precise measurements and the associated
+calibration of equipment. Ray Costa, State Metrologist & Laboratory Manager and Hain "Will' Setow Call Division of Standards Metrology Lab, Hain "Will' Setow at(508) 532-1200, manages the state lab and he
+will be happy to help you with questions about the condition and testing of your equipment.
+There is certain preparatory work he would ask you to do prior to bringing your equipment to
+him. He will want the heavier 20# weights and any heavier ones cleaned and serialized. Each
+
+
+=== Image (7).jpg ===
+
+weight will need to be identifiable by using a serial number or some other means of
+differentiating them. None of this stuff can be rusty. There is a decided movement away from
+the 50# weights for obvious reasons. Before you abandon yours recheck the amounts of
+weight you will need to comply with the requirements of Handbook 44
+
+Ray will want your motor fuel test measure rinsed out with water and dried out. He
+will also want you to leave it all with him for perhaps a few weeks depending on the
+workload. The Commonwealth of Massachusetts Metrology Lab is now located at 250 Eliot Street, Suite 10-D, Ashland, MA 01721.  This is the same location the Division of
+Standards is using for classroom space.
+
+You can expect rejection of any weights that are brass, except as noted below, or
+some that have handles that twist off to access the adjustments. Test Measures that are
+leaking or have broken components will likely be rejected. The State iab does not do repairs.
+
+In the State of Massachusetts it is expected that your basic equipment will be retested
+by the state lab on a regular basis in order to insure accuracy and compliance with other
+metrology standards. Test Standards permanently installed in trucks or trailers are good for
+five years since they do not get banged around. The five gallon prover that sees limited usage
+and no abuse can go for up to five years between calibration while the provers that see heavy
+use or suffer the indignity of dents and dings need to come in much more often. Remember, a
+dented device may well be no longer accurate.
+
+Stainless Steel weights that have been carefully handled and have no corrosion or other
+defects can go five years also. If they get dropped or spilled onto the ground, or lobster tank,
+they need to go back for recalibration.
+
+The large provers, over ten gallons, need to be tested outside the state lab. Please arrange
+with Donny Smith, in advance to do this work during reasonable weather. There are no
+provisions for overnight stowage of equipment outside.
+
+Ray Costa can be reached at  Call Division of Standards Metrology Lab, Hain "Will' Setow at(508) 532-1200. That is his lab telephone number at 250 Eliot Street, Suite 10-D, Ashland, MA 01721
+
+Notes:
+Grip weights are those weights, not part of a kit, that have a handle cast into the
+weight itself. The older but still serviceable ones are cast iron and the newer ones are
+
+stainless steel.
+
+5 and 10 pound grip weights are no longer recognized in MA. If you are going to
+order any 5 and /or 10 pound weights get the cylindrical stainless steel one now available.
+
+For a Sealer using only field standards the weights do not need to be serialized or
+otherwise identified. The lab will stamp their mark on them.
+
+If ordering new 20/25/50 pound or up grip weights have the manufacturer stamp them
+with identifying data. This is not a requirement but would prove helpful.
+
+
+=== Image (8).jpg ===
+
+This is what the efforts of the State Lab are all about. The lab is the key link in the chain
+between the local sealers equipment and the national standards.
+
+Traceability
+
+All equipment used to measure in the world of metrology must conform to some very
+specific standards. The standards are in Handbook 105 of the National Institute of Standards
+and Technology. They are derived from the ISO 9000 series of standards, which contain the
+International Standards Organizations specifications for metrological accuracy. In short your
+one-pound weight is measured against the Commonwealths one-pound weight and
+determined to be within acceptable tolerances. The state weights are measured against the
+national standard weights, which are in turn validated against the international standards.
+Thus that weight rattling around, hopefully not, is part of a long tradition and a very accurate
+measure. A letter is issued to you certifying that your weight is a legal weight against which,
+under state law, you can compare and test scales. This same business applies to ALL of the
+weights you might use and ALL of the liquid measuring devices you might employ. Let us
+not forget that linear measuring devices are a part of this program. Think about that pencil
+marked measurement at the hardware store worktable when you bought some screening. The
+liquid measuring standards are calibrated in cubic inches with the same accuracy standards as
+are applied to our weights.
+
+Without the Traceability or the ability to trace the accuracy of your weights and measures to
+the state standards you could be on thin ice in either sealing or not sealing a device.
+
+Notes:
+
+Some people seem to take a perverse pride in not having their Field Standards
+certified by the State Lab. It is possible they are lazy, but the Traceability is just not there.
+This is leaving a hole in the program big enough to drive a truck through. How can a Sealer
+accurately calibrate a fuel meter if the accuracy of his prover is questionable?
+
+There are a large number of jurisdictions that have never (or at least in the last ten
+years) brought their equipment in for certification. If you have not, then by all means get that
+equipment tested in order to be able to do your job more professionally
+
+' Pharmacists can and do use brass weights for their balances. If they are in good
+physical shape and test within tolerance they are acceptable.
+
+Only the Sealers with brass weights that are on record at the metrology lab may use
+them. No new weight sets made of brass will be allowed.
+
+
+=== Image (9).jpg ===
+
+Administration
+
+Organization
+
+In some jurisdictions the Sealer is a stand-alone department developing its own
+budget and local reporting requirements. Some are integrated into the Building Inspectors
+Department. There are some communities that have a Director of Inspectional Services.
+These often include the Weights and Measures function just as it contains the Board of
+Health as well as the electrical and plumbing code enforcement component. In this structure
+the budget and salary issues are handled as a part of a larger budget. In addition to the
+statutory requirements for reporting to the Division you will likely have to prepare a written
+report for the jurisdictions Annual Report. The contents of that report are not predetermined.
+Some Sealers choose to report device numbers and / or fees collected. This exposes you to
+negative comments when the income you produce is far below the cost of having a Sealer.
+
+Some communities have budgeted amounts for general expenses including uniform
+items, membership expenses for our professional, mileage, education expenses, equipment
+expenses as well as salary.
+
+The question of adequate storage for your equipment needs to be addressed. If you
+are content storing everything at your home and if the Town has no problem with that then go
+with it. It is a responsibility to keep that equipment safe from damage and loss. I have seen
+the grip weights used as doorstops at Town Hall. This is not a proper way to store them.
+
+Some communities provide a vehicle for both the storage of the Sealers equipment
+and transportation. If you are offered a choice, a pickup with a cap is a better choice than a
+van because you will not be exposed to the benzene fumes of gasoline or the general
+unpleasantness of diesel fuel odors.
+
+More and more jurisdictions require that all transactions be paid by check and do not
+want Sealers handling cash. That is their call but it can increase the workload slightly. One
+reason’ for this local no cash policy is to protect you from any allegations of impropriety. The
+accountability can get difficult because not all stores or service stations can issue a check on
+the spot. You can consider stapling your card to the invoice you leave behind. That way you
+are assured the correct address and names are used.
+
+Fee Schedule
+
+State law in Chapter 98 established a fee schedule for sealing various weighing and
+measuring devices. It also allows cities and towns to set fees. Those fees in the law are quite
+out of date and most jurisdictions have revised their fee schedules to more appropriate levels.
+IF YOUR FEE SCHEDULE IS FIVE YEARS OLD OR OLDER YOU NEED TO
+UPDATE IT. The Consumer and Merchant Protection Act of 1998 added fees for scanner
+
+
+=== Image (10).jpg ===
+
+systems. These are locked in the law. Some communities strive to set the fee schedule at a
+level to reflect the actual cost of providing the service. Most do not.
+
+In addition to the fees provided for under the Weights and Measures laws there is
+Section 123 of Chapter 138 of the Acts of 1991 (Adding G.L. Ch.40, S.22F). This is a local
+option which if accepted by the community allows local jurisdiction to set reasonable fees
+and charges. This is the place where the authority to exceed the mandated state fee levels is
+found. It is also the place that allows a jurisdiction to set a fee for services not included in the
+state law. As with all laws you need to read the actual law to insure you do not cross some
+line.
+
+If adopted, and I will bet most towns have, then there is NO NEED for Town Meeting or City
+Council action in order to set or raise fees. Again, go to the actual law. I have appended some
+references to the law.
+
+With current statewide-figures you might be able to lead your community to update the local
+fee schedule. This could help you on the salary side of the issues. The Mass. Weights and
+Measures Association collects information from sealers about fees and shares the
+information. At the back of this report you will find a form called a Survey Update. Please
+photocopy the form complete the information and send it to the New Bedford address. If you
+have not submitted that information in the recent past please do it now. Whenever a salary or
+fee schedule changes it will be helpful if you will tell us. In this way your association can
+help you.
+
+Compensation
+
+Given that the range of work varies widely it is a delicate issue to make suggestions
+concerning pay. We have a lot of full time sealers especially in the cities while in the smaller
+towns The Mass. Weights and Measures Association is collecting this information on a
+voluntary basis from members. This information will be made available from time to time in
+order to assist you in determining an acceptable level of pay. One great danger is when the
+boss tries to count the devices and figure your pay accordingly. That attitude fails to
+acknowledge all the other work you are required by law to accomplish and ignores the
+professionalism of the job.
+
+' It should be noted that there are other components than pay. Allowances for
+education, uniforms, mileage, professional memberships and dues, conferences, etc. are hard
+to compare with another jurisdiction. In some communities the sealer is provided with an
+office and support, possibly a truck, and often storage for equipment. In some towns the
+Sealer works out of his house/garage
+
+Other Sealers
+
+Included in this report is a list of sealers by jurisdiction including phone numbers. It is a
+dynamic list and will constantly change but on 1/1/04 it was accurate. There is also a
+
+
+=== Image (11).jpg ===
+
+summary of the code letters to be used in the course of your sealing duties. This list is very
+stable.
+
+Massachusetts Municipal Association (MMA)
+
+The MMA is a group of communities that band together to share information on local
+government. They cover a lot of topics but the specific one of interest to you will be the
+compensation study. You should know that each member community shares the salary data.
+There is a separate book for Police, Fire, Unions and others. That information might be what
+your boss is looking at when he thinks about your pay. The data does NOT have any info on
+numbers of devices, mileage, training, supplies or any other breakdowns. I published an
+extract of the 2001 report in March 2002 and another extract is included with this report. In
+this current report 268 communities have contributed.
+
+Record Keeping / Reporting
+
+The Consumer and Merchant Protection Act of 1998 placed specific reporting
+requirements on us. The old annual reports are now history and the new forms are in use.
+They require far more details about your work. The recording of values from totalizers and
+other information has become essential. Appended you will find the January 2004 report. It is
+included to allow you to pre-gather the information in preparation for future annual reports.
+The Division will send to you the Annual Report for your preparation. I expect the reports to
+evolve over time and perhaps begin to ask for additional information. You can use the
+enclosed form to record and store some information for your jurisdiction. These annuai
+reports will be available in an electronic format soon. There will always be the option for a
+paper report.
+
+Quite apart from any Division of Standards guidelines is a requirement under state
+law for the preservation of records of Sealers of Weights and Measures. The disposal
+schedule is specific so I would consult with the enclosed form before cleaning out the old
+records. Some of them will have to be archived. The office ledger is a permanent record.
+
+COMPLAINTS
+
+When a citizen calls in a complaint about an apparent violation you are obliged to
+look into it. If the call goes to the Division they will give it a file number and look into
+the issue. They will then inform the local Sealer. The investigation of a complaint does
+
+not trigger the fee schedule. Records must be kept of any complaint received and any
+actions taken.
+
+Organizations
+Massachusetts Weights and Measures Association, P.O. Box 2430, Hyannis, MA.
+
+
+
+
+=== Image (12).jpg ===
+
+The W&M staff in Barnstable currently administers this group. The
+Massachusetts Weights and Measures Association have a number of subcommittees that help
+us perform our mission. A President, elected annually and guided by an executive Board
+leads the state association. They usually hold a mid -term meeting in the winter and an annual
+meeting in the fall. The location of these meetings changes on a regular basis. At all meetings
+information is presented on the current affairs of the world of Metrology and what
+information you can use to better do your job. Annual dues are $50.00
+
+Eastern Massachusetts Weights and Measures Association, c/o Weights and
+Measures 45 School Street, City Hall, Brockton, MA 02301-9927. Annual dues are $15.00.
+Contact Mark Coyne at 1-508-580-7120.
+
+Western Massachusetts Weights and Measures Association, 164 Belmont Avenue,
+
+West Springfield, MA, 01089
+National Conference on Weights and Measures is at 15245 Shady Grove Road, Suite 130,
+
+Rockville, MD 20850. Tele: 1-240-632-9454. They have a hotline 1-800-925-2453 that you
+can use to get a membership application by fax or you can call 1-301-975-4093 to talk to a
+live one. Dues for Sealers are $ 50.00 for an annual year ending June 30. Membership
+includes access to a member’s only portion of the website: news, membership directory,
+bylaws and device indexes.
+
+WHY GO TO MEETINGS?
+
+I am convinced that the only way one can stay up to date with the changes happening
+is to get a constant flow of new information. These meetings, those of the State and the
+Regional Mass Weights and Measures Associations have proven to be rich sources of
+information. I am familiar with the Eastern Mass Assoc. I am just as sure that the Western
+Mass. meetings are equally informative. There are a lot of opinions about what should be
+done in various situations. It is very useful to hear and share the experiences of some sealers.
+It’s the “been there done that” school of information sharing but it indeed works. There is a
+small amount of B.S. but you gradually figure out the players. Do not ever be reluctant to ask
+a question at these meetings, you might trigger a lively debate.
+
+’ Looking back I now realize that only a portion of the learning in this job happens
+during the presentations at these meetings. A vast amount of knowledge is passed along in
+the hallways, over lunch and during the “bull sessions”. Here is where you can get the
+questions answered and opinions rendered.
+
+Given that many of the active sealers have held their position for a long time it is
+difficult to have agenda items that will appeal to many of them. There seems to be a
+developing trend to review basic stuff about our job. That can only be productive.
+
+The various associations have newsletters, which promulgate all kinds of news and
+
+facts of value. The networking, handouts and free info alone make these meetings
+worthwhile. The Division of Standards usually briefs us on recent developments and
+
+-10-
+
+
+=== Image (13).jpg ===
+
+upcoming items of interest. Attendance at these meetings does count for continuing education
+credits.
+
+Certification
+
+The position of Sealer of Weights and Measures was defined by what we do and was
+lacking somewhat on the how we do it. As a result there were many disparate methods used
+by the hundreds of Sealers that have passed through this job. In the search for ways to get
+some standardization in this work and to insure the citizens of the Commonwealth were
+better served, it became apparent that some level of certification was called for. Chapter 295
+of the Acts of 1998 “The Consumer and Merchant Protection Act” was developed to address
+that need. Among other things the Act requires-that all Weights and Measures officials
+become certified after being appointed.
+
+Certification is achieved by taking and passing a written test and passing a practical
+(hands on) evaluation period with a State Inspector. Remember, the goal is standardization
+and safety as well as adequate understanding of the task at hand. The focus is on the small
+scale (30#) and the typical gasoline meter. These makes up the bulk of the devices Sealers
+deal with. There is also an emphasis on understanding where and how to find information.
+The written test covers such topics as the Massachusetts General Laws pertaining to Weights
+and Measures, portions of HB-44 and the Scale Modules as well as the Motor Fuel Dispenser
+Module. There are also some basic mathematical computations of the sort you would
+_ encounter on the job.
+
+Certification alone is but one component of the move toward professionalizing this
+job. There is a requirement for continuing education in order to remain certified. Basically it
+encourages attendance at association meetings and the formal training courses offered from
+time to time.
+
+Certification should be looked at as a minimum qualification on which to build.
+There are other devices and programs, which have their own educational requirements in
+order for you to properly inspect and test, as required.
+
+Education and Training
+
+The Division of Standards in conjunction with the several professional organizations
+will be conducting training on a regular basis around the state. Membership in the various
+organizations listed below will insure you are up to date on the latest offering. Continuing
+education is now a requirement.
+
+There is a certain amount of on the job training involved in this business but you
+should know that there is some formal training available. The Mass. Weights and Measures
+Association working with the Division of Standards has a series of formal training classes
+based on NIST developed programs. This is a classroom environment usually lasting 2-5
+days and often involving some hands on and or fieldwork. The typical class size is 25
+students and a central location is generally chosen or the training is conducted twice to allow
+a course in the eastern half and the western half of the state.
+
+«41 -
+
+
+=== Image (14).jpg ===
+
+There are NIST courses available for many of the devices you will be faced with.
+These courses require a NIST trained instructor. When the manpower is available these
+course are offered. Due to the cycle time before a course is offered again take any course that
+becomes available if you have that device in your jurisdiction
+
+Another choice could be the courses offered by Stabler Training Resources at 9497
+Long Road, Ostrander, Ohio, 43061. Tele: 1-740-666-1908 or e-mail at
+StablerTraining@Earthlink.net. I have completed five of these courses and find them to be
+very intense but very thorough. These are correspondence courses each is made up of ten
+lessons. I would suggest that you would get more from these courses if you do them with
+someone with whom you can argue and defend your answers. You will likely need someone
+to talk to while gaining this knowledge. The courses would be very difficult to attempt to do
+alone if you do not have some prior knowledge’of the topic. When you have completed his
+courses you will have a very in-depth knowledge of the subject. Tom Stabler is a well-known
+expert in the metrology iridustry with plenty of credentials for his background.
+
+The combination of some training by a friendly sealer or mentor, the working of the
+courses and participation in the various continuing education programs will round out your
+education. The one shortfall to getting all you know from one individual is that you pick up
+his/her biases and or other misinformation without a context in which to evaluate it.
+
+NIST: National Institute of Standards and Technology
+
+100 Bureau Drive, Stop 8901, Gaithersburg, MD 220899-8901. Website
+www.nist.gov/owm. They publish the Weights and Measures Quarterly mailed to all
+members. They have a 24-hour fax on demand program 1 — 800 — 925 - 2453. You will then
+follow the voice prompts. If you do not have access to a fax or computer call them at 1 — 301
+— 975 - 4004.
+
+NTEP: NATIONAL TYPE EVALUATION PROGRAM
+
+At the risk of sounding too technical you should know that many sealers function
+without knowing anything about NTEP. I submit that in order for you to do your job to the
+highest degree of professionalism you must be familiar with the NTEP program and use it.
+
+CoC: Certificate of Conformance
+
+In the 1980's the electronic age arrived in the field of metrology big time. The old
+analog devices are being superceded by potentially very precise digital devices. The more
+precise the ability of a device to measure then the more we demand of it. Every new device in
+commercial service will have a Certificate of Conformance certifying that the device meets
+some very specific standards as in Handbook #44. That Certificate, known to some as a
+C.0.C or an NTEP Certificate is issued by the National Type Evaluation Program, NTEP. The
+state of Massachusetts recognizes that authority and requires that a certificate be issued for
+any new device employed in retail trade. The Commonwealth reserves the right to type
+
+
+=== Image (15).jpg ===
+
+approve devices in lieu of a CoC. One of the many reasons a certificate is valuable is that it
+tells you as a Sealer some key information that is often not available elsewhere. Examples
+will be cited later. The key here is that you do NOT have the authority to modify or amend a
+CoC. or even to ignore it.
+
+All of the Certificates were once published in Publication #5. All of the information
+formerly available in Pub #5 is now found on line at the NCWM website. If you inherit a set
+of volumes of Pub #5 place them in the archives or the trash as they will be seriously out of
+date. One very effective way to be more accurate is to build a listing of the devices under
+your jurisdiction. If you then obtain a copy of the certificate you will know the facts of the
+legality of the device and have some key information needed by you to correctly do your job.
+The C.0.C is the ONLY place where you can find out if a fish platter or a tare basket is
+approved. If it is not listed on the Certificate of Conformance then it is not legal and you
+cannot decide that it is O.K. Different size/shape platters get swapped with other scales
+resulting in a scale that is no longer legal for trade. Copies of specific C.o.C ‘s can be
+obtained from the Divisioir of Standards or from several jurisdictions around the state. For ene
+those of you on the cutting edge or just looking for an excuse all C.o.C s are on the World
+Wide Web of the Internet at the NIST website. (www//ntep.nist. aii ) These CoCs are
+kept up to date by NCWM.
+
+There are several different CoC’s appended for a variety of devices. They are typical
+and should be examined for what they do specifically say and / or do not mention.
+
+NOT LEGAL FOR TRADE
+
+These scales will never have an accuracy class designation nor will they have a CoC.
+They will have marked somewhere a statement affirming NOT FOR RETAIL TRADE. It just
+does not get much clearer than that. These scales CAN NOT BE SEALED under state law for
+use as a commercial weighing and measuring device. They constantly tum up in service so be
+vigilant. Pelouze and Sunbeam are two makers of such scales; Some times you have to look
+under the scale to find the markings. They need to be taken out of retail trade service
+immediately.
+
+At Dunkin Donuts if they weigh and grind right under your nose, it is not a pre pack;
+lately Dunkys has begun to pre-pack at a central location. Many coffee shops roast and
+package their own on premises.
+
+ISO 9000
+
+New equipment is appearing in the field with seals proclaiming / certifying
+compliance with ISO-9000. Do not be mislead. ISO 9000 represents the International
+Standards Organization program for very precise metrological standards. Many participants
+have their own weights and volume standards, which have a traceability suitable for their
+needs. All of this is for internal use in various manufacturing and quality assurance processes.
+None of it has any thing to do with us in our role as Sealers. It is beyond our pay grade. The
+results of the manufacturing process become of interest to us when the product enters the
+commercial trade world. At that time you inspect and test to the standards adopted by the
+Commonwealth and apply the appropriate standards.
+
+1s
+
+
+=== Image (16).jpg ===
+
+Handbook 44 “The one book you can not do without”
+
+This is the principle source for the details of the Sealing job. It would be a good thing if
+you get and keep a copy handy. It is published annually by NIST. It is automatically sent to
+NCWM members and usually arrives in the fall of the year. It is the definitive reference book
+and you will use it a lot. All of the Specifications, Tolerances and other Technical
+requirements for Weighing and Measuring devices will be found in it. If you can master all of
+the parts of HB-44 that apply to your work you have accomplished a major achievement.
+
+There is pending legislation to have each current edition of HB 44 automatically accepted
+by the Commonwealth.
+
+Handbook 133 _—— . a
+
+Checking the Net Contents of Packaged Goods is the title. The current version is the
+4th edition.
+
+Handbook 112 Examination Procedures Outline (EPO)
+
+This is a collection under one cover of all of the EPO information you
+are likely to need. The most recent edition is dated 2002. There is an EPO for most
+devices you will encounter. They lead you step by step through the examination and testing
+of the device. They are organized for the Safety, Inspection, Pretest Determinations and a
+Notes section. Each item refers you to a specific paragraph in HB-44
+
+~44-
+
+
+=== Image (17).jpg ===
+
+Equipment and Supplies
+
+RICE-LAKE
+
+Rice Lake Weighing Systems, 230 West Coleman Street, Rice Lake, Wisconsin
+54868. Tele: 1-800-357-8627. They make about any kind of weight you could ever need.
+Remember when talking to them that you need field standard equipment NOT laboratory
+grade, you probably need avoirdupois weights as opposed to metric and the so-called 30-
+pound test kit would work fine. Please get more specific information from the Division of
+Standards. This is also a source for your very small weight kits for below 8 ounces and for
+pharmacy and jewelry scales.
+
+SERAPHIN
+
+The five-gallon test measure you will use for testing liquid measuring devices is a Field Test
+Standard. It is commonly called a volumetric prover . It is most commonly painted red but
+some old green ones survive. Stainless steel seems to be the preferred choice for new ones. In
+daily use everyone just calls it a prover.
+
+The principal, but not the only, source of the five-gallon field test standard is Seraphin
+Test Measure Co:, 30 Indel Ave, Rancocas, New Jersey 08073. Tele: (609) 267-0922 or by
+Fax at (609) 261-2546. For sales try 1-800-573-6322 or Fax 1-800-373-6322. The stainless
+steel field measure is probably your best bet. There are non-stainless test measures usually
+with a painted finish for less money. There is also a plastic carry case available, which
+greatly facilitates carrying, and storage. Before you place that new or any other field test
+standard into service you should submit it to the state metrologist for calibration.
+
+This is the same company that can provide a 5-gallon capacity funnel with a built in anti-
+swirl tab. They are well made. They also have a new highboy version, which is easier on the
+back. These funnels often have a copper nozzle to facilitate the electrical grounding when the
+product is returned to the storage tanks.
+
+Seraphin also makes the popular two-wheeled cart that helps moving that gasoline around
+the station. That cart goes a long way toward saving your back and allowing relatively safe
+transportation of fuel across busy areas.
+
+They can also provide the environmental cap to fit over the opening of your field
+standard that engages the rubber boot on a stage II nozzle. This is a must have item. It must
+be electrically conductive so resist the idea of making your own out of PVC. You can also
+purchase one locally from Wells Machine Shop, Tel# 781-424-4445 or e-mail:
+wellsmachineco@aol.com
+
+American Casting
+
+~15-
+
+
+=== Image (18).jpg ===
+
+One of several sources of seal presses they are located at 51 Commercial Street,
+Plainview, New York 11803. Tele: 1-800-342-0333, Fax 1-516-349-8389. They produce the
+standard lead and wire seals and also the 5 inch Bulldog Press, which is the most popular
+size. They also produce an 8-% inch press for those jobs where you just gotta have more
+squeeze power. They also make the dies for the years and your jurisdiction that will fit both
+presses. I have found it is best to order dies for several years at a time to save shipping. Be
+prepared to give them the correct two or three letter identifier for your jurisdiction. A list of
+these codes is appended. Any questions about the two or three letters can be resolved at the
+Division of Standards. This year the dies for each year cost $9:60 each, plus shipping.
+
+ELC Security Products, Inc.
+
+Is now located at 8252 NW 30" Terrace, Miami, Florida, 33122. They moved. Tele # 1-
+800-577-3257, or 1-305-477-2303, Fax # 1-305-477-0186. ELC manufactures a wide line of
+physical seals using plastic. They also sell marking pliers with dies for the plastic seals. ELC
+also sells spools of wire and pressure sensitive security seals. They arc being used in MA.
+
+HOBBS and WARREN
+
+Sealer Record Books (SO page sets) is available from Hobbs and Warren. 11 Beacon
+Street, P.O. Box 63 Boston, MA 02101-0063. (617) 523-2282.The current edition is done on
+NCR paper, which eliminates that pesky blue carbon paper that was never in the right place.
+The current edition of the generic sealer book does include a line for scanners. It cost $32.00
+each plus shipping. i : :
+
+Seals/ Not Sealed / Condemned / Aluminum Seals for use on Vehicle Tank Meters and
+taxi Meters and other forms can be obtained from Hobbs and Warren.
+
+Badges
+
+You are a Law Enforcement Officer in the Commonwealth of Massachusetts. You are
+entitled to carry and display as you see fit, an appropriate badge identifying you as a Sealer
+and the jurisdiction you serve. The need for such display varies from Town to City I can only
+say that in my case my badge never left the box it came in or the file it was thrown into six
+years ago. Be careful with that symbol of authority. Hobbs and Warren can also supply the
+badges.
+
+SAFETY CONES
+
+Those orange safety or the new safety green cones can save you much trouble. You
+should have about /2 dozen and they should be the largest size you can get your hands on.
+Use them at the point where you leave your funnel and both behind you and in front of you
+while testing a dispenser. The horror stories about drivers at gas stations you will hear will
+suffice until you get your own tales to tell. It seems the funnel attracts drivers that just need
+to hit something. UNDER NO CIRCUMSTANCES USE A CONE AS A FUNNEL. You are
+asking for a problem with static electricity. Northern Tool and equipment Co. P.O. Box 1469,
+Burnsville, MN. 55337-0499. Tele: 1-800-556-7885
+
+-16-
+
+
+=== Image (19).jpg ===
+
+SEALS:
+
+The vinyl seal seems to be the most popular since it solves many of the minor
+problems associated with the former round paper seal, which are still valid. Vinyl seals can
+be purchased from Springfield label and Tape Co. 430 St. James Ave, Springfield, MA
+01109-3896. Tele: 1-413-733-6634, Fax 1-413-731-5904. At meetings of the Sealers you can
+often combine your order with another jurisdiction and achieve an economy of scale. There
+are other sources for seals.
+
+There are basically only four types of seals in use here today. They are:
+a. SEAL of APPROVAL, Visible paper or vinyl seal
+
+This seal is to show the public that you are doing your job and that the device has
+been inspected, tested and approved by competent authority as determined by your
+jurisdiction. This used to be exclusively a round paper seal which varied in color in odd /
+even years. It identified the jurisdiction, the date and the Sealer. This type of paper seal is
+still in use in some places. It has an advantage of being very inexpensive. They do not
+hold up well when exposed to weather or repeated cleaning. The viny] seal will need to
+have hole punched to indicate the month and date of issue. The vinyl seal will not fall off
+due to weather if it was placed on a clean smooth surface. The viny] seal is not and
+should not be used as a pressure sensitive seal when one is called for to secure the
+adjustment access hole for scale calibration adjustment.
+
+Note: The color of the seal has meaning. For odd years the color is red and for even
+years use the green ones. Any printer in the state that usually prints these should know ‘
+that. The color change is a fast way to identify which devices have been tested recently.
+There are very specific language requirements for that printed viny] seal.
+
+b. PRESSURE SENSITIVE SEAL, (PS)
+
+These are new to the metrology world though they have been used in industry for
+many years. They are a multiple layered very fine film that will not tolerate any
+tampering with. If a PS seal has been tampered with then the underlying film will say
+very clearly VOID or other words to indicate that all is not well. They break very easily
+and resist alteration. Get used to them because more and more devices can only be sealed
+by this method. Meaning that there are no provisions for a physical lead/wire seal. Again
+the C.0.C will lead you to an answer. The newer HOBART deli scales are going this way
+as are others.
+
+c. SECURITY SEAL
+
+This is the seal in Sealing. This is what locks in the data and prevents meddling. This is what
+you are paid to employ. The vinyl seal is a feel good device but ultimately not as critical as
+the security seal. Traditionally this has been a lead and wire combination seal. This seal to
+assure integrity must have the wire doubled back through the lead lozenge before being
+compressed with your mark. This seal assures that at the time you sealed the device it was
+compliant with existing standards. The location of the sealing points is found on the C.0.C.
+
+«fF
+
+
+=== Image (20).jpg ===
+
+That location is predicated on preventing any tampering with or alteration to the adjustment
+mechanism. When you are done that device should have a lead seal that indicates your
+jurisdiction and the year sealed. If you test a properly sealed device and it meets the standards
+there is no need to replace the lead seal if it is not visible to the consumer,i.e. under a scale
+platform or inside a motor fuel dispenser. It is there to tell you that no one has been
+tampering. It also provides information as to the last time the seal was broken for adjustment.
+If, in the course of your duties, you find that your dated security seal is in place and still
+intact there is no reason to change it. Unless, of course, you need to make an adjustment to
+the device.
+
+There is an increased sensitivity to using lead in the environment so you might start to see
+any of several plastic seal devices. These work fine if they perform the function of the
+lead/wire seal. Tie wraps are not adequate and cannot be utilized
+
+Many sealers now collect the old wire seals and dispose of them responsibly. The lead
+lozenge is the issue. How green are you?
+
+d. OTHER SEALS
+
+The round aluminum or zinc seals are used on oil trucks and related meters as
+well as taximeters. They make it easy to identify the month and year of the
+sealing. This is useful on a cold day, they standout.
+
+Placed under this category are also all the seals that you did not dispense. If they
+were issued in compliance with the law the seal is valid. Often a device will be moved
+from another jurisdiction and will come with the proper seal on it. I have encountered
+seals from other states. Oil trucks cross jurisdiction lines many times a day. Sometimes a
+deli scale will be relocated. If the seals are current and you have no reason to believe
+there is a problem then relax.
+
+When a service technician breaks your seal to make some kind of adjustment he/she
+will then, usually, install one of his own. That seal does only one thing. It assures you that the
+tech determined all was o.k. at the time he sealed it. That seal DOES NOT constitute a legal
+seal for the purposes of complying with state law. The device is ina NOT SEALED
+condition for which there is a legal issue and you are required to retest the device AND reseal
+with your seal. The technician’s seal serves ONLY to preserve his settings in the device until
+you come to test and seal the device.
+
+New devices often come from the factory with a manufacturer seal certifying that the
+device met their standards. That is good but not sufficient. Often you will see references to
+ISO 9000, which is an international standard for quality control. You are to inspect and test
+the device and place your seal on the device thus allowing it to be used in your jurisdiction.
+
+That Cabinet
+
+In the early 1900’s every city and town received a set of standard weights and
+measures and a large equal arm balance, which was in a cabinet. The cabinet was custom
+made. These cabinets and their balance and standards were and are the property of the
+
+-18-
+
+
+=== Image (21).jpg ===
+
+Commonwealth. The local Sealers are now considered to be the custodian of the cabinets and
+the contents. You are expected to inventory the contents and report annually to the Division
+of Standards. This reporting is a part of your regular annual report. It is your responsibility to
+insure the proper precautions to preserve the state standards are taken. In some communities
+the cabinets and contents have become the ward of a historical commission or other
+municipal body. The community must obtain permission from the Division of Standards if
+control or custody is to be exercised by other than the local sealer. In the event a community
+no longer wishes to adequately store and safeguard the cabinet and contents contact the
+Division and make arrangements to return the property to the state.
+
+When delivered the cabinet had glass doors on the upper portion and solid doors
+below. The balance was the centerpiece. It operated by a lever, which lifted the device off the
+resting points. The weights were stored to either side and went all the way up to 50 pounds.
+There were also stored on the upper half a series of liquid measures from 1% gill up to the
+traditional quart. In the lower cabinet are the cast iron measure devices for dry measures and
+aiso a set of round wooden measures used to verify berry boxés and such. There was also a
+cast iron fork (fairly large) in a wishbone shape. That fork slid into the triangular opening on
+the lower left side of the cabinet to hold the measures and to allow you to empty them when
+finished. The collection was rounded out with slicker plates and a yardstick. It was a
+comprehensive work cabinet that served for many years. The Annual Report inventory sheet
+lists the original contents of the cabinet.
+
+In some jurisdictions the cabinet is maintained in such shape and with such care that
+the field standards can be tested in the office. This can be very helpful in some cases. It has
+been my experience that when you can find the cabinet no one seems to know why they have
+it or who it belongs to. It is yours, protect it.
+
+If you have a current set of state standards that have been certified by the state
+metrology lab and are carefully maintained you may, after properly testing the scale balance,
+use the state standards to certify your field standard weights. There is a requirement that you
+maintain complete records of the balance testing and the testing of the field standards. It is
+easier to take your filed standards to the state lab.
+
+Car / Truck ?
+
+) There are many different ways of arranging to move you and your equipment around
+your jurisdiction. It is a matter worked out as part of the compensation or work conditions.
+
+The generally accepted standard mileage fee for Massachusetts, in the private sector
+this year (2004) is 38 cents per mile. That is the figure the IRS accepts. This might be one
+
+approach to using your car or truck. Another approach, used in a few Towns, is a flat monthly
+rate. Whatever works. ;
+
+The healthiest and safest way to move this equipment around is in a pickup truck with
+acap. You do not need to be sharing space with known carcinogens from the gasoline, diesel
+or other petroleum based product you have run through your provers. A separate vented
+compartment will resolve that issue. A van merely confines the odor and concentrates it
+somewhat especially on a hot day. It can get real unpleasant driving with that odor.
+
+-19-
+
+
+=== Image (22).jpg ===
+
+20
+
+I cannot overemphasize the nastiness and dangerousness of those fumes. They are
+publicly identified as hazardous to your health
+
+The large number of weights you will need on a random basis is a good argument for
+permanently storing those weights in the back of a truck. Remember to insure they are
+securely fastened to the floor at all times when traveling. One can get a very nasty headache
+from flying 20# weights in a minor fender bender. Try to imagine a whole collection of 50#
+weights doing their thing in a serious accident Basic safety requires the weights be secured at
+all times.
+
+Equip your vehicle with both a First Aid Kit and an appropriate fire extinguisher.
+
+Common sense would urge that ALL of the provers and other hard objects be
+adequately secured as well
+
+In some jurisdictions the truck is used as a rolling toolbox and storage shed.
+Everything the Sealer needs to store has a place in the truck.
+
+Hand Tools
+
+A small kit of hand tools will be needed. A level is required, though rarely used, to level
+the test standard, also a razor scraper, a pair of wire cutters, pliers (needle nose are best) but
+have both, WD-40, Q-Tips, rags, screwdriver, a dental type mirror,and spare keys for the fuel
+dispensers. Plastic/rubber gloves are used by many, Flashlight and clipboard are also useful.
+A bucket is essential to catch the drips from the gas nozzles. Paper towels, hand cleaner and
+coveralls should be considered . Steel toed shoes or at least a gasoline resistant soled work
+shoe can save you some pain. Fuel absorbent pads to catch that inevitable mess you will
+make once in a while will save some embarrassment. A large screwdriver or small pry bar is
+sometimes needed to open the caps on the underground tanks. They can be tough to do with
+Just your fingertips - or as one Sealer was heard to remark “what! And break my nails”.
+
+The hand press should have the correct jurisdiction and current year die installed.
+
+) KEYS
+
+All of the cabinets for fuel will be accessed by keys. The keys are generic within a
+brand. A Gilbarco key will open all Gilbarco cabinets and the same holds true for the other
+brands. Often keys can be obtained from the people that install or service the units. There will
+often be a different key for the top section, which allows access to the keypad to get totalizer
+information.
+
+SAFETY VEST It is you on the line here. Safety vests at least improve the odds of
+not being hit. Conventional wisdom has it that anything you have at a gas station is a target
+and has been hit. Provers and funnels seem to be the most popular targets. Make yourself an
+unlikely target and wear a safety vest.
+
+«20
+
+
+=== Image (23).jpg ===
+
+21
+
+That which is tested / inspected / sealed / condemned
+Public Notice
+
+In the early years owners of devices would be required to bring their equipment to
+
+you for inspection and testing. This was done using the contents of “That Cabinet” I
+mentioned earlier. The world has changed, Many devices are not transportable and now
+you go to them. The laws change slowly and one vestige of the old way is the Public
+Notice.
+
+In order for you to have the ability to claim to have a compliant Sealing program
+you must give the citizens due notice. That takes the form of the “Public Notice”
+appended. This form, when properly displayed, serve to give the owner of devices legal
+warning of the requirement for Sealing. The form, when filled out, must be posted in at
+least two public places for at least two weeks. Public T.V. is not an acceptable choice but
+it may supplement the chosen places. When you remove the signs file them as evidence
+of compliance.
+
+Seal What ?
+
+In accordance with the law in this state any citizen may request you to check ANY
+device at any time to determine iis accuracy and mark it according to your findings. A scale,
+clearly marked NOT FOR USE IN RETAIL TRADE, can be checked and marked if the use
+of the scale is non-commercial.
+
+Seal to What Settings ?
+
+When a device is calibrated it is to be set as close to zero as can be reasonably
+achieved. In no circumstance can the device owner claim to “own” the right to have his
+device off by a certain amount but within tolerance. The allowable tolerances are a
+recognition that moving parts can and do wear. In the process of wearing the accuracy slips.
+These tolerances are in place to allow you the Sealer some discretion before acting on the
+amount of error. Tolerances are the acceptable limit of inaccuracy.
+
+Sloppy Work!
+
+On several occasions recently large stores have been found with missing tabs on the
+scales for installing the sealing wires. It was not readily apparent that the devices were
+missing required parts but a review of the CoC. revealed that the parts were indeed missing.
+In one case 12 of 13 scales in one store were missing the sealing posts and could not be
+sealed. It was eventually determined that the scale service company evidently did not
+appreciate why the posts were there and just did not bother to reinstall them. In one
+community the security seals were missing for several years and no one noticed.
+
+-21-
+
+
+=== Image (24).jpg ===
+
+22
+
+Basic devices everyone deals with
+
+WEIGHTS
+
+The most common weight package is a kit normally referred to as a 30-pound kit. The
+contents differ somewhat between suppliers but contain all you need to test the most common
+scales in retail trade.
+
+. . Keep.an eye.on where you placethe 30# weight kit or any other weights while
+performing tests. They seem to like to dive into lobster tanks.
+
+Vendor’s catalogs have assorted kits and a seemingly endless list of choices with the
+weights. Talk with other Sealers at meetings to find out which kits might address your needs.
+Donny Smith can assist any community with cogent advice. There is no one size fits all
+answer since there are many different devices out there.
+
+SCALES, LIGHT as opposed to heavy. Up to 100-pound capacity
+
+The procedures for inspecting and testing are laid out in the EPOs and will take you
+through it step by step. Be aware that almost all digital scales will have a CoC and that a
+surprising number of scales that would appear to be pre-NTEP also have a CoC. The CoC
+will alert you to what the configuration of the scale should be. For example in a fish market
+(wet environment) you would not be surprised to see, indeed you must, a tray that drains the
+water away from the product on the scale. It happens that not every scale is approved for a
+fish tray even though it seems to belong there. The manufacturer chose not to submit the
+scale for testing with that tray and the fish market cannot make the substitution. That was
+their choice. There is a brand new 50 # digital computing scale that has a CoC et al. In the
+shipping box the manufacturer includes a tare basket, which mounts on the receiver of the
+scale. If you consult the CoC you find that it is not approved for retail trade with that tare
+basket mounted or used. The scale is approved only with a flat platform receiver. Only prior
+consultation with the CoC will reveal these problems. That brand new Class 3, NTEP
+approved scale could not be sealed in the as found condition. It did look good though.
+
+Some scale makers seem to play hide the sealing posts. These are the bolts that have a
+small hole drilled through the top from side to side. The mere presence of this post does not
+mean that it is the place for the seal. I have noticed that these posts turn up in the oddest
+places. They are not always obvious as to their location or type of seal. The CoC will
+forewarn you. Some scales require two security seals. There is a new deli scale out that
+requires you to get assistance to turn it upside down to seal it. You might not know that if you
+did not have the CoC. When asked for a recommendation for a replacement scale you are
+wise to refer the buyer to the yellow pages for reference. This will eliminate any conflict of
+
+-22-
+
+
+=== Image (25).jpg ===
+
+23
+
+interest and reduce backlash if the buyer is unhappy with any thing. It would be appropriate
+to explain the need for a ‘legal for trade” Class III NTEP certified scale. Adjusting electronic
+scales is beyond your pay grade. It is best if you do not attempt any adjustments. There are
+plenty of service technicians out there to make whatever corrections that are needed.
+
+MEDICAL / ATHLETIC SCALES
+
+These scales are NOT a part of the retail trade under which our sealing is done. There
+is no requirement that you get involved. Having said that I want to remind you that members
+of your local high school wrestling team and or the local football team need to be weighed
+prior to competition. Many Sealers perform this service at no cost. These scales do not have
+provisions for sealing the adjustment parts so there is no assurance the scales are accurate the
+day after you leave. People tend not to tamper.
+
+The Medical scales like those found in Doctors offices are usually the human weighers
+running up to around 500# max. They are not Class Ili nor do they have to be. If you are
+going to test these you will be hauling a lot of cast iron around with you. This would be a
+good area to get clear about with your boss as to the policy about Medical scales. Put a vinyl
+seal on it if that is what they need.
+
+HANGING SCALES
+
+Those usually round-faced chain suspended scales that lurk around the produce
+department are not required to be certified by weights and measures as they are not used in
+direct sales. However they usually are NIEP compliant and have a CoC issued. They are
+used in retail trade because people make buying and cost estimates based on the readings.
+The produce gets weighed again at check out. Thus, common practice is to seal the hanging
+scales, and that choice is up to the retailer. Regardless of what you do they must hang clear of
+obstructions.
+
+JEWELRY SCALES
+
+They are a separate certification and are the concern of the local sealer. Retail
+precious metals and semi precious gem weighing could be Class III or Class Il. If a scale is
+Class II device you must have the correct weights to test. Most are Class III
+
+PHARMACY SCALES
+
+They are a separate certification and are the concern of the local sealer. The weights
+used by a pharmacist are also tested. Since you cannot seal a weight there is a special
+certificate you will issue upon completion. This certificate is a part of the requirements the
+MA Pharmacy Board looks for during their inspection. It is a small blessing if you will do the
+pharmacy scales and weights each year about the same time. It saves getting wires crossed
+with the Pharmacy Board.
+
+There is a movement toward electronic/digital scales , which are certified to class II
+standards. To test these device you would need a weight set certified to class II metrics.
+
+=23%
+
+
+=== Image (26).jpg ===
+
+24
+
+FARM STANDS,
+
+These are usually seasonal operations but an enormous value of product crosses the
+counter. It is only fair that accurate devices are employed. These usually are the round
+hanging style but more digital devices are turning up.
+
+UPS / SHIPPING SCALES
+
+Contrary to what is sometimes argued, those UPS scales out there are subject to state
+law and need to be sealed. It has been settled. Any questions call Division of Standards.
+Some of them are dual capacity devices that can go from 1-30 pounds and then from 0-300
+pounds. Both modes must be tested. Obviously this applies to all UPS/FEDEX/DHL and any
+other shipping scale regardless of who owns it. ;
+
+Scales, in excess of 100 pound capacity
+
+In this category are a lot of retail scales from around 100# capacity up to the 1200#
+Fairbanks style platform scale. All of the rules that apply to the light scales apply here. In
+addition you will need a set of weights, usually the grip variety, to get'the scale load up to the
+required levels. The amount of test weight you must have to do the testing correctly is
+specified in HB-44. This type of scale is often found around fish markets. Many of the older
+steelyard type platform scales have been upgraded with the use of digital components. These
+upgrades have been performed by the manufacturer and have a CoC issued approving the
+upgrade. Some scales have been upgraded locally by using digital components, which are
+individually approved. These scales are to be tested in accordance with HB-44 and not just
+tested in the range they are usually used for.
+
+Notes:
+Do not assume the scale guy knows the codes or state laws. It is not required of him.
+
+Silver is the color code for our familiar avoirdupois sets of weights. If you run into
+metric,scales you must use the appropriate gold colored weights.
+
+With the exception of the pharmacy balance or scales or the pre-pack scales the
+consumer must be able to see the operation of all scales.
+
+Generally all scale operations against a back wall will not be compliant.
+
+Some perfectly “legal for trade” scales come with trays, which, if installed, render the
+device “not legal for trade”. That is why the Certificate of Conformance is so important.
+
+a es
+
+
+=== Image (27).jpg ===
+
+25
+
+HEAVY TRUCK SCALES
+
+These are found in construction yards, junkyards, cement plants and many
+cities and towns have them at the landfill / transfer station. The heavy scales owned by the
+town are sometimes involved in retail trade. At the very least the community has a contract
+with an agency to remove the waste for a fee. There are some specifics that apply only to the
+heavy scales that are worth noting. Generally the big scales are not approved to weigh loads
+that do not challenge the system. Loads of fewer than 1000#s may be too light for accurate
+measurement. For many of the heavy scales loads below specified limits are prohibited due to
+the inability of the scale to discern the values. There is a difference in minimum load between
+scrap material for recycling and all other materials. The scale code part of HB 44 will show
+you the values for these lower limits.
+
+In most jurisdictions a scale company wili perform the testing as they have the equipment
+needed. The local sealer will monitor the test and place his security and viny] seal in the
+appropriate places. The role of the local sealer is to insure that the scales have been found in
+compliance with existing standards across the full spectrum of weight the scale is capable of
+handling. Beware the tendency to only test to the “usual load”.
+
+Given that these scales need enormous amounts of weight it should be obvious that you
+do not have to haul it. Usually a scale company has a maintenance contract to service the
+device. They will have weights that are traceable. You should verify this. When they conduct
+
+" the test you watch, ask questions, verify the testing then you and only you can put the local
+Jurisdictions seal on the device. If you have never seen one done you should know that the
+truck that comes for the test as well as the weights it carries is a part of the test. It does not
+really matter what the truck weighs. The truck will not be a certified weight as we know them
+but it will be a part of the strain load placed on the scale. If there is a spare forklift or front-
+end loader around they might use it for the strain load portion of the testing. Do not overlook
+the bulldozer parked nearby. Almost any thing is useful if it is very heavy.
+
+These scales require a separate certification.
+
+Virtually all the rules for testing the local deli scales apply to the heavy truck scales. It is
+justa matter of scale, I could not resist that. There are of course some very specific
+requirements in HB-44. These do NOT apply to scales used in law enforcement and we do
+not seal law enforcement scales. No split drafts or axle scales are allowed.
+
+Notes:
+
+56,000 Pounds, the usual weight of a scale testing truck is just not enough. Do not fall
+for the argument that that is all the weight is available.
+
+s06ie
+
+
+=== Image (28).jpg ===
+
+26
+
+PRE-PACK SCALES,
+
+In The Commonwealth of Massachusetts we consider this a commercial device,
+which must be tested and sealed. These are often found in the back room of the meat
+department at the local supermarket. These scales will not often be visible to a consumer and
+they do not need to be. A consumer can have a prepacked package reweighed in front of
+him/her.
+
+RAILWAY SCALES
+
+We have only a few of these in the state. They are a separate certification and are the
+concern of the local sealer. Minimum test load is 80,000 pounds and a certified railroad test
+car is required for these.
+
+BELT CONVEYOR SCALES,
+
+These devices are also required to comply with NIST etc. They are used for weighing
+product as it moves down a conveyor belt. The calculations are based on the amount of
+electric load is involved to move the product over a short (4 to 10 feet long) distance. They
+are used primarily for weighing product of a uniform size / shape. They are used to weigh
+moving coal (screened to a uniform size) grain and other bulk products of a similar nature. In
+approved installations they achieve an accuracy of +/- 5# per ton. An issue came up when a
+company used a portable belt conveyor scale to bid with a local Department of Public Works
+to process removed road asphalt and associated dirt and gravel for a fixed price per ton. The
+grinding process involved produces a product called “reclamate”. It is recycled roadway and
+is used by the DPW for roadwork. I understand the companies are still moving around the
+state selling their service. Keep your eyes open. This device was not approved. If you
+encounter one call the Division of Standards.
+
+-26-
+
+
+=== Image (29).jpg ===
+
+27
+
+MEASURES
+
+MOTOR FUEL DEVICES
+
+With the advent of electronics and the price of gasoline passing the dollar mark came
+a revolution in the display and accounting for the amounts of money and product. Most of the
+meters in the pumps out there are very much like what has been around a long time. What has
+changed is the control of some of the meters. As technology advances look for meters that
+self-test and self adjust. We are not quite there yet but subtle changes are showing up. You
+can no longer assume that the meters are straightforward. Once again the C.o.C would be
+very helpful here.
+Always test the diesel fuel devices before the gas devices to avoid the chance of a
+static spark discharge when filling your prover or using the funnel. There have been instances
+where the 5-gallon Test Measure has burst into flames.
+
+The Totalizer on each device is to be in good working order even if the management does
+not use it. We use it to validate flows and in checking blends. Electronic or mechanical is
+acceptable. It is required to be functioning. We need the information it provides for our
+reporting.
+
+Blend pumps are tested by a different process than the single product devices. Both types
+are tested using the Examination Procedure Outline (EPO ) as appropriate. NIST publishes
+these EPOs to assist in the orderly inspection of all of the devices covered by NIST. The two
+you need are the Single Product Retail Motor Fuel Dispensers (EPO # 21) and the blended
+product (EPO # 22). Blend product is returned to the tanks at the lowest octane grade of fuel
+regardless of which blend you tested.
+
+AIRPORTS
+
+Some of you will have airports to serve. They are much like a service station
+in thatthey have meters. Be real careful about the octane rating of the tested product since the
+range of octanes can be very large. Jet fuel is a form of kerosene and thus presents no unique
+safety hazards. The testing of airports with in ground hydrants is specialized and the typical
+Sealer will not encounter them. The danger of fuel contamination requires that the Sealer be
+very careful in the handling of the product. There are special considerations to bear in mind
+about disposing of the product you have tested. Often the fuel cannot be put back in the
+ground. The airport personnel will work with you.
+
+MARINAS
+
+Including some yacht club facilities. In addition to normal dispensers in the
+boatyard, Marinas often have dispensers down on the floats. It can be a long haul to
+
+-27-
+
+
+=== Image (30).jpg ===
+
+28
+
+return the product to the tanks. It is always smart to consider the time of high tide as it
+can shorten the height you have to climb with the provers. This is one of the places where
+only the five-gallon test measure will work. The truck or trailer will not work because it
+cannot get there. There are specific user requirements in HB-44 for airports and marinas.
+
+TIRED?
+
+The field test standard (prover) be it stainless steel or painted steel weighs about 15
+pounds empty. Diesel fuel has a specific gravity of .84 and a full prover weighs 49.99#.
+Gasoline has a specific gravity of .74 and a full prover weighs 45.8#. Kerosene has a specific
+gravity of .80 so a full prover weighs 48.33#. Water has a specific gravity of 1.0 so you can
+understand why these fuels float on top of water.
+
+In a modest sized station with nine dispensers totaling 36 meters and 18 blends of
+gasoline you will have moved 90 test drafts (individual full provers) from the dispenser to the
+in-ground tank, that comes out to carrying 4,124 # to the in-ground tank, lifting it to pour into
+the funnel and another 1,350 # just hauling the empty cans back for the next load. Do you
+still wonder why you are tired?
+
+SAFETY SAFETY SAFETY SAFETY SAFETY
+
+This cannot be emphasized enough. There are a number of components to an
+effective safety program but none will be as portable and effective as that device between
+your ears. Common sense will usually alert you to a problem. Do not ignore it when you get
+the feeling something is wrong.
+
+The National Conference on Weights and Measures Task Force on Safety issued a
+Final Report in July 1991. It is available online for members at the NCWM website. That
+report lead to the changing of the EPO,s to include specific Safety guidance in each EPO.
+The basic report is 45 pages.
+
+Typical of the unexpected danger areas would be the proper grounding of a scale ina
+wet environment. An incorrect wiring job could be found to absolutely shocking when you
+try to install a wire seal.
+
+One danger is static electricity. Do not wear nylon clothing when testing gasoline.
+Always touch the nozzle to the side of the prover while filling and make sure the prover is
+grounded. If you use any kind of cart to hold or transport the provers insure proper
+grounding. When returning product to the ground use a metal funnel and touch the prover to
+it to insure a good ground.
+
+This is probably not a good time to use your cell phone.
+Always test the diesel first. Just a reminder about the dangers of static electricity and fire.
+
+The static electrical charge is generated by the differences in the friction if diesel is poured
+over a gasoline-covered surface.
+
+-28-
+
+
+=== Image (31).jpg ===
+
+29
+
+Use the orange highway cones to protect yourself and your equipment but ALWAYS
+expect someone will drive right over them, I use my truck to block the area in which I am
+working.
+
+Open the dispenser, the skirts at the base of the dispenser, to ventilate the meter area
+before inspecting it. Look for any signs of leaks. Do not touch that problem. If you find a
+very minor one your job is done for the day with that unit. Shut it down, inform the owner
+and require that the matter be addressed before you test the device. The device may not be
+used by anybody until the problem is fixed. If you find a significant leak---call the Fire
+Department. Use some common sense here and point out the issues to the owner.
+
+The wiring inside the skirts must all be in the conduits it was originally in. Conduits that
+are no longer threaded together or are missing sections are not acceptable. Intrinsically safe
+wiring is allowed. You will spot a patch job or jury rig.
+
+Always touch the nozzle to the prover when testing the meter to avoid the buildup of
+static electricity.
+
+Always touch the 5-gallon Test Measure to the funnel as you pour. The funnel will be -
+grounded thus your can is grounded.
+
+In asking for better equipment you can point out the implications for the community if
+you were to trip and let go of one or more of those provers while enroute to the funnel. After
+all you are moving 2 tons to the funnel, and this is for a modest size station. One spark or hot
+catalytic converter could ignite the gasoline and ruin your whole day
+
+Notes:
+
+Please see my earlier comments on wearing a high visibility vest.
+Every cubic “inch” on a prover translates to about $60/year per meter.
+
+Hand written receipts for fuel is O.K. if they are legible.
+
+If you see a hose resting on top of a cabinet, (not properly hung up) be cautious about
+buying gas from that station.
+
+When checking a NEW station you will be shutting off all electric power for 15
+
+minutes to verify that the meters can remember the displayed values that you had previously
+recorded.
+
+Gilbarco Meters; the totalizers only have 5 digits displayed. You will have to get the
+full totalizer numbers from the console.
+
+A broken or missing lock on a cabinet (the skirts) of a dispenser is “not as designed”
+so it can be cited. These enclosures have a certificate of conformance. Usually just have the
+owner get them fixed.
+
+~i'29 «
+
+
+=== Image (32).jpg ===
+
+30
+
+Do not be surprised to find all the meters inside the same cabinet with the same serial
+number.
+
+Never notify a station in advance of your coming. Out of a sense of fairness try to do the
+testing during non-peak hours.
+
+How many vinyl stickers you should place on a dispenser is up to you, but at least one
+must be visible on each side the public uses.
+
+You must record the serial numbers of the meters so you can prove it is/is not the same
+pump you saw last time.
+
+Some identifying information can be hard to find, painted over, under or behind
+something. Painted over data plates and or identification is in a form that renders any
+information no longer readable. The CoC requires the information be readable.
+
+One additional reason we do the slow test is because some new cars will not accept fuel
+at the full flow the nozzle is capable of.
+
+On a prover the little curve on the liquid level is called a meniscus. A reading is taken
+across the bottom edge.
+
+The audit trail is an emerging concept as the principal way to learn what has happened.
+New meters can and indeed do fail acceptance tests.
+
+Spring water would be tested in the 5-gallon prover. The Spring water dispensers are our
+concern — they are uncomplicated — usually a timer on a pipe, they are rarely a problem.
+
+The prover must be “wet” prior to testing to get it into an “as delivered “condition, which
+is what the prover is for.
+
+The Wayne / Dresser Vista Series meters are essentially self adjusting and you have to
+alter you usual patterns in adjusting these.
+
+About the benzene and other chemicals in and around service stations, there is an
+unproven theory that the fumes lead to hair loss in men.
+
+Gilbarco Meters need a “long” Q-tip to clean off the totalizer for you to read it. They are
+deeply recessed in the side of the dispenser.
+
+It is legal to advertise and sell in metric units in Massachusetts.
+
+Some diesel meters have hi-flow nozzle for trucks and a low -flow for cars. The
+difference in size is apparent. The truck nozzle is of high capacity to expedite fueling in very
+large quantities. That nozzle would not fit in an automobile fuel tank. You cannot legally test
+a high capacity nozzle with a five-gallon prover.
+
+a
+
+
+=== Image (33).jpg ===
+
+31
+
+OCTANE TESTING
+
+Despite what you might conclude we, at our level, do not usually get involved with
+Octane testing. Some jurisdictions, usually cities or County level organizations are
+conducting such testing. This testing calls for specialized equipment not usually available to a
+small Town Sealer.
+
+CNG---- also known as COMPRESSED NATURAL GAS
+
+This is one of several alternative fuels being developed for vehicles. The dispensers
+and associated equipment are NTEP approved and in use today in the state. The testing
+procedure involves scales not your trusty gas prover. The measuring is done using Mass
+Flow Meters and a lot of electronic control and calculations. With operating pressures in the
+4000 io 5006 psig range the servicing is specialized. The local sealer must seal the device if it
+is used in direct sales to consumers. The CoC specifies the location of the security seal.
+
+These devices are currently used for vehicle fleets and are only in service in six places I
+know of; Boston, Waltham, Lowell, Yarmouth, Wakefield and Springfield. If you have
+questions about these installations call one of the Sealers.
+
+Notes:
+
+. CNG is methane based (90% min) and all calculations are temperature
+adjusted to 70 degrees Fahrenheit
+
+CNG is very temperature sensitive. CNG is 130 Octane
+
+CARBON DIOXIDE
+
+Liquid Measuring Devices: This is the new kid on the block. Liquid carbon dioxide
+is used for fire extinguishers and most commonly, it seems, to provide the push for all
+those soft drink dispensers in the Wendy’s, Mc Donald’s, Burger King, Pizza Hut and all
+those thousands of places that do not serve from bottles. There are many other uses in the
+Commonwealth. The liquid is transported and sold much the way home heating oil is
+with some very significant differences. It is very cold and has its own set of handling
+requirements. It is sold by weight, which is determined by meters. Those meters need
+sealing and the associated printer needs inspection. Section 3.38 of HB-44 has the
+pertinent information. These trucks range all over the state and you might keep an eye
+open for them. It is a specialized inspection and testing procedure which will require
+equipment the typical sealer will not have. For assistance contact the Div. Of Standards.
+
+-31-
+
+
+=== Image (34).jpg ===
+
+32
+
+OTHER FUELS
+
+PROPANE TANKS
+
+The 20# BBQ style tank is the most common in the state. The law requires that the
+propane be sold by weight or measure. Thus a tare must be taken and then a net weight of
+propane to be pumped into the tank. They cannot be filled for a flat rate. There must be a
+scale at the refill site and it must be used. Any talk you may hear about the “new” valves
+changing things is just that. Nothing has changed. The new valves actually prevent filling the
+tank and usually stop the flow at the 80% full mark. Thus it is impossible to get 20# of
+propane in a 20# tank. See the two pages of propane testing appended.
+
+PROPANE METERS
+
+The Division has the responsibility for testing these devices. If you recall propane
+must be sold by weight or measure. The meter is the measure component the state has a
+specialized device for dealing with propane.
+
+VEHICLE TANK METERS / OIL TRUCKS /
+BULK RACK METERS
+
+Some jurisdictions do not have the adequate equipment to perform the required
+testing. In those cases the testing will have to be done by a qualified Sealer from another
+jurisdiction, or the equipment can be rented at the expense of the business from Northeast
+Petroleum Supply Company in Jamaica Plain, Boston. The Division does have some
+equipment they will loan if you are certified and willing. The failure of a jurisdiction to
+provide you with the required prover does not exempt the local dealer from the sealing
+requirements under state law. These are separate certifications and are the concern of the
+local sealer.
+
+Notes:
+The price per gallon must be on the ticket at the time of delivery
+
+The entire VIM stack, the meter, preset and the printer must be sealed to be
+considered legal.
+
+The metal discs formerly used in sealing are generally considered obsolete.
+
+Some new VTMs require a programmed laptop to calibrate. That laptop is not always
+in the truck.
+
+In examining the VTMs we should make every reasonable effort to keep that truck on
+the road.
+
+«22
+
+
+=== Image (35).jpg ===
+
+FIREWOOD
+
+128 CUBIC FEET, the law is very clear. Firewood is less than 4 feet and more than 8
+inches and it is split. In responding to a complaint you do not have to stack it, they do.
+
+The quantity is determined when the wood is closely stacked.
+If cordwood is advertised, that is what you bought. Cordwood is 4 feet long.
+
+There must be a receipt for the delivery, see Chapter 94, Section 299
+
+REVERSE VENDING MACHINES
+
+The Commonwealth of Massachusetts has certified them as retail trade devices, thus
+we seal them. If they work seal them with a vinyl seal. I watch them at the stores while doing
+other duties. If they do what they are supposed to do seal them. They are required to have a
+notice on them about how to deal with a problem.
+
+Devices beyond basic certification
+These devices require a separate qualification from the Division of Standards in order for
+you to inspect test and seal. The local sealer will encounter devices he/she are not familiar
+
+with and are not qualified to seal. Do not be afraid to contact the Division of Standards for
+help. It is understood that you might not be qualified to seal these devices. The state can help.
+
+TAXI METERS
+
+The meters in taxis need sealing. They are a separate certification and are the
+concern of the local Sealer.
+
+COIN OPERATED AMUSEMENT DEVICES
+
+Division of Standards issues approvals, Not a certification and not a local Sealer issue
+
+MILK TANKS
+Division of Standards inspects and calibrates
+
+COIN COUNTING MACHINES
+
+-33-
+
+
+=== Image (36).jpg ===
+
+34
+
+Not a certification and not a local Sealer issue, yet. Only check based on a complaint.
+Contact the service area representative and check unit with him.
+
+LOAD CELLS
+
+We do not test individual load cells but in almost every digital scale we examine we
+are dealing with one or more load cells. The typical retail scale will have from 1 to 4 load
+cells. They work on the electrical theory of changes of conductivity in a very fine wire when
+that wire is placed under stress, i.e. load. They are very reliable and well protected from
+abuse. The voltages and amperages are very very low. There is no electrical hazard from
+them. I do not know why you would be touching one. All load cells are required to have a
+CoC. Load cells must be installed plumb, not torqued or tilted.
+
+Additional Disciplines: none of these have associated fee schedules in the law.
+
+These are compliance issues.
+The following activities require specific certification:
+
+UNIT PRICING, conducted pursuant to M.G.L. ch 6, -115A
+
+ITEM PRICING, conducted pursuant to M.G.L. ch 94, - 184C-184D
+
+PRICE VERIFICATION, conducted pursuant to M.G.L. ch98, - 56D
+
+PACKAGE AND LABEL CHECKING, conducted pursuant to M.G.L. 202 CMR
+3.00 é
+
+e. MOTOR FUEL SALES ACT COMPLIANCE, ch 94 — 295 (a) -(k)
+
+aonrp
+
+PRICE VERIFICATION
+
+The importance and necessity of price verification is apparent in everyday life to both
+consumers as well as retailers. It is part of your responsibility as an inspector, as well as it
+being the law, to conduct price verification inspections in retail locations that utilize any type
+of scanning system, including price look up systems. The purpose of the procedure is to
+ensure that consumers are being charged the correct price for the items they purchase.
+
+» Publication 19 outlines the only appropriate method used for price verification
+inspections. It clearly explains multiple sampling procedures and strongly emphasizes the
+importance of random selection. Price verification classes have been offered by the Division
+of Standards and continue to do so periodically. All weights and measures inspectors must
+be certified in price verification order to conduct these inspections.
+
+Some lessons of price verification can never be taught in a handbook. Common
+sense, consideration and courtesy are just as important as the procedures reviewed in
+Publication 19. A few things to consider when planning price verification inspections:
+
+Avoid certain retailers during certain times of the year (i.e. the mall stores at
+holiday time)
+
+-34-
+
+
+=== Image (37).jpg ===
+
+35
+
+Do not hold up normal business to conduct your inspections (i.e. if a register is
+needed and you are testing it, step away until it is available)
+
+Take the time to introduce yourself and explain the inspection and the procedure
+to the merchant
+
+The state requires an accuracy rate of 98% and there are fees for this inspection pass
+or fail, based on the number of automated devices. Additional inspections (i.e. reinspections)
+are $75 apiece. In addition to this fines of $100 each are issued for any overcharges, up to a
+maximum of $2,500 per inspection.
+
+Per the Consumer and Merchant’s Protection Act of 1998, “the director of his
+inspectors, and sealers and inspectors of weights and measures....shall in every 24-month
+period examine and test the operation of all automated retail checkout systems.” It has been
+the policy of the Division of Standards to inspect retail locations every year and every other
+for any store that has passed in the previous year.
+
+Thanks to Kim Connors for the above information.
+NOT YOU’RE BUSINESS, but keep your eyes open.
+
+From time to time you may encounter some thing, which is not part of your job
+description. What you do with that information is up to you.
+
+In the performance of your work you will indeed find things, which are the
+responsibility of the local FIRE DEPARTMENT. Pass the information on to them for action.
+If you see an apparent violation of state law or a fire safety issue you are obliged to report it
+to both the owner and competent authority.
+
+The state Fire Prevention Regulations requires the presence of shear valves on motor fuel
+dispensers. These valves will be the lowest valves on the fuel line supplying the dispenser.
+They are installed in order to cut off the supply of fuel in the event of an accident. They
+MUST be there for all devices and there is no grandfathering involved. If you do not have
+them you have an unsafe situation. See 527 CMR 5.07 (9).
+
+Safety barrier or guardrails at the ends of the pump islands must protect the dispenser, These
+are sometimes called bollards. The dispensers must also be rigidly mounted on a concrete
+platform at least 6 inches high.
+
+The head of the local fire department must specifically approve in writing any dispensing
+
+device within ten feet from the outside of a building.
+Finally: If you have a problem do not hide it-get some help- the Division can respond
+gently or severely as the situation may call for. Ask them.
+Joe Shea
+Deputy Sealer
+Duxbury, MA
+
+-35-
