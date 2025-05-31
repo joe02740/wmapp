@@ -5,3 +5,4 @@ export { default as PaymentForm } from './PaymentForm';
 export { default as StripeWrapper } from './StripeWrapper';
 export { default as SuccessPage } from './SuccessPage';
 export { default as CancelPage } from './CancelPage';
+export { default as ChatHistory } from './ChatHistory';

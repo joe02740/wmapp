@@ -43,7 +43,10 @@ app.config['ANTHROPIC_API_KEY'] = os.getenv('ANTHROPIC_API_KEY')
 app.config['DB_PATH'] = os.getenv('DB_PATH', 'wm_helper.db')
 
 # Initialize Stripe
-stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
+app.config['STRIPE_SECRET_KEY'] = os.getenv('STRIPE_SECRET_KEY')
+if app.config['STRIPE_SECRET_KEY']:
+    stripe.api_key = app.config['STRIPE_SECRET_KEY']
+
 stripe_webhook_secret = os.getenv('STRIPE_WEBHOOK_SECRET')
 stripe_price_ids = {
     'basic': os.getenv('STRIPE_BASIC_PRICE_ID'),
@@ -55,40 +58,67 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Initialize database
 def init_db():
-    conn = sqlite3.connect(app.config['DB_PATH'])
-    cursor = conn.cursor()
-    
-    # Create users table
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id TEXT PRIMARY KEY,
-        email TEXT UNIQUE,
-        name TEXT,
-        subscription_tier TEXT DEFAULT 'free',
-        subscription_end_date TEXT,
-        stripe_customer_id TEXT,
-        stripe_subscription_id TEXT,
-        created_at TEXT,
-        last_login TEXT
-    )
-    ''')
-    
-    # Create usage table
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS usage (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT,
-        query TEXT,
-        scope TEXT,
-        tokens_used INTEGER,
-        created_at TEXT,
-        FOREIGN KEY (user_id) REFERENCES users (id)
-    )
-    ''')
-    
-    conn.commit()
-    conn.close()
-    logger.info("Database initialized")
+    try:
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        
+        # Create users table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id TEXT PRIMARY KEY,
+            email TEXT UNIQUE,
+            name TEXT,
+            subscription_tier TEXT DEFAULT 'free',
+            subscription_end_date TEXT,
+            stripe_customer_id TEXT,
+            stripe_subscription_id TEXT,
+            created_at TEXT,
+            last_login TEXT
+        )
+        ''')
+        
+        # Create usage table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            query TEXT,
+            scope TEXT,
+            tokens_used INTEGER,
+            created_at TEXT,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+        ''')
+        
+        # Create chat sessions table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS chat_sessions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            title TEXT,
+            created_at TEXT,
+            updated_at TEXT,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+        ''')
+        
+        # Create chat messages table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS chat_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id INTEGER,
+            message TEXT,
+            sender TEXT,
+            created_at TEXT,
+            FOREIGN KEY (session_id) REFERENCES chat_sessions (id)
+        )
+        ''')
+        
+        conn.commit()
+        conn.close()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error(f"Database initialization error: {str(e)}")
 
 # Get user from database or create new user
 def get_or_create_user(user_id, email=None, name=None):
@@ -124,9 +154,9 @@ def get_or_create_user(user_id, email=None, name=None):
     
     return {
         'id': user_id,
-        'subscription_tier': user_data[0],
-        'subscription_end_date': user_data[1],
-        'stripe_customer_id': user_data[2]
+        'subscription_tier': user_data[0] if user_data else 'free',
+        'subscription_end_date': user_data[1] if user_data else None,
+        'stripe_customer_id': user_data[2] if user_data else None
     }
 
 # Check usage limits
@@ -171,12 +201,11 @@ def check_usage_limit(user_id):
     
     conn.close()
     
-    # Define limits based on tier (reduced limits)
+    # Define limits based on tier
     limits = {
-        'free': {'daily': 1, 'monthly': 10},
-        'basic': {'daily': 10, 'monthly': 100},
-        'pro': {'daily': 50, 'monthly': 500}
-    }
+    'free': {'daily': 2, 'monthly': 6},        # Very restrictive
+    'paid': {'daily': 50, 'monthly': 500}      # Actually usable
+}
     
     # Check limits
     if tier in limits:
@@ -205,86 +234,107 @@ def record_usage(user_id, query, scope, tokens_used):
     
     logger.info(f"Recorded usage for user {user_id}: {tokens_used} tokens")
 
+# Basic test route
+@app.route('/api/test', methods=['GET'])
+def test_route():
+    return jsonify({
+        'message': 'Backend is working!', 
+        'user_id': request.args.get('user_id'),
+        'timestamp': datetime.now().isoformat()
+    })
+
 # Get user usage statistics
 @app.route('/api/usage', methods=['GET'])
 def get_usage():
     user_id = request.args.get('user_id')
+    logger.info(f"Usage request for user_id: {user_id}")
     
     if not user_id:
         return jsonify({'error': 'User ID is required'}), 400
     
-    conn = sqlite3.connect(app.config['DB_PATH'])
-    cursor = conn.cursor()
-    
-    # Get user subscription info
-    cursor.execute('SELECT subscription_tier, subscription_end_date FROM users WHERE id = ?', (user_id,))
-    user_data = cursor.fetchone()
-    
-    if not user_data:
+    try:
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        
+        # Get or create user first
+        user = get_or_create_user(user_id)
+        
+        # Get user subscription info
+        cursor.execute('SELECT subscription_tier, subscription_end_date FROM users WHERE id = ?', (user_id,))
+        user_data = cursor.fetchone()
+        
+        if not user_data:
+            conn.close()
+            return jsonify({'error': 'User not found'}), 404
+        
+        tier, end_date = user_data
+        
+        # Get today's usage
+        today = datetime.now().strftime('%Y-%m-%d')
+        cursor.execute(
+            'SELECT COUNT(*) FROM usage WHERE user_id = ? AND created_at LIKE ?', 
+            (user_id, f"{today}%")
+        )
+        today_count = cursor.fetchone()[0]
+        
+        # Get monthly usage
+        current_month = datetime.now().strftime('%Y-%m')
+        cursor.execute(
+            'SELECT COUNT(*) FROM usage WHERE user_id = ? AND created_at LIKE ?', 
+            (user_id, f"{current_month}%")
+        )
+        month_count = cursor.fetchone()[0]
+        
+        # Get total usage
+        cursor.execute('SELECT COUNT(*) FROM usage WHERE user_id = ?', (user_id,))
+        total_count = cursor.fetchone()[0]
+        
+        # Get recent queries
+        cursor.execute(
+            'SELECT query, scope, tokens_used, created_at FROM usage WHERE user_id = ? ORDER BY created_at DESC LIMIT 5', 
+            (user_id,)
+        )
+        recent_queries = cursor.fetchall()
+        
         conn.close()
-        return jsonify({'error': 'User not found'}), 404
-    
-    tier, end_date = user_data
-    
-    # Get today's usage
-    today = datetime.now().strftime('%Y-%m-%d')
-    cursor.execute(
-        'SELECT COUNT(*) FROM usage WHERE user_id = ? AND created_at LIKE ?', 
-        (user_id, f"{today}%")
-    )
-    today_count = cursor.fetchone()[0]
-    
-    # Get monthly usage
-    current_month = datetime.now().strftime('%Y-%m')
-    cursor.execute(
-        'SELECT COUNT(*) FROM usage WHERE user_id = ? AND created_at LIKE ?', 
-        (user_id, f"{current_month}%")
-    )
-    month_count = cursor.fetchone()[0]
-    
-    # Get total usage
-    cursor.execute('SELECT COUNT(*) FROM usage WHERE user_id = ?', (user_id,))
-    total_count = cursor.fetchone()[0]
-    
-    # Get recent queries
-    cursor.execute(
-        'SELECT query, scope, tokens_used, created_at FROM usage WHERE user_id = ? ORDER BY created_at DESC LIMIT 5', 
-        (user_id,)
-    )
-    recent_queries = cursor.fetchall()
-    
-    conn.close()
-    
-    # Format recent queries
-    recent = []
-    for query, scope, tokens, created_at in recent_queries:
-        recent.append({
-            'query': query,
-            'scope': scope,
-            'tokens_used': tokens,
-            'created_at': created_at
-        })
-    
-    # Define limits based on tier
-    limits = {
-        'free': {'daily': 1, 'monthly': 10},
-        'basic': {'daily': 10, 'monthly': 100},
-        'pro': {'daily': 50, 'monthly': 500}
-    }
-    
-    return jsonify({
-        'user_id': user_id,
-        'subscription_tier': tier,
-        'subscription_end_date': end_date,
-        'usage': {
-            'daily': today_count,
-            'daily_limit': limits.get(tier, {}).get('daily', 0),
-            'monthly': month_count,
-            'monthly_limit': limits.get(tier, {}).get('monthly', 0),
-            'total': total_count
-        },
-        'recent_queries': recent
-    })
+        
+        # Format recent queries
+        recent = []
+        for query, scope, tokens, created_at in recent_queries:
+            recent.append({
+                'query': query,
+                'scope': scope,
+                'tokens_used': tokens,
+                'created_at': created_at
+            })
+        
+        # Define limits based on tier
+        limits = {
+            'free': {'daily': 1, 'monthly': 10},
+            'basic': {'daily': 10, 'monthly': 100},
+            'pro': {'daily': 50, 'monthly': 500}
+        }
+        
+        response_data = {
+            'user_id': user_id,
+            'subscription_tier': tier,
+            'subscription_end_date': end_date,
+            'usage': {
+                'daily': today_count,
+                'daily_limit': limits.get(tier, {}).get('daily', 0),
+                'monthly': month_count,
+                'monthly_limit': limits.get(tier, {}).get('monthly', 0),
+                'total': total_count
+            },
+            'recent_queries': recent
+        }
+        
+        logger.info(f"Successfully retrieved usage data for user {user_id}")
+        return jsonify(response_data)
+        
+    except Exception as e:
+        logger.error(f"Error getting usage data: {str(e)}")
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
 # Create Stripe checkout session
 @app.route('/api/create-checkout-session', methods=['POST'])
@@ -300,62 +350,11 @@ def create_checkout_session():
         if tier not in ['basic', 'pro']:
             return jsonify({'error': 'Invalid subscription tier'}), 400
             
-        # Get price ID from tier
-        price_id = stripe_price_ids.get(tier)
-        if not price_id:
-            return jsonify({'error': 'Invalid subscription tier or price not configured'}), 400
-        
-        # Get or create user
-        user = get_or_create_user(user_id)
-        
-        # Check if user already has a Stripe customer ID
-        conn = sqlite3.connect(app.config['DB_PATH'])
-        cursor = conn.cursor()
-        
-        cursor.execute('SELECT stripe_customer_id, email, name FROM users WHERE id = ?', (user_id,))
-        user_data = cursor.fetchone()
-        
-        if not user_data:
-            conn.close()
-            return jsonify({'error': 'User not found'}), 404
-            
-        stripe_customer_id, email, name = user_data
-        
-        # Create or get Stripe customer
-        if not stripe_customer_id:
-            # Create customer in Stripe
-            customer = stripe.Customer.create(
-                email=email,
-                name=name,
-                metadata={'user_id': user_id}
-            )
-            
-            # Save customer ID to database
-            cursor.execute(
-                'UPDATE users SET stripe_customer_id = ? WHERE id = ?',
-                (customer.id, user_id)
-            )
-            conn.commit()
-            stripe_customer_id = customer.id
-        
-        conn.close()
-        
-        # Create checkout session
-        checkout_session = stripe.checkout.Session.create(
-            customer=stripe_customer_id,
-            payment_method_types=['card'],
-            line_items=[{
-                'price': price_id,
-                'quantity': 1,
-            }],
-            mode='subscription',
-            success_url='https://nbwm.netlify.app/success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url='https://nbwm.netlify.app/cancel',
-            client_reference_id=user_id,  # Store your user ID for reference
-            metadata={'user_id': user_id, 'tier': tier}
-        )
-        
-        return jsonify({'checkoutUrl': checkout_session.url})
+        # For now, return a placeholder response since Stripe isn't fully configured
+        return jsonify({
+            'error': 'Stripe checkout not yet configured',
+            'message': 'Please set up Stripe price IDs in environment variables'
+        }), 501
         
     except Exception as e:
         logger.error(f"Checkout session error: {str(e)}")
@@ -364,195 +363,109 @@ def create_checkout_session():
             "details": str(e)
         }), 500
 
-# Stripe webhook endpoint
-@app.route('/api/webhook', methods=['POST'])
-def webhook():
-    payload = request.get_data(as_text=True)
-    sig_header = request.headers.get('Stripe-Signature')
-    
+# Endpoint to create a Stripe PaymentIntent
+@app.route('/api/create-payment-intent', methods=['POST'])
+def create_payment_intent():
     try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, stripe_webhook_secret
+        data = request.json
+        amount = data.get('amount')  # Amount in dollars
+        currency = data.get('currency', 'usd')
+        user_id = data.get('user_id')
+        tier = data.get('tier')
+        
+        if not amount or not user_id or not tier:
+            return jsonify({'error': 'Missing required fields'}), 400
+        
+        if not app.config['STRIPE_SECRET_KEY']:
+            return jsonify({'error': 'Stripe not configured'}), 501
+        
+        # Create a PaymentIntent with the order amount and currency
+        intent = stripe.PaymentIntent.create(
+            amount=int(float(amount) * 100),  # Convert dollars to cents
+            currency=currency,
+            metadata={
+                'user_id': user_id,
+                'tier': tier
+            }
         )
         
-        # Handle the event
-        if event['type'] == 'checkout.session.completed':
-            session = event['data']['object']
-            user_id = session.get('client_reference_id')
-            subscription_id = session.get('subscription')
-            
-            # Get subscription details
-            subscription = stripe.Subscription.retrieve(subscription_id)
-            tier = session.get('metadata', {}).get('tier')
-            
-            if not tier:
-                # Determine tier from price ID if not in metadata
-                price_id = subscription.plan.id
-                tier = 'basic' if price_id == stripe_price_ids['basic'] else 'pro'
-            
-            # Calculate subscription end date
-            current_period_end = subscription.current_period_end
-            end_date = datetime.fromtimestamp(current_period_end).isoformat()
-            
-            # Update user's subscription in database
-            conn = sqlite3.connect(app.config['DB_PATH'])
-            cursor = conn.cursor()
-            
-            cursor.execute(
-                'UPDATE users SET subscription_tier = ?, subscription_end_date = ?, stripe_subscription_id = ? WHERE id = ?',
-                (tier, end_date, subscription_id, user_id)
-            )
-            
-            conn.commit()
-            conn.close()
-            
-            logger.info(f"Subscription {subscription_id} activated for user {user_id}")
-            
-        elif event['type'] == 'invoice.payment_succeeded':
-            invoice = event['data']['object']
-            subscription_id = invoice.get('subscription')
-            
-            if subscription_id:
-                # Get subscription details
-                subscription = stripe.Subscription.retrieve(subscription_id)
-                customer_id = subscription.customer
-                
-                # Find user with this Stripe customer ID
-                conn = sqlite3.connect(app.config['DB_PATH'])
-                cursor = conn.cursor()
-                
-                cursor.execute('SELECT id, subscription_tier FROM users WHERE stripe_customer_id = ?', (customer_id,))
-                user_data = cursor.fetchone()
-                
-                if user_data:
-                    user_id, tier = user_data
-                    
-                    # Calculate new subscription end date
-                    current_period_end = subscription.current_period_end
-                    end_date = datetime.fromtimestamp(current_period_end).isoformat()
-                    
-                    # Update subscription end date
-                    cursor.execute(
-                        'UPDATE users SET subscription_end_date = ? WHERE id = ?',
-                        (end_date, user_id)
-                    )
-                    
-                    conn.commit()
-                    logger.info(f"Subscription {subscription_id} renewed for user {user_id}")
-                
-                conn.close()
-                
-        elif event['type'] == 'customer.subscription.deleted':
-            subscription = event['data']['object']
-            customer_id = subscription.customer
-            
-            # Find user with this Stripe customer ID
-            conn = sqlite3.connect(app.config['DB_PATH'])
-            cursor = conn.cursor()
-            
-            cursor.execute('SELECT id FROM users WHERE stripe_customer_id = ?', (customer_id,))
-            user_data = cursor.fetchone()
-            
-            if user_data:
-                user_id = user_data[0]
-                
-                # Downgrade user to free tier
-                cursor.execute(
-                    'UPDATE users SET subscription_tier = "free", subscription_end_date = NULL, stripe_subscription_id = NULL WHERE id = ?',
-                    (user_id,)
-                )
-                
-                conn.commit()
-                logger.info(f"Subscription ended for user {user_id}")
-            
-            conn.close()
+        logger.info(f"Created payment intent for user {user_id}, tier {tier}, amount ${amount}")
         
-        return jsonify({'status': 'success'})
+        return jsonify({
+            'client_secret': intent.client_secret
+        })
         
     except Exception as e:
-        logger.error(f"Webhook error: {str(e)}")
-        return jsonify({'status': 'error'}), 400
+        logger.error(f"Payment intent creation error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 # Update user subscription (manual option for free tier)
 @app.route('/api/subscribe', methods=['POST'])
 def update_subscription():
-    data = request.json
-    user_id = data.get('user_id')
-    tier = data.get('tier')
-    
-    if not user_id or not tier:
-        return jsonify({'error': 'User ID and tier are required'}), 400
-    
-    if tier not in ['free', 'basic', 'pro']:
-        return jsonify({'error': 'Invalid subscription tier'}), 400
-    
-    conn = sqlite3.connect(app.config['DB_PATH'])
-    cursor = conn.cursor()
-    
-    # Check if user exists
-    cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
-    user = cursor.fetchone()
-    
-    if not user:
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        tier = data.get('tier')
+        
+        if not user_id or not tier:
+            return jsonify({'error': 'User ID and tier are required'}), 400
+        
+        if tier not in ['free', 'paid']:
+            return jsonify({'error': 'Invalid subscription tier'}), 400
+        
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        
+        # Get or create user
+        user = get_or_create_user(user_id)
+        
+        # For paid tiers, users should use Stripe Checkout (for now, allow direct update for testing)
+        if tier != 'free':
+            # For testing purposes, allow direct subscription updates
+            # In production, this should redirect to Stripe
+            pass
+        
+        # Calculate end date for paid tiers
+        end_date = None
+        if tier != 'free':
+            end_date = (datetime.now() + timedelta(days=30)).isoformat()
+        
+        # Update subscription
+        cursor.execute(
+            'UPDATE users SET subscription_tier = ?, subscription_end_date = ? WHERE id = ?',
+            (tier, end_date, user_id)
+        )
+        
+        conn.commit()
         conn.close()
-        return jsonify({'error': 'User not found'}), 404
-    
-    # For paid tiers, users should use Stripe Checkout
-    if tier != 'free':
-        conn.close()
+        
+        logger.info(f"Updated subscription for user {user_id} to {tier}")
+        
         return jsonify({
-            'error': 'For paid tiers, please use Stripe Checkout',
-            'redirect': True
-        }), 400
-    
-    # Update subscription to free tier
-    cursor.execute(
-        'UPDATE users SET subscription_tier = ?, subscription_end_date = NULL WHERE id = ?',
-        (tier, user_id)
-    )
-    
-    # If user has active Stripe subscription, cancel it
-    cursor.execute('SELECT stripe_subscription_id FROM users WHERE id = ?', (user_id,))
-    subscription_data = cursor.fetchone()
-    
-    if subscription_data and subscription_data[0]:
-        try:
-            # Cancel subscription in Stripe
-            stripe.Subscription.delete(subscription_data[0])
-            
-            # Clear subscription ID in database
-            cursor.execute(
-                'UPDATE users SET stripe_subscription_id = NULL WHERE id = ?',
-                (user_id,)
-            )
-        except Exception as e:
-            logger.error(f"Error canceling subscription: {str(e)}")
-    
-    conn.commit()
-    conn.close()
-    
-    logger.info(f"Updated subscription for user {user_id} to {tier}")
-    
-    return jsonify({
-        'success': True,
-        'message': f'Subscription updated to {tier}',
-        'user_id': user_id,
-        'subscription_tier': tier,
-        'subscription_end_date': None
-    })
+            'success': True,
+            'message': f'Subscription updated to {tier}',
+            'user_id': user_id,
+            'subscription_tier': tier,
+            'subscription_end_date': end_date
+        })
+        
+    except Exception as e:
+        logger.error(f"Subscription update error: {str(e)}")
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
-# Claude query endpoint
+# Enhanced version of your query endpoint that includes chat history
 @app.route('/api/query', methods=['POST'])
 def query_claude():
     try:
         user_query = request.json.get('query')
         scope = request.json.get('scope', 'mass_laws')
         user_id = request.json.get('user_id')
+        session_id = request.json.get('session_id')  # New: include session ID
         
         if not user_query:
             return jsonify({'error': 'Query is required'}), 400
             
-        logger.info(f"Processing query: {user_query} [scope: {scope}] [user: {user_id}]")
+        logger.info(f"Processing query: {user_query} [scope: {scope}] [user: {user_id}] [session: {session_id}]")
 
         # Check user and usage limits if user_id is provided
         if user_id:
@@ -568,6 +481,39 @@ def query_claude():
                     "response": limit_message,
                     "upgrade_required": True
                 }), 429
+        
+        # Get chat history for context if session_id provided
+        chat_context = ""
+        if session_id and user_id:
+            try:
+                conn = sqlite3.connect(app.config['DB_PATH'])
+                cursor = conn.cursor()
+                
+                # Get recent messages from this session (last 10 messages)
+                cursor.execute('''
+                    SELECT message, sender FROM chat_messages 
+                    WHERE session_id = ? 
+                    ORDER BY created_at DESC 
+                    LIMIT 10
+                ''', (session_id,))
+                
+                recent_messages = cursor.fetchall()
+                conn.close()
+                
+                if recent_messages:
+                    # Reverse to get chronological order
+                    recent_messages.reverse()
+                    
+                    chat_history = []
+                    for message, sender in recent_messages:
+                        role = "Human" if sender == "user" else "Assistant"
+                        chat_history.append(f"{role}: {message}")
+                    
+                    chat_context = f"\n\nCONVERSATION HISTORY:\n" + "\n".join(chat_history) + "\n\n"
+                
+            except Exception as e:
+                logger.error(f"Error getting chat context: {str(e)}")
+                # Continue without context if there's an error
         
         # Read both the laws and legacy document files
         laws_path = os.path.join(os.path.dirname(__file__), 'data', 'mass_weights_measures_laws.txt')
@@ -585,6 +531,9 @@ def query_claude():
             legacy_text = "Error loading legacy document."
 
         # Create Anthropic client
+        if not app.config['ANTHROPIC_API_KEY']:
+            return jsonify({'error': 'Anthropic API not configured'}), 501
+            
         client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
         
         # Create system prompt with guidance about document precedence
@@ -597,8 +546,16 @@ def query_claude():
         * The legacy document is a general reference created approximately 20 years ago and may not reflect current standards.
         * Use the legacy document to provide historical context or procedural insight, but defer to official laws for enforcement or compliance guidance.
         
-        Be concise in your responses while being accurate and helpful.
+        Be concise in your responses while being accurate and helpful. If there is conversation history, consider it for context but focus on the current question.
         """
+        
+        # Build the content with optional chat context
+        content = f"MASSACHUSETTS WEIGHTS AND MEASURES LAWS:\n{laws_text}\n\nLEGACY REFERENCE DOCUMENT:\n{legacy_text}"
+        
+        if chat_context:
+            content += chat_context
+            
+        content += f"\nCurrent question: {user_query}"
         
         # Make the Claude query
         response = client.messages.create(
@@ -608,7 +565,7 @@ def query_claude():
             messages=[
                 {
                     "role": "user",
-                    "content": f"MASSACHUSETTS WEIGHTS AND MEASURES LAWS:\n{laws_text}\n\nLEGACY REFERENCE DOCUMENT:\n{legacy_text}\n\nUser question: {user_query}"
+                    "content": content
                 }
             ]
         )
@@ -630,15 +587,169 @@ def query_claude():
             "details": str(e)
         }), 500
 
+# Get chat history for a user
+@app.route('/api/chat-history', methods=['GET'])
+def get_chat_history():
+    user_id = request.args.get('user_id')
+    
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    
+    try:
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        
+        # Get all chat sessions for user, ordered by most recent
+        cursor.execute('''
+            SELECT id, title, created_at, updated_at 
+            FROM chat_sessions 
+            WHERE user_id = ? 
+            ORDER BY updated_at DESC 
+            LIMIT 50
+        ''', (user_id,))
+        
+        sessions = []
+        for row in cursor.fetchall():
+            sessions.append({
+                'id': row[0],
+                'title': row[1],
+                'created_at': row[2],
+                'updated_at': row[3]
+            })
+        
+        conn.close()
+        
+        return jsonify({
+            'sessions': sessions,
+            'total': len(sessions)
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching chat history: {str(e)}")
+        return jsonify({'error': 'Failed to fetch chat history'}), 500
+
+# Get messages for a specific chat session
+@app.route('/api/chat-session/<int:session_id>', methods=['GET'])
+def get_chat_session(session_id):
+    user_id = request.args.get('user_id')
+    
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    
+    try:
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        
+        # Verify session belongs to user
+        cursor.execute('''
+            SELECT title FROM chat_sessions 
+            WHERE id = ? AND user_id = ?
+        ''', (session_id, user_id))
+        
+        session = cursor.fetchone()
+        if not session:
+            conn.close()
+            return jsonify({'error': 'Session not found'}), 404
+        
+        # Get all messages for this session
+        cursor.execute('''
+            SELECT message, sender, created_at 
+            FROM chat_messages 
+            WHERE session_id = ? 
+            ORDER BY created_at ASC
+        ''', (session_id,))
+        
+        messages = []
+        for row in cursor.fetchall():
+            messages.append({
+                'text': row[0],
+                'sender': row[1],
+                'created_at': row[2]
+            })
+        
+        conn.close()
+        
+        return jsonify({
+            'session_id': session_id,
+            'title': session[0],
+            'messages': messages
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching chat session: {str(e)}")
+        return jsonify({'error': 'Failed to fetch chat session'}), 500
+
+# Create or update a chat session
+@app.route('/api/chat-session', methods=['POST'])
+def save_chat_session():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        session_id = data.get('session_id')  # None for new session
+        title = data.get('title')
+        messages = data.get('messages', [])
+        
+        if not user_id:
+            return jsonify({'error': 'User ID is required'}), 400
+        
+        conn = sqlite3.connect(app.config['DB_PATH'])
+        cursor = conn.cursor()
+        current_time = datetime.now().isoformat()
+        
+        # Create new session or update existing
+        if not session_id:
+            # Create new session
+            cursor.execute('''
+                INSERT INTO chat_sessions (user_id, title, created_at, updated_at)
+                VALUES (?, ?, ?, ?)
+            ''', (user_id, title, current_time, current_time))
+            session_id = cursor.lastrowid
+        else:
+            # Update existing session
+            cursor.execute('''
+                UPDATE chat_sessions 
+                SET title = ?, updated_at = ? 
+                WHERE id = ? AND user_id = ?
+            ''', (title, current_time, session_id, user_id))
+        
+        # Save new messages (only save the last message to avoid duplicates)
+        if messages:
+            latest_message = messages[-1]
+            cursor.execute('''
+                INSERT INTO chat_messages (session_id, message, sender, created_at)
+                VALUES (?, ?, ?, ?)
+            ''', (session_id, latest_message['text'], latest_message['sender'], current_time))
+        
+        conn.commit()
+        conn.close()
+        
+        logger.info(f"Saved chat session {session_id} for user {user_id}")
+        
+        return jsonify({
+            'success': True,
+            'session_id': session_id,
+            'title': title
+        })
+        
+    except Exception as e:
+        logger.error(f"Error saving chat session: {str(e)}")
+        return jsonify({'error': 'Failed to save chat session'}), 500
+
 # Initialize database when app starts
-with app.app_context():
-    init_db()
+init_db()
+
+# Debug: Print registered routes
+print("=== REGISTERED ROUTES ===")
+for rule in app.url_map.iter_rules():
+    print(f"  {rule.rule} -> {rule.endpoint}")
+print("========================")
 
 if __name__ == '__main__':
-    # Only enable debug mode in development
+    # Only enable debug mode in developmen
     debug = os.environ.get('FLASK_ENV') == 'development'
     
     # Get port from environment variable for production deployment
     port = int(os.environ.get("PORT", 5000))
     
+    print(f"Starting Flask app on port {port}")
     app.run(host='0.0.0.0', port=port, debug=debug)

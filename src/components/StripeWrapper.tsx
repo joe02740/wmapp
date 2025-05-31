@@ -2,8 +2,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentForm from './PaymentForm';
 
-// Mock Stripe public key - replace with your actual publishable key when using in production
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+// Your actual test publishable key
+const stripePromise = loadStripe('pk_test_51RKr9tB1wZPdY9nxxomYqJdK7KtebPA2lwnySGu499AOjNUBRA50IpjCpDhWTYU6b1IYsLkkmKxztcwjVO9v8jcR00GJ4MFauy');
 
 interface StripeWrapperProps {
   amount: number;

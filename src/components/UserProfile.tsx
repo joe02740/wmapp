@@ -29,11 +29,10 @@ const UserProfile = () => {
   const [selectedTier, setSelectedTier] = useState<string>('');
   
   // Plan prices map
-  const tierPrices: { [key: string]: number } = {
-    'free': 0,
-    'basic': 9.99,
-    'pro': 29.99
-  };
+  //const tierPrices: { [key: string]: number } = {
+    //'free': 0,
+    //'paid': 20.00
+  //};
 
   useEffect(() => {
     if (user) {
@@ -43,6 +42,9 @@ const UserProfile = () => {
 
   const fetchUsageData = async () => {
     if (!user) return;
+    
+    console.log('User object:', user); // Add this line
+    console.log('User ID:', user.id);  // Add this line
     
     try {
       setLoading(true);
@@ -217,36 +219,26 @@ const UserProfile = () => {
             <h3>Upgrade Subscription</h3>
             <div className="subscription-plans">
               <div className={`plan ${selectedTier === 'free' ? 'selected' : ''}`} onClick={() => setSelectedTier('free')}>
-                <h4>Free</h4>
-                <p className="price">$0 / month</p>
+                <h4>Free Trial</h4>
+                <p className="price">$0</p>
                 <ul>
-                  <li>1 query per day</li>
-                  <li>10 queries per month</li>
-                  <li>Basic response quality</li>
+                  <li>2 queries per day</li>
+                  <li>6 queries per month</li>
+                  <li>Basic support</li>
                 </ul>
                 <div className="plan-badge">Current: {usageData.subscription_tier === 'free' ? 'Yes' : 'No'}</div>
               </div>
               
-              <div className={`plan ${selectedTier === 'basic' ? 'selected' : ''}`} onClick={() => setSelectedTier('basic')}>
-                <h4>Basic</h4>
-                <p className="price">$9.99 / month</p>
-                <ul>
-                  <li>10 queries per day</li>
-                  <li>100 queries per month</li>
-                  <li>Standard response quality</li>
-                </ul>
-                <div className="plan-badge">Current: {usageData.subscription_tier === 'basic' ? 'Yes' : 'No'}</div>
-              </div>
-              
-              <div className={`plan ${selectedTier === 'pro' ? 'selected' : ''}`} onClick={() => setSelectedTier('pro')}>
+              <div className={`plan ${selectedTier === 'paid' ? 'selected' : ''}`} onClick={() => setSelectedTier('paid')}>
                 <h4>Professional</h4>
-                <p className="price">$29.99 / month</p>
+                <p className="price">$20 / month</p>
                 <ul>
                   <li>50 queries per day</li>
                   <li>500 queries per month</li>
-                  <li>Premium response quality</li>
+                  <li>Priority support</li>
+                  <li>Advanced features</li>
                 </ul>
-                <div className="plan-badge">Current: {usageData.subscription_tier === 'pro' ? 'Yes' : 'No'}</div>
+                <div className="plan-badge">Current: {usageData.subscription_tier === 'paid' ? 'Yes' : 'No'}</div>
               </div>
             </div>
             

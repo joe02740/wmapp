@@ -3119,17 +3119,191 @@ REGULATORY AUTHORITY
 202 CMR 7.00: M.G.L. c. 94, §§ 184B through 184E and M.G.L. c. 98, § 56D.
 
 
+=== MOST RECENT MASSACHUSETTS WEIGHTS & MEASURES REGULATIONS ===
+NOTE: These recent updates supersede any conflicting information above.
+Last Updated: 05/31/2025
 
 
 
 
+202 CMR: DIVISION OF STANDARDS
+202 CMR 5.00: UNIT PRICING AND AUTOMATED RETAIL CHECKOUT SYSTEMS
+5.01: Definitions
+5.02: Applicability
+5.03: Exemptions
+5.04: Price Label Requirements
+5.05: Extension ofTime for Compliance
+5.06: Severability
+5.07: Inspection of Automated Checkout Systems
+5.01: Definitions
+(1) Packaged Commodity: means any food, drug, device or cosmetic and any other article,
+product, or commodity of any kind or class which is customarily necessary or used for
+personal, family or household use and offered for sale at retail and is offered for sale
+by weight, measure, quantity, count, or combination thereof.
+(2) Price label: A physical or electronic sign, sticker, stamp, label, or other medium
+containing the unit price and item price of the packaged commodity and such other
+information required by 202 CMR 5.00 or M.G.L. c. 98, §§ 184B-184E. Shelf Tag: a
+price label that meets the requirements contained in 202 CMR 5.00 that is affixed to
+the front of the shelf on which a packaged commodity is displayed for sale.
+(3) Unit Price: the price of each packaged commodity per measure.
+(a) The declaration of the unit price of a particular commodity in all package sizes offered
+for sale in a retail store shall be uniformly and consistently expressed in terms of either:
+1. Price per kilogram or 100 g, or price per pound or ounce, if the net quantity of
+contents of the commodity is in terms of weight.
+2. Price per liter or 100 mL, or price per dry quart or dry pint, if the net quantity of
+contents of the commodity is in terms of dry measure or volume.
+3. Price per liter or 100 mL, or price per gallon, quart, pint, or fluid ounce, if the net
+quantity of contents of the commodity is in terms of liquid volume.
+4. Price per individual unit or multiple units if the net quantity of contents of the
+commodity is in terms of count.
+(b) Price per square meter, square decimeter, or square centimeter, or price per square yard,
+square foot, or square inch, if the net quantity of contents of the commodity is in terms of
+area. The declaration of the unit price shall reflect the unit of measure as it most commonly
+appears displayed on the particular commodity.
+(4) ItemPrice: the total, currentsale price of the packaged commodity, inclusive of any temporary
+discounts, available rebates, loyalty club discounts, or other temporary price reductions.
+(5) Retail Store: any retail outlet, either as a sole location or part of a chain of stores, including
+wholesale clubs and membership warehouses that sells or offers for sale any packaged
+commodity and has a sales volume of not less than $5,000,000 (five-million dollars) per
+year of in-store sales excluding the sale of motor or vehicle fuels; only retail outlets
+whose owners have submitted requested by the Division to ensure the retail outlet’s
+compliance with the sales limits contained in M.G.L. c. 6 §115A and 202 CMR 5.00 shall
+be excluded from the definition of retail store. For the purposes of compliance with this
+requirement, sworn and notarized affidavits completed by independent auditors attesting
+to the annual sales limits of each retail store shall be sufficient for compliance.
+5.02: Applicability:
+(1) These regulations shall apply to all retail stores that offer packaged commodities for sale.
+(2) The unit price and item price of a packaged commodity must be disclosed on a price label
+that meets the requirements of 202 CMR 5.04. Nothing in these regulations shall prevent a
+retail store from including other information on a price label provided that all required
+information is displayed prominently. Retail stores are strongly encouraged to include
+design elements to price labels to increase accessibility to pricing information for visually
+impaired consumers, such as Quick Response (QR) codes or other similar additions.
+(3) If the packaged commodity is displayed on a shelf, the price label containing the unit price
+shall either appear on a shelf tag directly below one or more of the packaged commodities
+displayed for sale or shall be attached to the packaged commodity. If it is physically
+impossible to meet the foregoing requirement, the unit price may appear on a price sign or
+list that is displayed as close as is practical to the packaged commodity.
+(4) In the event a retail store elects to utilize electronic shelf labels to meet the requirements of these
+regulations, such electronic shelf labels may only be automatically updated during such period in
+which in the retail store is not open to consumers; in the event that a retail store is open to
+consumer for twenty-four (24) hours per day, such electronic shelf labels may only be
+202 CMR: DIVISION OF STANDARDS
+automatically updated between the hours of 1:00 a.m. to 3:00 a.m.
+(5) If the packaged commodity is displayed in an electronic format, such as on a website or mobile
+application, the item price and unit price shall be prominently displayed on the same screen as the
+packaged commodity.
+(6) If a packaged commodity is displayed in an enclosed heated or refrigerated case, the price label
+shall be affixed to the case, to a shelf edge, or to the packaged commodity. If it is physically
+impossible to meet the foregoing requirement, the unit price may appear on a price sign or list that
+is displayed as close as practical to the packaged commodity.
+5.03: Exemptions
+The following packaged commodities are exempt from the requirements of 202 CMR 5.00:
+(1) Medicine sold by prescription only;
+(2) Beveragessubject to or complying with packaging or labeling requirements imposed under the
+Federal Alcohol Administration Act;
+(3) Such packaged commodities which are required to be marked individually with the cost per unit
+of weight under the provisions of M.G.L. c. 94, § 181;
+(4) Commodities packaged in quantities of less than 28 g (1 oz) or 29 mL (1 fl. oz) or when
+the total retail price is 50 cents or less;
+(5) When only one brand and in only one size of the packaged commodity is offered for
+sale in a particular retail store;
+(6) Infant formula. Unit price information may be based on the reconstituted volume.
+“Infant formula” means a food that is represented for special dietary use solely as a food
+for infants by reason of its simulation of human milk or suitability as a complete or
+partial substitute for human milk.
+(7) Packaged commodities intended for retail sale containing two or more individual
+packages or units of dissimilar commodities;
+(8) Packaged commodities intended for retail sale containing two or more individual
+packages or units of similar, but not identical, commodities specifically items that are
+generically the same, but that differ in weight, measure, volume, appearance, or quality,
+are considered similar, but not identical.
+(9) The retailstore shall not be required to comply with the provisions of 202 CMR 5.00 where
+the packaged commodity carries an item price and unit price displayed on its package.
+5.04 Price Label Requirements
+(1) The price label shall include a clear and comprehensible description of the packaged
+commodity, and is comprised of no more than two dominant segments which clearly and
+prominently indicate the item price and unit price, respectively. In the event that the retail
+store elects to display multiple price labels for the same individual product to reflect a
+temporary price adjustment, both price labels must meet all the requirements stated herein.
+(2) The unit price segment of the price label shall appear:
+(a) Clearly and conspicuously to the consumer;
+(b) Within the left segment of the price label;
+(c) In black typeface over a contrasting-color background of yellow, red, orange or other color
+approved by the Commissioner/Deputy Director of Standards upon written request of the
+retail store or chain of retail stores. The contrasting-color background of the unit price
+segment shall be consistent for all price labels throughout the retail store location but may
+vary among different locations of a chain of retail stores.
+1. In the event a retail store elects to utilize electronic shelf labels to meet the
+requirements of these regulations, the use of black and white-only contrasting
+price labels are only allowed in freezer sections of retail stores or with the express
+written authorization of the Commissioner/Deputy Director of Standards.
+(3) The unit price segment ofthe price label shall include the following information and no
+other:
+(a) The words "Unit Price"as a heading directly above the numericalunit price;
+(b) The unit price as defined in 202 CMR 5.01(3) shall be displayed:
+1. To the nearest cent when the unit price is one dollar or greater;
+2. Either to the tenth of one cent or to the whole cent when the unit price
+is 99 cents or less.
+(4) The item price segment of the price label shall appear:
+(a) Clearly and conspicuously to the consumer;
+(b) Within the rightsegment of the price label;
+(c) In black typeface over a white background unless otherwise approved by the
+Commissioner/Deputy Director of Standards upon written request of the retail store or
+202 CMR: DIVISION OF STANDARDS
+chain of retail stores.
+(5) The item price segment ofthe price labelshall include the following information:
+(a) The words "Item Price," “Retail Price,” or other clear descriptoras a heading adjacent to
+the numericalitem price;
+(b) The itemprice;
+(c) The totalsize, weight, or volume ofthe commodity being sold;
+(d) The date of expiration of any applicable temporary discounts, available rebates,
+loyalty club discounts, or other temporary price reductions that impact the Item
+Price of the packaged commodity, if applicable;
+(e) Other information may also be included on the price label at the option of the retail
+establishment provided thatsaid information does not in any way obscure, de-emphasize
+or confuse the unit or item price information.
+(5) The largest font size possible should be used based on the size of the price label utilized. The unit
+price shall be displayed in font size no smaller than 50% of the font size that used for the item
+price, but in no eventshall the unit price appear in fontsize lessthan 6.00 mm unless
+approved by the Commissioner/Deputy Director of Standards. Both the unit price and
+item price as appearing on the price label shall be printed in bold typeface in a clear and
+conspicuous manner. The letters and numbers used to comply with the provisions of 202
+CMR 5.04 shall appear in a font size and at a location on the price label that can be
+easily seen and read by consumers with average vision from normal viewing positions
+and distances
+5.05 Extension ofTime for Compliance
+(1) Any retail establishment which is unable to comply with 202 CMR 5.00, may apply to the
+Commissioner/Deputy Director of Standards, in writing, for permission to extend such time for
+compliance for a period not to exceed 30 days. Such retail establishmentshallset forth, in as
+much detail as possible, the reasonsfor itsinability to comply. The Commissioner/Deputy
+Director of Standards may extend such period from time to time, upon such terms and
+conditions as he may deemreasonable.
+(2) Exemption from compliance with the requirements of any of the provisions of these
+regulations be granted for cause by the Commissioner/Deputy Director of Standards upon
+the filing of a statement settingforththe reason forinabilityto comply with any ofthe
+requirements. Any such exemption shall be granted by the Commissioner/Deputy Director of
+Standards forsuch period of time asthey may deem reasonable.
+(3) Concurrency period: Retail stores may conform, without violation, with 202 CMR 5.00
+as it appears immediately preceding the most recent amendment(s) for a period of one
+hundred and twenty (120) days following final promulgation of the new regulations.
+5.06 Severability Provision
+(1) If any section or portion of a section of 202 CMR 5.00, or the applicability thereof to any person
+or circumstances is held invalid by a court, the remainder of 202 CMR 5.00, or the applicability of
+such provision to other persons or circumstances, shall not be affected thereby.
+5.07 Inspection of Automated RetailCheckout Systems
+(1) Scope: The examination proceduresset out in 202 CMR 5.10(2)shall be used by the
+Commissioner/Deputy Director of the Division of Standards or hisinspectors and sealers and
+inspectors of weights and measures and their deputiesfor all examinationsrequired by
+M.G.L. c. 98, § 56D.
+(2) Examination Procedures: Pursuant to M.G.L. c. 98, § 56D, the Division of Standards adopts
+the most recent edition of the National Institute of Standards and Technology Handbook
+130, Section V: Examination Procedure for Price Verification asthe rules and regulations of
+the Division of Standards regarding the proceduresfor examining automated retail checkout
+systems.
+REGULATORY AUTHORITY
+202 CMR 5.00: M.G.L. c. 6A, § 115A; c. 98, § 29.
+202 CMR: DIVISION OF STANDARDS
 
-
-
-
-
-
-
-
-36
+=== END RECENT UPDATES ===
 

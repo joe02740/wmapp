@@ -22,17 +22,32 @@ const PaymentForm = ({ amount, tier, userId, onSuccess, onCancel }: PaymentFormP
     event.preventDefault();
     
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet.
       return;
     }
     
     setLoading(true);
     setError(null);
     
-    // NOTE: In a real implementation, you would call your backend here to create a payment intent
-    // and then confirm the payment on the client. This is just a demo.
-    
     try {
+      // Create payment intent on your backend
+      const response = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: amount,
+          user_id: userId,
+          tier: tier
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to create payment intent');
+      }
+      
+      const { client_secret } = await response.json();
+      
       // Get card element
       const cardElement = elements.getElement(CardElement);
       
@@ -40,36 +55,44 @@ const PaymentForm = ({ amount, tier, userId, onSuccess, onCancel }: PaymentFormP
         throw new Error('Card element not found');
       }
       
-      // Simulate a payment processing delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // For demo purposes, we'll just simulate a successful payment
-      // In a real implementation, you would use the paymentMethod to confirm the payment
-      
-      setSucceeded(true);
-      setLoading(false);
-      
-      // Call an API to update the user's subscription
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          tier: tier
-        }),
+      // Confirm payment with Stripe
+      const result = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: cardElement,
+        }
       });
       
-      if (!response.ok) {
-        throw new Error('Failed to update subscription');
+      if (result.error) {
+        throw new Error(result.error.message);
+      } else {
+        // Payment succeeded
+        setSucceeded(true);
+        
+        // Update user subscription
+        const subscriptionResponse = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            tier: tier
+          }),
+        });
+        
+        if (!subscriptionResponse.ok) {
+          throw new Error('Failed to update subscription');
+        }
+        
+        // Notify parent that payment was successful
+        setTimeout(() => {
+          onSuccess();
+        }, 1500);
       }
-      
-      // Notify parent that payment was successful
-      onSuccess();
       
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
+    } finally {
       setLoading(false);
     }
   };
@@ -136,8 +159,7 @@ const PaymentForm = ({ amount, tier, userId, onSuccess, onCancel }: PaymentFormP
             </div>
             
             <div className="payment-disclaimer">
-              <p>This is a demo. No actual payment will be processed.</p>
-              <p>For testing, you can use the card number: 4242 4242 4242 4242</p>
+              <p>Test mode: Use card number 4242 4242 4242 4242</p>
               <p>Use any future expiration date, any 3-digit CVC, and any postal code.</p>
             </div>
           </form>
