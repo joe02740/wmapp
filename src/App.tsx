@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ChatInterface, UserProfile } from './components';
+import { ChatInterface, UserProfile, HelpPage } from './components';
 import SuccessPage from './components/SuccessPage';
 import CancelPage from './components/CancelPage';
 import './App.css';
@@ -9,15 +9,26 @@ import './App.css';
 function MainLayout() {
   const { user } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'chat' | 'profile'>('chat');
+  const [currentView, setCurrentView] = useState<'chat' | 'profile' | 'help'>('chat');
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleMenuClick = (view: 'chat' | 'profile') => {
+  const handleMenuClick = (view: 'chat' | 'profile' | 'help') => {
     setCurrentView(view);
     setMenuOpen(false);
+  };
+
+  const renderCurrentView = () => {
+    switch (currentView) {
+      case 'profile':
+        return <UserProfile />;
+      case 'help':
+        return <HelpPage />;
+      default:
+        return <ChatInterface />;
+    }
   };
 
   return (
@@ -65,8 +76,9 @@ function MainLayout() {
               <li className={currentView === 'profile' ? 'active' : ''} onClick={() => handleMenuClick('profile')}>
                 My Profile
               </li>
-              <li>Settings</li>
-              <li>Help</li>
+              <li className={currentView === 'help' ? 'active' : ''} onClick={() => handleMenuClick('help')}>
+                Help
+              </li>
             </SignedIn>
             <SignedOut>
               <li>About</li>
@@ -142,11 +154,7 @@ function MainLayout() {
         </SignedOut>
         
         <SignedIn>
-          {currentView === 'chat' ? (
-            <ChatInterface />
-          ) : (
-            <UserProfile />
-          )}
+          {renderCurrentView()}
         </SignedIn>
       </main>
     </div>
