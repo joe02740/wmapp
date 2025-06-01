@@ -383,11 +383,11 @@ print("10. Save chat session route defined")
 @app.route('/api/query', methods=['POST'])
 def handle_query():
     data = request.json
-    query = data.get('query')
+    user_query = data.get('query')
     scope = data.get('scope', 'mass_laws')
     user_id = data.get('user_id')
     
-    if not query or not user_id:
+    if not user_query or not user_id:
         return jsonify({'error': 'Query and user ID are required'}), 400
     
     try:
@@ -396,33 +396,56 @@ def handle_query():
         if not can_use:
             return jsonify({'response': limit_message}), 429
         
-        # Initialize Anthropic client correctly
-        if app.config['ANTHROPIC_API_KEY']:
-            # Correct way to initialize Anthropic client
-            client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
+        if not app.config['ANTHROPIC_API_KEY']:
+            return jsonify({'error': 'Anthropic API key not configured'}), 500
             
-            # Make the API call
-            message = client.messages.create(
-                model="claude-sonnet-4-20250514",
-                max_tokens=1000,
-                messages=[
-                    {"role": "user", "content": f"Query about {scope}: {query}"}
-                ]
-            )
-            response_text = message.content[0].text
-        else:
-            # Fallback if no API key
-            response_text = f"Anthropic API key not configured. Query: {query} (Scope: {scope})"
+        # Read the appropriate laws/handbook file based on scope
+        file_path = os.path.join(os.path.dirname(__file__), 'data', 'mass_weights_measures_laws.txt')
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                laws_text = file.read()
+        except FileNotFoundError:
+            return jsonify({'error': 'Laws file not found. Please contact support.'}), 500
+            
+        # Create Anthropic client (your working method)
+        client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
+        
+        # Make the Claude query with prompt caching (upgraded to Sonnet 4)
+        response = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=1024,
+            system=[
+                {
+                    "type": "text",
+                    "text": "You are an AI assistant specialized in Massachusetts weights and measures laws. Provide accurate and helpful information based on the given context. Please also assume you are chatting with someone who is a Weights and Measures official.\n"
+                },
+                {
+                    "type": "text", 
+                    "text": laws_text,
+                    "cache_control": {"type": "ephemeral"}
+                }
+            ],
+            messages=[{"role": "user", "content": user_query}]
+        )
+        
+        response_text = response.content[0].text
         
         # Record usage
-        tokens_used = len(query.split()) * 2  # Rough estimate
-        record_usage(user_id, query, scope, tokens_used)
+        tokens_used = response.usage.input_tokens + response.usage.output_tokens if hasattr(response, 'usage') else len(user_query.split()) * 2
+        record_usage(user_id, user_query, scope, tokens_used)
         
-        return jsonify({'response': response_text})
+        return jsonify({
+            "type": "mass_laws", 
+            "response": response_text
+        })
         
     except Exception as e:
         logger.error(f"Error processing query: {str(e)}")
-        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
+        return jsonify({
+            "error": "An error occurred processing your request",
+            "details": str(e)
+        }), 500
 
 print("11. Query route defined")
 
