@@ -2,68 +2,41 @@ import psycopg2
 import psycopg2.extras
 import os
 import logging
-from urllib.parse import urlparse
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
 def get_db_connection():
-    """
-    Create and return a PostgreSQL database connection.
-    Uses DATABASE_URL environment variable or constructs from individual vars.
-    """
+    """Get database connection"""
     try:
-        # Try to get full DATABASE_URL first (common in production like Heroku)
-        database_url = os.getenv('DATABASE_URL')
+        DATABASE_URL = os.getenv('DATABASE_URL')
         
-        if database_url:
-            # Debug logging
-            logger.info(f"DATABASE_URL exists: {database_url is not None}")
-            if "@" in database_url:
-                host_part = database_url.split("@")[1].split("/")[0]
+        # Debug logging
+        logger.info(f"DATABASE_URL exists: {DATABASE_URL is not None}")
+        if DATABASE_URL:
+            # Log just the host part for security
+            if "@" in DATABASE_URL:
+                host_part = DATABASE_URL.split("@")[1].split("/")[0]
                 logger.info(f"Connecting to host: {host_part}")
-            
-            # Parse the URL
-            url = urlparse(database_url)
-            conn = psycopg2.connect(
-                host=url.hostname,
-                port=url.port,
-                database=url.path[1:],  # Remove leading slash
-                user=url.username,
-                password=url.password,
-                cursor_factory=psycopg2.extras.RealDictCursor
-            )
+            else:
+                logger.info("DATABASE_URL format seems wrong")
         else:
-            # Use individual environment variables
-            logger.info("Using individual DB environment variables")
-            conn = psycopg2.connect(
-                host=os.getenv('DB_HOST', 'localhost'),
-                port=os.getenv('DB_PORT', '5432'),
-                database=os.getenv('DB_NAME', 'wmhelper'),
-                user=os.getenv('DB_USER', 'postgres'),
-                password=os.getenv('DB_PASSWORD', ''),
-                cursor_factory=psycopg2.extras.RealDictCursor
-            )
+            logger.error("DATABASE_URL environment variable not set")
+            raise ValueError("DATABASE_URL environment variable not set")
         
-        logger.info("Database connection established successfully")
+        conn = psycopg2.connect(DATABASE_URL)
         return conn
-        
-    except psycopg2.Error as e:
-        logger.error(f"Database connection error: {str(e)}")
-        raise
     except Exception as e:
-        logger.error(f"Unexpected error connecting to database: {str(e)}")
+        logger.error(f"Database connection error: {str(e)}")
         raise
 
 def init_db():
-    """
-    Initialize the database with required tables.
-    Creates tables if they don't exist.
-    """
+    """Initialize database tables"""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Create users table
+        # Create tables
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 id VARCHAR(255) PRIMARY KEY,
@@ -77,58 +50,51 @@ def init_db():
             )
         ''')
         
-        # Create usage table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS usage (
                 id SERIAL PRIMARY KEY,
                 user_id VARCHAR(255) REFERENCES users(id),
                 query TEXT,
-                scope VARCHAR(50),
+                scope VARCHAR(100),
                 tokens_used INTEGER,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
         
-        # Create chat_sessions table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS chat_sessions (
                 id SERIAL PRIMARY KEY,
                 user_id VARCHAR(255) REFERENCES users(id),
-                title VARCHAR(500),
-                messages JSONB,
+                title TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
         
-        # Create indexes for better performance
         cursor.execute('''
-            CREATE INDEX IF NOT EXISTS idx_usage_user_id ON usage(user_id);
+            CREATE TABLE IF NOT EXISTS chat_messages (
+                id SERIAL PRIMARY KEY,
+                session_id INTEGER REFERENCES chat_sessions(id) ON DELETE CASCADE,
+                message TEXT,
+                sender VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
         ''')
         
-        cursor.execute('''
-            CREATE INDEX IF NOT EXISTS idx_usage_created_at ON usage(created_at);
-        ''')
-        
-        cursor.execute('''
-            CREATE INDEX IF NOT EXISTS idx_chat_sessions_user_id ON chat_sessions(user_id);
-        ''')
-        
-        cursor.execute('''
-            CREATE INDEX IF NOT EXISTS idx_chat_sessions_updated_at ON chat_sessions(updated_at);
-        ''')
+        # Create indexes
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_usage_user_id ON usage(user_id)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_usage_created_at ON usage(created_at)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_chat_sessions_user_id ON chat_sessions(user_id)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_chat_messages_session_id ON chat_messages(session_id)')
         
         conn.commit()
         cursor.close()
         conn.close()
         
-        logger.info("Database initialized successfully")
+        logger.info("Database tables created successfully")
         
-    except psycopg2.Error as e:
-        logger.error(f"Database initialization error: {str(e)}")
-        raise
     except Exception as e:
-        logger.error(f"Unexpected error initializing database: {str(e)}")
+        logger.error(f"Database initialization error: {str(e)}")
         raise
 
 def execute_query(query, params=None, fetch=False):
@@ -153,36 +119,3 @@ def execute_query(query, params=None, fetch=False):
     except Exception as e:
         logger.error(f"Database query error: {str(e)}")
         raise
-
-def test_connection():
-    """
-    Test the database connection and return status.
-    """
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('SELECT version();')
-        version = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        
-        logger.info(f"Database connection test successful. PostgreSQL version: {version[0]}")
-        return True, f"Connected successfully. PostgreSQL version: {version[0]}"
-        
-    except Exception as e:
-        logger.error(f"Database connection test failed: {str(e)}")
-        return False, str(e)
-
-if __name__ == "__main__":
-    # Test the database connection when run directly
-    success, message = test_connection()
-    print(f"Database test: {'PASSED' if success else 'FAILED'}")
-    print(f"Message: {message}")
-    
-    if success:
-        print("Initializing database...")
-        try:
-            init_db()
-            print("Database initialization completed successfully!")
-        except Exception as e:
-            print(f"Database initialization failed: {str(e)}")
