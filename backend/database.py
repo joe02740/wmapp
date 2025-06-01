@@ -10,7 +10,18 @@ def get_db_connection():
     """Get database connection"""
     try:
         DATABASE_URL = os.getenv('DATABASE_URL')
-        if not DATABASE_URL:
+        
+        # Debug logging
+        logger.info(f"DATABASE_URL exists: {DATABASE_URL is not None}")
+        if DATABASE_URL:
+            # Log just the host part for security
+            if "@" in DATABASE_URL:
+                host_part = DATABASE_URL.split("@")[1].split("/")[0]
+                logger.info(f"Connecting to host: {host_part}")
+            else:
+                logger.info("DATABASE_URL format seems wrong")
+        else:
+            logger.error("DATABASE_URL environment variable not set")
             raise ValueError("DATABASE_URL environment variable not set")
         
         conn = psycopg2.connect(DATABASE_URL)
