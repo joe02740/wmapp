@@ -20,67 +20,25 @@ def get_db_connection():
         raise
 
 def init_db():
-    """Initialize database tables"""
+    """Test database connection"""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Create users table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id TEXT PRIMARY KEY,
-            email TEXT UNIQUE,
-            name TEXT,
-            subscription_tier TEXT DEFAULT 'free',
-            subscription_end_date TIMESTAMP,
-            stripe_customer_id TEXT,
-            stripe_subscription_id TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        ''')
+        # Just test the connection
+        cursor.execute('SELECT 1')
+        result = cursor.fetchone()
         
-        # Create usage table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS usage (
-            id SERIAL PRIMARY KEY,
-            user_id TEXT REFERENCES users(id),
-            query TEXT,
-            scope TEXT,
-            tokens_used INTEGER,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        ''')
-        
-        # Create chat_sessions table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS chat_sessions (
-            id SERIAL PRIMARY KEY,
-            user_id TEXT REFERENCES users(id),
-            title TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        ''')
-        
-        # Create chat_messages table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS chat_messages (
-            id SERIAL PRIMARY KEY,
-            session_id INTEGER REFERENCES chat_sessions(id),
-            message TEXT,
-            sender TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        ''')
-        
-        conn.commit()
         cursor.close()
         conn.close()
-        logger.info("Database initialized successfully")
+        
+        if result:
+            logger.info("Database connection successful")
+        else:
+            logger.warning("Database connection test failed")
         
     except Exception as e:
-        logger.error(f"Database initialization error: {str(e)}")
+        logger.error(f"Database connection error: {str(e)}")
         raise
 
 def execute_query(query, params=None, fetch=False):
