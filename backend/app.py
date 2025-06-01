@@ -26,9 +26,9 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/api/*": {
         "origins": [
-            "https://nbwm.netlify.app",
-            "http://localhost:5173",  # Vite dev server
-            "http://localhost:5174"   # Alternative port
+            "https://wmhelper.com",
+            "https://www.wmhelper.com",
+            "http://localhost:5173",  # Keep for local dev
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
