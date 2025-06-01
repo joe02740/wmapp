@@ -167,6 +167,114 @@
     transform: translateY(-2px);
   }
   
+  /* Mobile App Section - Special styling for top priority */
+  .mobile-app-section {
+    border: 2px solid #FFD700;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mobile-app-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1B3664 0%, #FFD700 50%, #1B3664 100%);
+  }
+  
+  .mobile-app-highlight {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .mobile-app-content h4 {
+    color: #1B3664;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .mobile-app-content p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .mobile-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .benefit-item:hover {
+    transform: translateY(-2px);
+    background-color: #e9ecef;
+  }
+  
+  .benefit-icon {
+    font-size: 1.2rem;
+    min-width: 1.5rem;
+  }
+  
+  .install-guide-button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 1.5rem auto;
+    background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%);
+    color: #FFD700;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'IM Fell English', serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .install-guide-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .install-preview {
+    background-color: #e8f4f8;
+    border-left: 4px solid #1B3664;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .install-preview p {
+    margin: 0;
+    color: #1B3664;
+    text-align: left;
+    line-height: 1.4;
+  }
+  
   /* Mobile responsive */
   @media (max-width: 768px) {
     .help-page {
@@ -184,5 +292,17 @@
     
     .conversation-flow {
       gap: 0.75rem;
+    }
+    
+    .mobile-app-section {
+      padding: 1.5rem;
+    }
+    
+    .mobile-benefits {
+      grid-template-columns: 1fr;
+    }
+    
+    .install-guide-button {
+      max-width: 100%;
     }
   }

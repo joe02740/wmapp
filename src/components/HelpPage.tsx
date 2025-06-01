@@ -1,10 +1,56 @@
+//import React from 'react';
 import './HelpPage.css';
 
-const HelpPage = () => {
+interface HelpPageProps {
+  onNavigateToProfile?: () => void;
+}
+
+const HelpPage = ({ onNavigateToProfile }: HelpPageProps) => {
+  // Provide a fallback if onNavigateToProfile is not passed
+  const handleNavigate = () => {
+    if (onNavigateToProfile) {
+      onNavigateToProfile();
+    } else {
+      window.location.hash = '#profile';
+    }
+  };
+
   return (
     <div className="help-page">
       <h2>Help & Tips</h2>
-      
+      <div className="help-section mobile-app-section">
+        <h3>📱 Install Mobile App</h3>
+        <div className="mobile-app-highlight">
+          <div className="mobile-app-content">
+            <h4>Get Instant Field Access</h4>
+            <p>Install W&M Helper as an app on your phone for lightning-fast access during inspections. No more hunting for bookmarks or typing URLs while standing in a store.</p>
+            <div className="mobile-benefits">
+              <div className="benefit-item">
+                <span className="benefit-icon">⚡</span>
+                <span>One-tap access from home screen</span>
+              </div>
+              <div className="benefit-item">
+                <span className="benefit-icon">📵</span>
+                <span>Works offline after initial load</span>
+              </div>
+              <div className="benefit-item">
+                <span className="benefit-icon">🖥️</span>
+                <span>Full-screen experience (no browser bars)</span>
+              </div>
+              <div className="benefit-item">
+                <span className="benefit-icon">🔒</span>
+                <span>Secure and private on your device</span>
+              </div>
+            </div>
+            <button className="install-guide-button" onClick={handleNavigate}>
+              Go to Profile → Install App
+            </button>
+            <div className="install-preview">
+              <p><strong>What you'll see:</strong> In your Profile page, you'll find an "Install App" section with either a one-click install button or step-by-step instructions for your device.</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="help-section">
         <h3>🎯 How to Get the Best Results</h3>
         <div className="tips-grid">
@@ -26,34 +72,36 @@ const HelpPage = () => {
           </div>
         </div>
       </div>
-
       <div className="help-section">
         <h3>📝 Example Conversations</h3>
-        
         <div className="example-conversation">
           <h4>Pricing Violations & Fines</h4>
           <div className="conversation-flow">
             <div className="user-example">
-              <strong>Inspector:</strong> "What's the fine for incorrect pricing on 12 items at a retail store?"
+              <strong>Inspector:</strong> "can you tell me about price verification and fees and charges for failure as well?"
             </div>
             <div className="ai-example">
-              <strong>W&M Helper:</strong> "Under Mass. Gen. Laws Ch. 98, §§56-57, you can issue fines of $200 per violation. For 12 items, that's $2,400 total. Quote section 56A for your citation authority. The law requires that advertised prices match scanned prices, and each incorrect item constitutes a separate violation."
+              <strong>W&M Helper:</strong> "Based on the provided regulations, here are the key points about price verification, fees, and charges for violations: Price Verification Requirements: - All pricing must be clear and conspicuous to consumers - If there is a discrepancy between advertised price, sticker price, scanner price, display price and checkout price, the lowest price must be charged - All prices represented to consumers for the same item must be consistent - Stores must provide itemized sales receipts showing prices charged Inspections & Violations: - The Division and local officials inspect stores at least once every 24 months for stores with 3+ registers - Can inspect more frequently based on consumer complaints or previous violations - Sample size for accuracy tests is 50-200 items - Scanner accuracy must be at least 98% - Each scanning error constitutes a separate violation Fees & Penalties: For Scanner System Stores: - $200 per violation up to $5,000 maximum per inspection - $300 per loyalty card price violation up to $5,000 maximum - $1,000 fine for insufficient number of scanners Price Discrepancy Penalties: If scanner/checkout price is higher than lowest advertised/displayed price: - Item priced $10 or less: Free to customer - Item priced over $10: Customer pays lowest price minus $10 - Additional identical items: Customer pays lowest price Progressive Fines: - First failed inspection: $200 civil fine - Second failed inspection: $500 civil fine - Subsequent failed inspections: $1,000 civil fine Enforcement: - Fines must be paid within 21 days unless appealed - Violations must be corrected immediately upon notice - Repeat/intentional violations can result in loss of exemptions for 12 months - Cases may be referred to Attorney General for enforcement The regulations aim to ensure pricing accuracy and transparency while providing meaningful penalties for violations. The fine structure increases for repeat offenders and there are additional penalties for loyalty card price discrepancies."
+            </div>
+            <div className="user-example">
+              <strong>Inspector:</strong> "So if i went to one and they failed 2 and i didn't do either fine there was 11 errors 5 against the customer on the 2nd one so i did a civil citation for 1000 (200x5) should i have given them a 500 dollar fine as well?"
+            </div>
+            <div className="ai-example">
+              <strong>W&M Helper:</strong> "Based on 202 CMR 7.11(5), for automated retail checkout system inspections: - First failed inspection = $200 civil fine - Second failed inspection = $500 civil fine - Subsequent failed inspections = $1,000 civil fine If this was their second failed inspection, you should have issued both: 1. The $500 civil fine for the second failed inspection, AND 2. The $1,000 civil fine for the 5 overcharge violations ($200 x 5) So in this case, the total fines should have been $1,500 ($500 + $1,000). The $500 fine is mandatory for a second failed inspection under 7.11(5), while the overcharge violations are calculated separately at $200 per violation up to the maximum cap of $2,500 per inspection under 7.11(9). So yes, you should have included the $500 fine for it being their second failed inspection in addition to the $1,000 in overcharge violation fines."
             </div>
           </div>
         </div>
-
         <div className="example-conversation">
           <h4>Scale Inspection Authority</h4>
           <div className="conversation-flow">
             <div className="user-example">
-              <strong>Inspector:</strong> "A business owner is refusing to let me inspect their scales. What's my legal authority?"
+              <strong>Inspector:</strong> "Good Morning, can you please tell me about item pricing requirements and what stores are required if they don't have the waiver and what section its in? we went in a store that had a ton of food and no prices on anything no stickers and no tags on the shelves, gonna go back today"
             </div>
             <div className="ai-example">
-              <strong>W&M Helper:</strong> "Under Mass. Gen. Laws Ch. 98, §34, you have the right to enter any premises during business hours to inspect weighing and measuring devices. Refusal to allow inspection is a violation under §57, punishable by fine. You can cite the specific statute and explain that compliance is mandatory for business operation."
+              <strong>W&M Helper:</strong> "Good morning! Based on M.G.L. Chapter 94, Sections 184B-184E and 202 CMR 7.03, food stores and food departments are required to have clear and conspicuous price disclosure through either individual item pricing or consumer price scanner systems (if they have obtained a waiver). For stores WITHOUT a waiver: - They must have individual item pricing where the correct price is affixed to each unit/item via a sticker - They must have shelf tags (not less than 1 inch high) showing the price - The price numbers on shelf tags must be at least 1/2 inch high - All prices must be consistent with each other and the correct price There are some exemptions allowed under Section 184C like produce, milk, eggs etc., but the majority of packaged items must be individually priced unless the store has obtained a waiver to use scanner systems instead. If you encountered a store with no prices marked on items and no shelf tags, this would likely be a violation unless: 1. They have a valid waiver to use scanner systems instead (which still requires clear shelf tags) 2. The items fall under specific exemptions I'd recommend: 1. Checking if they have price scanners throughout the store (indicating they may have a waiver) 2. Taking photos/notes of the missing price issues 3. Filing a complaint with the MA Division of Standards who can investigate You can find complaint forms on the Division of Standards website. The store could face fines of $100-500 per violation if found to be non-compliant. Would you like me to provide any additional specific details about the requirements or complaint process?"
             </div>
           </div>
         </div>
-
         <div className="example-conversation">
           <h4>Electronic Price Tags (New Regulations)</h4>
           <div className="conversation-flow">
@@ -66,7 +114,6 @@ const HelpPage = () => {
           </div>
         </div>
       </div>
-
       <div className="help-section">
         <h3>🔧 Features</h3>
         <div className="features-list">
@@ -100,7 +147,6 @@ const HelpPage = () => {
           </div>
         </div>
       </div>
-
       <div className="help-section">
         <h3>💡 Pro Tips from the Field</h3>
         <div className="pro-tips">
@@ -118,7 +164,6 @@ const HelpPage = () => {
           </div>
         </div>
       </div>
-
       <div className="help-section">
         <h3>📞 Still Need Help?</h3>
         <p>This tool was built by a working Weights & Measures inspector who understands the real challenges you face in the field. If you have suggestions for improvements or need help with specific features, feel free to reach out.</p>

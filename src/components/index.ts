@@ -7,3 +7,4 @@ export { default as SuccessPage } from './SuccessPage';
 export { default as CancelPage } from './CancelPage';
 export { default as ChatHistory } from './ChatHistory';
 export { default as HelpPage } from './HelpPage';
+export { default as PWAInstall } from './PWAInstall';

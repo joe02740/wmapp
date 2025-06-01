@@ -1,0 +1,109 @@
+.pwa-install {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .pwa-install:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .pwa-install.installed {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  }
+  
+  .pwa-install.manual {
+    background: linear-gradient(135deg, #FFD700 0%, #f0c040 100%);
+    color: #1B3664;
+  }
+  
+  .pwa-icon {
+    font-size: 2rem;
+    min-width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .pwa-content {
+    flex: 1;
+  }
+  
+  .pwa-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: inherit;
+  }
+  
+  .pwa-content p {
+    margin: 0 0 1rem 0;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+  
+  .pwa-install-button {
+    background-color: #FFD700;
+    color: #1B3664;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'IM Fell English', serif;
+  }
+  
+  .pwa-install-button:hover {
+    background-color: #f0c040;
+    transform: translateY(-1px);
+  }
+  
+  .manual-instructions {
+    margin-top: 1rem;
+  }
+  
+  .manual-instructions p {
+    margin: 0.75rem 0 0.25rem 0;
+    font-weight: bold;
+  }
+  
+  .manual-instructions ol {
+    margin: 0.5rem 0 1rem 1rem;
+    padding-left: 1rem;
+  }
+  
+  .manual-instructions li {
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+  }
+  
+  .ios-icon {
+    display: inline-block;
+    margin: 0 0.25rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .pwa-install {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .pwa-icon {
+      min-width: auto;
+    }
+    
+    .manual-instructions {
+      text-align: left;
+    }
+  }

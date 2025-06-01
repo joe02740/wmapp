@@ -1,0 +1,28 @@
+{
+    "name": "Weights & Measures Helper",
+    "short_name": "W&M Helper",
+    "description": "AI-powered assistant for Massachusetts Weights & Measures laws and regulations",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1B3664",
+    "theme_color": "#1B3664",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "icons": [
+      {
+        "src": "/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/icon-512.png", 
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ],
+    "categories": ["government", "productivity", "business"],
+    "lang": "en-US",
+    "dir": "ltr"
+  }

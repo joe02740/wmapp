@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { API_BASE } from '../config';
+import PWAInstall from './PWAInstall';
 import './UserProfile.css';
 
 interface UsageData {
@@ -251,6 +252,11 @@ const UserProfile = () => {
               {loading ? 'Processing...' : `Upgrade to ${selectedTier !== usageData.subscription_tier ? selectedTier : 'selected'} tier`}
             </button>
             <p className="disclaimer">* Free downgrades are processed immediately. Paid upgrades require payment information.</p>
+          </div>
+
+          <div className="profile-section">
+            <h3>📱 Mobile App</h3>
+            <PWAInstall />
           </div>
         </>
       )}
