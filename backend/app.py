@@ -48,7 +48,6 @@ CORS(app, resources={
 
 # Load configuration from environment variables
 app.config['ANTHROPIC_API_KEY'] = os.getenv('ANTHROPIC_API_KEY')
-app.config['DB_PATH'] = os.getenv('DB_PATH', 'wm_helper.db')
 
 # Initialize Stripe
 app.config['STRIPE_SECRET_KEY'] = os.getenv('STRIPE_SECRET_KEY')
@@ -56,10 +55,7 @@ if app.config['STRIPE_SECRET_KEY']:
     stripe.api_key = app.config['STRIPE_SECRET_KEY']
 
 stripe_webhook_secret = os.getenv('STRIPE_WEBHOOK_SECRET')
-stripe_price_ids = {
-    'basic': os.getenv('STRIPE_BASIC_PRICE_ID'),
-    'pro': os.getenv('STRIPE_PRO_PRICE_ID')
-}
+stripe_price_id_paid = os.getenv('STRIPE_PRICE_ID_PAID')
 
 # Configure proxy headers if using a reverse proxy
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
@@ -291,36 +287,46 @@ def get_chat_session(session_id):
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Get session details
+        # Get session info
         cursor.execute('''
-            SELECT id, title, messages, created_at, updated_at 
+            SELECT title, created_at 
             FROM chat_sessions 
             WHERE id = %s AND user_id = %s
         ''', (session_id, user_id))
         
         session = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        
         if not session:
             return jsonify({'error': 'Session not found'}), 404
         
-        # Parse messages from JSON
-        messages = json.loads(session[2]) if session[2] else []
+        # Get messages from separate table
+        cursor.execute('''
+            SELECT message, sender, created_at 
+            FROM chat_messages 
+            WHERE session_id = %s 
+            ORDER BY created_at ASC
+        ''', (session_id,))
+        
+        messages = cursor.fetchall()
+        cursor.close()
+        conn.close()
         
         return jsonify({
-            'id': session[0],
-            'title': session[1],
-            'messages': messages,
-            'created_at': session[3].isoformat() if session[3] else '',
-            'updated_at': session[4].isoformat() if session[4] else ''
+            'title': session[0],
+            'created_at': session[1].isoformat() if session[1] else '',
+            'messages': [
+                {
+                    'text': row[0],
+                    'sender': row[1]
+                }
+                for row in messages
+            ]
         })
         
     except Exception as e:
-        logger.error(f"Error fetching chat session: {str(e)}")
-        return jsonify({'error': 'Internal server error'}), 500
+        logger.error(f"Error loading chat session: {str(e)}")
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
-print("9. Chat session route defined")
+print("9. Chat session get route defined")
 
 @app.route('/api/chat-session', methods=['POST'])
 def save_chat_session():
@@ -346,7 +352,7 @@ def save_chat_session():
                 WHERE id = %s AND user_id = %s
             ''', (title, current_time, session_id, user_id))
         else:
-            # Create new session - DON'T try to insert messages column!
+            # Create new session
             cursor.execute('''
                 INSERT INTO chat_sessions (user_id, title, created_at, updated_at)
                 VALUES (%s, %s, %s, %s)
@@ -382,10 +388,13 @@ print("10. Save chat session route defined")
 
 @app.route('/api/query', methods=['POST'])
 def handle_query():
+    logger.info("=== QUERY ROUTE CALLED ===")  # Debug log
     data = request.json
     user_query = data.get('query')
     scope = data.get('scope', 'mass_laws')
     user_id = data.get('user_id')
+    
+    logger.info(f"Query: {user_query[:50]}... | User: {user_id} | Scope: {scope}")
     
     if not user_query or not user_id:
         return jsonify({'error': 'Query and user ID are required'}), 400
@@ -405,13 +414,17 @@ def handle_query():
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 laws_text = file.read()
+                logger.info(f"Loaded laws file: {len(laws_text)} characters")
         except FileNotFoundError:
+            logger.error(f"Laws file not found at: {file_path}")
             return jsonify({'error': 'Laws file not found. Please contact support.'}), 500
             
-        # Create Anthropic client (your working method)
+        # Create Anthropic client
+        logger.info("Creating Anthropic client...")
         client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
         
         # Make the Claude query with prompt caching (upgraded to Sonnet 4)
+        logger.info("Making Anthropic API call...")
         response = client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
@@ -430,6 +443,7 @@ def handle_query():
         )
         
         response_text = response.content[0].text
+        logger.info(f"Got response: {len(response_text)} characters")
         
         # Record usage
         tokens_used = response.usage.input_tokens + response.usage.output_tokens if hasattr(response, 'usage') else len(user_query.split()) * 2
@@ -442,6 +456,8 @@ def handle_query():
         
     except Exception as e:
         logger.error(f"Error processing query: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
         return jsonify({
             "error": "An error occurred processing your request",
             "details": str(e)
@@ -449,9 +465,7 @@ def handle_query():
 
 print("11. Query route defined")
 
-# Get user from database or create new user
-# REPLACED FUNCTION
-
+# Helper functions
 def get_or_create_user(user_id, email=None, name=None):
     try:
         conn = get_db_connection()
@@ -497,9 +511,6 @@ def get_or_create_user(user_id, email=None, name=None):
             'stripe_customer_id': None
         }
 
-# Check usage limits
-# REPLACED FUNCTION
-
 def check_usage_limit(user_id):
     try:
         conn = get_db_connection()
@@ -527,13 +538,13 @@ def check_usage_limit(user_id):
         # Get today's usage
         cursor.execute('''
             SELECT COUNT(*) FROM usage 
-            WHERE user_id = %s AND created_at::date = CURRENT_DATE
+            WHERE user_id = %s AND DATE(created_at) = CURRENT_DATE
         ''', (user_id,))
         today_count = cursor.fetchone()[0]
         # Get monthly usage
         cursor.execute('''
             SELECT COUNT(*) FROM usage 
-            WHERE user_id = %s AND created_at >= date_trunc('month', CURRENT_DATE)
+            WHERE user_id = %s AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
         ''', (user_id,))
         month_count = cursor.fetchone()[0]
         cursor.close()
@@ -553,9 +564,6 @@ def check_usage_limit(user_id):
     except Exception as e:
         logger.error(f"Error checking usage limit: {str(e)}")
         return True, None  # Allow usage if error
-
-# Record usage
-# REPLACED FUNCTION
 
 def record_usage(user_id, query, scope, tokens_used):
     try:
@@ -582,7 +590,7 @@ for rule in app.url_map.iter_rules():
 print("========================")
 
 if __name__ == '__main__':
-    # Only enable debug mode in developmen
+    # Only enable debug mode in development
     debug = os.environ.get('FLASK_ENV') == 'development'
     
     # Get port from environment variable for production deployment
