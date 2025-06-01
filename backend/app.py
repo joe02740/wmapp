@@ -266,18 +266,18 @@ def get_chat_history():
         return jsonify({
             'sessions': [
                 {
-                    'id': session[0],
-                    'title': session[1],
-                    'created_at': session[2].isoformat() if session[2] else '',
-                    'updated_at': session[3].isoformat() if session[3] else ''
+                    'id': row[0],
+                    'title': row[1],
+                    'created_at': row[2].isoformat() if row[2] else '',
+                    'updated_at': row[3].isoformat() if row[3] else ''
                 }
-                for session in sessions
+                for row in sessions
             ]
         })
         
     except Exception as e:
-        logger.error(f"Error fetching chat history: {str(e)}")
-        return jsonify({'error': 'Internal server error'}), 500
+        logger.error(f"Error in get_chat_history: {str(e)}")
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
 print("8. Chat history route defined")
 
@@ -324,16 +324,16 @@ print("9. Chat session route defined")
 
 @app.route('/api/chat-session', methods=['POST'])
 def save_chat_session():
+    data = request.json
+    user_id = data.get('user_id')
+    session_id = data.get('session_id')
+    title = data.get('title')
+    messages = data.get('messages', [])
+    
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    
     try:
-        data = request.json
-        user_id = data.get('user_id')
-        session_id = data.get('session_id')
-        title = data.get('title')
-        messages = data.get('messages', [])
-        
-        if not user_id:
-            return jsonify({'error': 'User ID is required'}), 400
-        
         conn = get_db_connection()
         cursor = conn.cursor()
         current_time = datetime.now()
@@ -342,23 +342,27 @@ def save_chat_session():
             # Update existing session
             cursor.execute('''
                 UPDATE chat_sessions 
-                SET title = %s, messages = %s, updated_at = %s 
+                SET title = %s, updated_at = %s 
                 WHERE id = %s AND user_id = %s
-            ''', (title, json.dumps(messages), current_time, session_id, user_id))
-            
-            if cursor.rowcount == 0:
-                cursor.close()
-                conn.close()
-                return jsonify({'error': 'Session not found'}), 404
+            ''', (title, current_time, session_id, user_id))
         else:
-            # Create new session
+            # Create new session - DON'T try to insert messages column!
             cursor.execute('''
-                INSERT INTO chat_sessions (user_id, title, messages, created_at, updated_at)
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO chat_sessions (user_id, title, created_at, updated_at)
+                VALUES (%s, %s, %s, %s)
                 RETURNING id
-            ''', (user_id, title, json.dumps(messages), current_time, current_time))
-            
+            ''', (user_id, title, current_time, current_time))
             session_id = cursor.fetchone()[0]
+        
+        # Clear existing messages for this session
+        cursor.execute('DELETE FROM chat_messages WHERE session_id = %s', (session_id,))
+        
+        # Insert new messages into separate table
+        for msg in messages:
+            cursor.execute('''
+                INSERT INTO chat_messages (session_id, message, sender, created_at)
+                VALUES (%s, %s, %s, %s)
+            ''', (session_id, msg.get('text'), msg.get('sender'), current_time))
         
         conn.commit()
         cursor.close()
@@ -367,92 +371,58 @@ def save_chat_session():
         return jsonify({
             'session_id': session_id,
             'title': title,
-            'message': 'Session saved successfully'
+            'message': 'Chat session saved successfully'
         })
         
     except Exception as e:
         logger.error(f"Error saving chat session: {str(e)}")
-        return jsonify({'error': 'Internal server error'}), 500
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
 print("10. Save chat session route defined")
 
 @app.route('/api/query', methods=['POST'])
 def handle_query():
+    data = request.json
+    query = data.get('query')
+    scope = data.get('scope', 'mass_laws')
+    user_id = data.get('user_id')
+    
+    if not query or not user_id:
+        return jsonify({'error': 'Query and user ID are required'}), 400
+    
     try:
-        data = request.json
-        query = data.get('query')
-        scope = data.get('scope', 'mass_laws')
-        user_id = data.get('user_id')
-        session_id = data.get('session_id')
-        
-        if not query or not user_id:
-            return jsonify({'error': 'Query and user ID are required'}), 400
-        
         # Check usage limits
         can_use, limit_message = check_usage_limit(user_id)
         if not can_use:
-            return jsonify({
-                'error': 'Usage limit exceeded',
-                'response': limit_message
-            }), 429
+            return jsonify({'response': limit_message}), 429
         
-        # Initialize Anthropic client
-        if not app.config['ANTHROPIC_API_KEY']:
-            return jsonify({'error': 'AI service not configured'}), 500
-        
-        client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
-        
-        # Prepare context based on scope
-        context_prompts = {
-            'mass_laws': """You are an expert assistant for Massachusetts Weights and Measures inspectors. 
-            You have comprehensive knowledge of Massachusetts General Laws Chapter 98, regulations 940 CMR, 
-            and all related weights and measures laws and regulations. Provide accurate, specific answers 
-            with exact citations including chapter, section, and regulation numbers when applicable.""",
-            'hb44': "You are an expert on NIST Handbook 44 - Specifications, Tolerances, and Other Technical Requirements for Weighing and Measuring Devices.",
-            'hb130': "You are an expert on NIST Handbook 130 - Uniform Laws and Regulations in the areas of legal metrology and engine fuel quality.",
-            'hb133': "You are an expert on NIST Handbook 133 - Checking the Net Contents of Packaged Goods."
-        }
-        
-        system_prompt = context_prompts.get(scope, context_prompts['mass_laws'])
-        
-        # Make API call to Anthropic
-        response = client.messages.create(
-            model="claude-3-haiku-20240307",
-            max_tokens=1000,
-            system=system_prompt,
-            messages=[
-                {"role": "user", "content": query}
-            ]
-        )
-        
-        # Calculate tokens (approximate)
-        input_tokens = len(query.split()) + len(system_prompt.split())
-        output_tokens = len(response.content[0].text.split())
-        total_tokens = input_tokens + output_tokens
+        # Initialize Anthropic client correctly
+        if app.config['ANTHROPIC_API_KEY']:
+            # Correct way to initialize Anthropic client
+            client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
+            
+            # Make the API call
+            message = client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=1000,
+                messages=[
+                    {"role": "user", "content": f"Query about {scope}: {query}"}
+                ]
+            )
+            response_text = message.content[0].text
+        else:
+            # Fallback if no API key
+            response_text = f"Anthropic API key not configured. Query: {query} (Scope: {scope})"
         
         # Record usage
-        record_usage(user_id, query, scope, total_tokens)
+        tokens_used = len(query.split()) * 2  # Rough estimate
+        record_usage(user_id, query, scope, tokens_used)
         
-        logger.info(f"Query processed for user {user_id}, tokens: {total_tokens}")
+        return jsonify({'response': response_text})
         
-        return jsonify({
-            'response': response.content[0].text,
-            'tokens_used': total_tokens,
-            'scope': scope
-        })
-        
-    except anthropic.APIError as e:
-        logger.error(f"Anthropic API error: {str(e)}")
-        return jsonify({
-            'error': 'AI service error',
-            'response': 'Sorry, I encountered an error processing your request. Please try again.'
-        }), 500
     except Exception as e:
         logger.error(f"Error processing query: {str(e)}")
-        return jsonify({
-            'error': 'Internal server error',
-            'response': 'Sorry, I encountered an error processing your request. Please try again.'
-        }), 500
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
 print("11. Query route defined")
 
