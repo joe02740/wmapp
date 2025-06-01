@@ -189,6 +189,84 @@ for rule in app.url_map.iter_rules():
     print(f"  {rule.rule} -> {rule.endpoint}")
 print("========================")
 
+@app.route('/api/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    try:
+        data = request.json
+        tier = data.get('tier')
+        user_id = data.get('user_id')
+        
+        if not user_id:
+            return jsonify({'error': 'User ID is required'}), 400
+            
+        if tier != 'paid':
+            return jsonify({'error': 'Invalid subscription tier'}), 400
+        
+        # Get price ID from environment
+        price_id = os.getenv('STRIPE_PRICE_ID_PAID')
+        if not price_id:
+            return jsonify({'error': 'Stripe price not configured'}), 500
+        
+        # Get or create user
+        user = get_or_create_user(user_id)
+        
+        # Get user email from Clerk (you might need to pass this from frontend)
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT email, stripe_customer_id FROM users WHERE id = %s', (user_id,))
+        user_data = cursor.fetchone()
+        
+        if not user_data:
+            cursor.close()
+            conn.close()
+            return jsonify({'error': 'User not found'}), 404
+            
+        email, stripe_customer_id = user_data
+        
+        # Create or get Stripe customer
+        if not stripe_customer_id:
+            customer = stripe.Customer.create(
+                email=email,
+                metadata={'user_id': user_id}
+            )
+            
+            # Save customer ID to database
+            cursor.execute('''
+                UPDATE users SET stripe_customer_id = %s WHERE id = %s
+            ''', (customer.id, user_id))
+            conn.commit()
+            stripe_customer_id = customer.id
+        
+        cursor.close()
+        conn.close()
+        
+        # Create checkout session
+        checkout_session = stripe.checkout.Session.create(
+            customer=stripe_customer_id,
+            payment_method_types=['card'],
+            line_items=[{
+                'price': price_id,
+                'quantity': 1,
+            }],
+            mode='subscription',
+            success_url=f'https://wmhelper.com/success?session_id={{CHECKOUT_SESSION_ID}}',
+            cancel_url='https://wmhelper.com/cancel',
+            client_reference_id=user_id,
+            metadata={'user_id': user_id, 'tier': tier}
+        )
+        
+        logger.info(f"Created checkout session for user {user_id}")
+        
+        return jsonify({'checkoutUrl': checkout_session.url})
+        
+    except Exception as e:
+        logger.error(f"Checkout session error: {str(e)}")
+        return jsonify({
+            "error": "An error occurred creating checkout session",
+            "details": str(e)
+        }), 500
+
 if __name__ == '__main__':
     # Only enable debug mode in developmen
     debug = os.environ.get('FLASK_ENV') == 'development'
