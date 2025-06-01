@@ -28,6 +28,7 @@ CORS(app, resources={
         "origins": [
             "https://wmhelper.com",
             "https://www.wmhelper.com",
+            "https://nbwm.netlify.app"
             "http://localhost:5173",  # Keep for local dev
         ],
         "methods": ["GET", "POST", "OPTIONS"],

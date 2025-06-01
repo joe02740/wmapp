@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import ChatHistory from './ChatHistory';
+import { API_BASE } from '../config';
 import './ChatInterface.css';
 
 interface Message {
@@ -33,7 +34,7 @@ const ChatInterface = () => {
     try {
       const title = sessionTitle || generateTitle(newMessages[0].text);
       
-      const response = await fetch('/api/chat-session', {
+      const response = await fetch(`${API_BASE}/api/chat-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ const ChatInterface = () => {
     }
 
     try {
-      const response = await fetch(`/api/chat-session/${sessionId}?user_id=${user.id}`);
+      const response = await fetch(`${API_BASE}/api/chat-session/${sessionId}?user_id=${user.id}`);
       if (response.ok) {
         const data = await response.json();
         setMessages(data.messages);
@@ -98,7 +99,7 @@ const ChatInterface = () => {
     setUsageLimitReached(false);
 
     try {
-      const response = await fetch('/api/query', {
+      const response = await fetch(`${API_BASE}/api/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

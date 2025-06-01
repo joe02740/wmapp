@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
+import { API_BASE } from '../config';
 import './UserProfile.css';
 
 interface UsageData {
@@ -48,7 +49,7 @@ const UserProfile = () => {
     
     try {
       setLoading(true);
-      const response = await fetch(`/api/usage?user_id=${user.id}`);
+      const response = await fetch(`${API_BASE}/api/usage?user_id=${user.id}`);
       
       if (!response.ok) {
         throw new Error(`Error fetching usage data: ${response.status}`);
@@ -73,7 +74,7 @@ const UserProfile = () => {
       
       // If downgrading to free tier, process immediately
       if (selectedTier === 'free') {
-        const response = await fetch('/api/subscribe', {
+        const response = await fetch(`${API_BASE}/api/subscribe`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ const UserProfile = () => {
         alert(`Your subscription has been updated to ${selectedTier} tier!`);
       } else {
         // For paid tiers, redirect to Stripe Checkout
-        const response = await fetch('/api/create-checkout-session', {
+        const response = await fetch(`${API_BASE}/api/create-checkout-session`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

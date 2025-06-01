@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
+import { API_BASE } from '../config';
 import './ChatHistory.css';
 
 interface ChatSession {
@@ -24,7 +25,7 @@ const ChatHistory = ({ onSelectSession, currentSessionId }: ChatHistoryProps) =>
     
     try {
       setLoading(true);
-      const response = await fetch(`/api/chat-history?user_id=${user.id}`);
+      const response = await fetch(`${API_BASE}/api/chat-history?user_id=${user.id}`);
       if (response.ok) {
         const data = await response.json();
         setSessions(data.sessions || []);

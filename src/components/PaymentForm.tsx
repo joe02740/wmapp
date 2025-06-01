@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { API_BASE } from '../config';
 import './PaymentForm.css';
 
 interface PaymentFormProps {
@@ -30,7 +31,7 @@ const PaymentForm = ({ amount, tier, userId, onSuccess, onCancel }: PaymentFormP
     
     try {
       // Create payment intent on your backend
-      const response = await fetch('/api/create-payment-intent', {
+      const response = await fetch(`${API_BASE}/api/create-payment-intent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ const PaymentForm = ({ amount, tier, userId, onSuccess, onCancel }: PaymentFormP
         setSucceeded(true);
         
         // Update user subscription
-        const subscriptionResponse = await fetch('/api/subscribe', {
+        const subscriptionResponse = await fetch(`${API_BASE}/api/subscribe`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
