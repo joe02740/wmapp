@@ -78,9 +78,24 @@ print("5. Test route defined")
 
 @app.route('/api/usage', methods=['GET'])
 def get_usage():
-    # ...existing get_usage function code...
-    # (The actual function body is already present below this line)
-    pass
+    user_id = request.args.get('user_id')
+    logger.info(f"Usage request for user_id: {user_id}")
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    try:
+        # Add debug logging
+        logger.info("About to call get_or_create_user")
+        user = get_or_create_user(user_id)
+        logger.info(f"User created/retrieved: {user}")
+        # Continue with your function...
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        # ...existing code for the rest of the function...
+    except Exception as e:
+        logger.error(f"Error in get_usage: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
 
 print("6. Usage route defined")
 
