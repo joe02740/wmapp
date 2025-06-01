@@ -1,0 +1,61 @@
+.app-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e1e5e9;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    font-family: 'IM Fell English', serif;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .disclaimer {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #856404;
+    text-align: center;
+  }
+  
+  .disclaimer strong {
+    color: #d63384;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links span {
+    white-space: nowrap;
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .app-footer {
+      padding: 1rem;
+    }
+    
+    .footer-links {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .footer-links span:nth-child(even) {
+      display: none; /* Hide bullet points on mobile */
+    }
+  }

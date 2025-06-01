@@ -29,6 +29,7 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTier, setSelectedTier] = useState<string>('');
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   
   // Plan prices map
   //const tierPrices: { [key: string]: number } = {
@@ -41,6 +42,14 @@ const UserProfile = () => {
       fetchUsageData();
     }
   }, [user]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      setPaymentSuccess(true);
+      fetchUsageData(); // Refresh data
+    }
+  }, []);
 
   const fetchUsageData = async () => {
     if (!user) return;
@@ -69,10 +78,8 @@ const UserProfile = () => {
 
   const handleUpgradeSubscription = async () => {
     if (!user || !selectedTier || selectedTier === usageData?.subscription_tier) return;
-    
     try {
       setLoading(true);
-      
       // If downgrading to free tier, process immediately
       if (selectedTier === 'free') {
         const response = await fetch(`${API_BASE}/api/subscribe`, {
@@ -85,11 +92,9 @@ const UserProfile = () => {
             tier: selectedTier
           }),
         });
-        
         if (!response.ok) {
           throw new Error(`Error updating subscription: ${response.status}`);
         }
-        
         // Refresh usage data after updating subscription
         await fetchUsageData();
         alert(`Your subscription has been updated to ${selectedTier} tier!`);
@@ -105,13 +110,10 @@ const UserProfile = () => {
             tier: selectedTier
           }),
         });
-        
         if (!response.ok) {
           throw new Error(`Error creating checkout session: ${response.status}`);
         }
-        
         const data = await response.json();
-        
         // Redirect to Stripe Checkout
         window.location.href = data.checkoutUrl;
       }
@@ -260,6 +262,7 @@ const UserProfile = () => {
           </div>
         </>
       )}
+      {paymentSuccess && <div>Payment was successful!</div>}
     </div>
   );
 };

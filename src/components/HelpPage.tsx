@@ -164,6 +164,48 @@ const HelpPage = ({ onNavigateToProfile }: HelpPageProps) => {
           </div>
         </div>
       </div>
+      <div className="help-section disclaimer-section">
+        <h3>⚠️ Important Legal Disclaimer</h3>
+        <div className="legal-disclaimer">
+          <div className="disclaimer-content">
+            <h4>Use Responsibly - AI Can Make Mistakes</h4>
+            <p>This AI assistant is a <strong>research tool</strong>, not a substitute for official legal guidance or your professional judgment. Here's what you need to know:</p>
+            <div className="disclaimer-grid">
+              <div className="disclaimer-item">
+                <span className="disclaimer-icon">🔍</span>
+                <div>
+                  <strong>Always Verify</strong>
+                  <p>Cross-check AI responses with official Mass.gov sources, current regulations, and your department's guidance before taking enforcement action.</p>
+                </div>
+              </div>
+              <div className="disclaimer-item">
+                <span className="disclaimer-icon">⚖️</span>
+                <div>
+                  <strong>Your Professional Responsibility</strong>
+                  <p>You remain fully responsible for all enforcement decisions, citations, and legal interpretations. The AI is an aid, not a replacement for your expertise.</p>
+                </div>
+              </div>
+              <div className="disclaimer-item">
+                <span className="disclaimer-icon">🤖</span>
+                <div>
+                  <strong>AI Limitations</strong>
+                  <p>AI can hallucinate, misinterpret context, or provide outdated information. When in doubt, consult official sources or legal counsel.</p>
+                </div>
+              </div>
+              <div className="disclaimer-item">
+                <span className="disclaimer-icon">📋</span>
+                <div>
+                  <strong>Documentation</strong>
+                  <p>Keep records of your verification process. Don't rely solely on AI output for citation justification.</p>
+                </div>
+              </div>
+            </div>
+            <div className="liability-notice">
+              <p><strong>No Liability:</strong> The creators of this tool assume no responsibility for enforcement actions, legal outcomes, or decisions made based on AI responses. Use at your own professional discretion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="help-section">
         <h3>📞 Still Need Help?</h3>
         <p>This tool was built by a working Weights & Measures inspector who understands the real challenges you face in the field. If you have suggestions for improvements or need help with specific features, feel free to reach out.</p>

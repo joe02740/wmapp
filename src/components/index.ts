@@ -8,3 +8,4 @@ export { default as CancelPage } from './CancelPage';
 export { default as ChatHistory } from './ChatHistory';
 export { default as HelpPage } from './HelpPage';
 export { default as PWAInstall } from './PWAInstall';
+export { default as Footer } from './Footer';

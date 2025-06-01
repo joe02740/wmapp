@@ -87,10 +87,73 @@ def get_usage():
         logger.info("About to call get_or_create_user")
         user = get_or_create_user(user_id)
         logger.info(f"User created/retrieved: {user}")
-        # Continue with your function...
+        
         conn = get_db_connection()
         cursor = conn.cursor()
-        # ...existing code for the rest of the function...
+        
+        # Get today's usage
+        cursor.execute('''
+            SELECT COUNT(*) FROM usage 
+            WHERE user_id = %s AND DATE(created_at) = CURRENT_DATE
+        ''', (user_id,))
+        today_count = cursor.fetchone()[0]
+        
+        # Get monthly usage
+        cursor.execute('''
+            SELECT COUNT(*) FROM usage 
+            WHERE user_id = %s AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
+        ''', (user_id,))
+        month_count = cursor.fetchone()[0]
+        
+        # Get total usage
+        cursor.execute('''
+            SELECT COUNT(*) FROM usage WHERE user_id = %s
+        ''', (user_id,))
+        total_count = cursor.fetchone()[0]
+        
+        # Get recent queries (last 5)
+        cursor.execute('''
+            SELECT query, scope, tokens_used, created_at 
+            FROM usage 
+            WHERE user_id = %s 
+            ORDER BY created_at DESC 
+            LIMIT 5
+        ''', (user_id,))
+        recent_queries = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        
+        # Define limits based on tier
+        limits = {
+            'free': {'daily': 2, 'monthly': 6},
+            'paid': {'daily': 50, 'monthly': 500}
+        }
+        
+        user_limits = limits.get(user['subscription_tier'], limits['free'])
+        
+        return jsonify({
+            'user_id': user_id,
+            'subscription_tier': user['subscription_tier'],
+            'subscription_end_date': user['subscription_end_date'],
+            'usage': {
+                'daily': today_count,
+                'daily_limit': user_limits['daily'],
+                'monthly': month_count,
+                'monthly_limit': user_limits['monthly'],
+                'total': total_count
+            },
+            'recent_queries': [
+                {
+                    'query': row[0],
+                    'scope': row[1],
+                    'tokens_used': row[2],
+                    'created_at': row[3].isoformat() if row[3] else ''
+                }
+                for row in recent_queries
+            ]
+        })
+        
     except Exception as e:
         logger.error(f"Error in get_usage: {str(e)}")
         import traceback
@@ -176,6 +239,222 @@ def create_checkout_session():
             "error": "An error occurred creating checkout session",
             "details": str(e)
         }), 500
+
+print("7. Checkout session route defined")
+
+@app.route('/api/chat-history', methods=['GET'])
+def get_chat_history():
+    user_id = request.args.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT id, title, created_at, updated_at 
+            FROM chat_sessions 
+            WHERE user_id = %s 
+            ORDER BY updated_at DESC
+        ''', (user_id,))
+        
+        sessions = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'sessions': [
+                {
+                    'id': session[0],
+                    'title': session[1],
+                    'created_at': session[2].isoformat() if session[2] else '',
+                    'updated_at': session[3].isoformat() if session[3] else ''
+                }
+                for session in sessions
+            ]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching chat history: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+print("8. Chat history route defined")
+
+@app.route('/api/chat-session/<int:session_id>', methods=['GET'])
+def get_chat_session(session_id):
+    user_id = request.args.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+    
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Get session details
+        cursor.execute('''
+            SELECT id, title, messages, created_at, updated_at 
+            FROM chat_sessions 
+            WHERE id = %s AND user_id = %s
+        ''', (session_id, user_id))
+        
+        session = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        
+        if not session:
+            return jsonify({'error': 'Session not found'}), 404
+        
+        # Parse messages from JSON
+        messages = json.loads(session[2]) if session[2] else []
+        
+        return jsonify({
+            'id': session[0],
+            'title': session[1],
+            'messages': messages,
+            'created_at': session[3].isoformat() if session[3] else '',
+            'updated_at': session[4].isoformat() if session[4] else ''
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching chat session: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+print("9. Chat session route defined")
+
+@app.route('/api/chat-session', methods=['POST'])
+def save_chat_session():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        session_id = data.get('session_id')
+        title = data.get('title')
+        messages = data.get('messages', [])
+        
+        if not user_id:
+            return jsonify({'error': 'User ID is required'}), 400
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        current_time = datetime.now()
+        
+        if session_id:
+            # Update existing session
+            cursor.execute('''
+                UPDATE chat_sessions 
+                SET title = %s, messages = %s, updated_at = %s 
+                WHERE id = %s AND user_id = %s
+            ''', (title, json.dumps(messages), current_time, session_id, user_id))
+            
+            if cursor.rowcount == 0:
+                cursor.close()
+                conn.close()
+                return jsonify({'error': 'Session not found'}), 404
+        else:
+            # Create new session
+            cursor.execute('''
+                INSERT INTO chat_sessions (user_id, title, messages, created_at, updated_at)
+                VALUES (%s, %s, %s, %s, %s)
+                RETURNING id
+            ''', (user_id, title, json.dumps(messages), current_time, current_time))
+            
+            session_id = cursor.fetchone()[0]
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'session_id': session_id,
+            'title': title,
+            'message': 'Session saved successfully'
+        })
+        
+    except Exception as e:
+        logger.error(f"Error saving chat session: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+print("10. Save chat session route defined")
+
+@app.route('/api/query', methods=['POST'])
+def handle_query():
+    try:
+        data = request.json
+        query = data.get('query')
+        scope = data.get('scope', 'mass_laws')
+        user_id = data.get('user_id')
+        session_id = data.get('session_id')
+        
+        if not query or not user_id:
+            return jsonify({'error': 'Query and user ID are required'}), 400
+        
+        # Check usage limits
+        can_use, limit_message = check_usage_limit(user_id)
+        if not can_use:
+            return jsonify({
+                'error': 'Usage limit exceeded',
+                'response': limit_message
+            }), 429
+        
+        # Initialize Anthropic client
+        if not app.config['ANTHROPIC_API_KEY']:
+            return jsonify({'error': 'AI service not configured'}), 500
+        
+        client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
+        
+        # Prepare context based on scope
+        context_prompts = {
+            'mass_laws': """You are an expert assistant for Massachusetts Weights and Measures inspectors. 
+            You have comprehensive knowledge of Massachusetts General Laws Chapter 98, regulations 940 CMR, 
+            and all related weights and measures laws and regulations. Provide accurate, specific answers 
+            with exact citations including chapter, section, and regulation numbers when applicable.""",
+            'hb44': "You are an expert on NIST Handbook 44 - Specifications, Tolerances, and Other Technical Requirements for Weighing and Measuring Devices.",
+            'hb130': "You are an expert on NIST Handbook 130 - Uniform Laws and Regulations in the areas of legal metrology and engine fuel quality.",
+            'hb133': "You are an expert on NIST Handbook 133 - Checking the Net Contents of Packaged Goods."
+        }
+        
+        system_prompt = context_prompts.get(scope, context_prompts['mass_laws'])
+        
+        # Make API call to Anthropic
+        response = client.messages.create(
+            model="claude-3-haiku-20240307",
+            max_tokens=1000,
+            system=system_prompt,
+            messages=[
+                {"role": "user", "content": query}
+            ]
+        )
+        
+        # Calculate tokens (approximate)
+        input_tokens = len(query.split()) + len(system_prompt.split())
+        output_tokens = len(response.content[0].text.split())
+        total_tokens = input_tokens + output_tokens
+        
+        # Record usage
+        record_usage(user_id, query, scope, total_tokens)
+        
+        logger.info(f"Query processed for user {user_id}, tokens: {total_tokens}")
+        
+        return jsonify({
+            'response': response.content[0].text,
+            'tokens_used': total_tokens,
+            'scope': scope
+        })
+        
+    except anthropic.APIError as e:
+        logger.error(f"Anthropic API error: {str(e)}")
+        return jsonify({
+            'error': 'AI service error',
+            'response': 'Sorry, I encountered an error processing your request. Please try again.'
+        }), 500
+    except Exception as e:
+        logger.error(f"Error processing query: {str(e)}")
+        return jsonify({
+            'error': 'Internal server error',
+            'response': 'Sorry, I encountered an error processing your request. Please try again.'
+        }), 500
+
+print("11. Query route defined")
 
 # Get user from database or create new user
 # REPLACED FUNCTION
