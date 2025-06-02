@@ -96,7 +96,7 @@ function MainLayout() {
                 Stop Hunting Through Regulation Manuals
               </h1>
               <h2 className="hero-subtitle">
-                Get instant answers from an AI that actually knows weights & measures law—right from your phone, right in the field.
+                Get instant answers from an AI that actually knows Massachusetts weights & measures law—right from your phone, right in the field.
               </h2>
               
               <div className="hero-features">
@@ -145,7 +145,7 @@ function MainLayout() {
                     "What's the fine for incorrect pricing on 12 items?"
                   </div>
                   <div className="chat-bubble ai">
-                    "Based on the Massachusetts weights and measures laws, the fine for incorrect pricing on 12 items depends on the type of establishment and pricing system being used: ## For Food Stores/Food Departments Using Consumer Price Scanner Systems: - **Fine: $2,400** (12 items × $200 per violation) - **Legal Authority:** M.G.L. c. 94, § 184D(b) - **Regulation:** 202 CMR 7.00 (Price Disclosure regulations)..."
+                    "Based on the Massachusetts weights and measures laws, For Food Stores/Food Departments Using Consumer Price Scanner Systems: - **Fine: $2,400**  **Legal Authority:** M.G.L. c. 94, § 184D(b) - **Regulation:** 202 CMR 7.00 (Price Disclosure regulations)..."
                   </div>
                 </div>
               </div>
