@@ -206,9 +206,9 @@ const HelpPage = ({ onNavigateToProfile }: HelpPageProps) => {
           </div>
         </div>
       </div>
-      <div className="help-section">
+      <div className="help-section support-section">
         <h3>📞 Still Need Help?</h3>
-        <p>This tool was built by a working Weights & Measures inspector who understands the real challenges you face in the field. If you have suggestions for improvements or need help with specific features, feel free to reach out.</p>
+        <p>This tool was built by a working Weights & Measures inspector who understands the real challenges you face in the field. If you have suggestions for improvements or need help with specific features, <a href="mailto:joe@thinkpack.ai?subject=W&M Helper Support Request" className="contact-link">feel free to reach out</a>.</p>
       </div>
     </div>
   );
