@@ -104,39 +104,130 @@
 }
 
 .upgrade-button {
-  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%);
-  color: #FFD700;
+  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%) !important;
+  color: #FFD700 !important;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
   cursor: pointer;
   width: 100%;
-  max-width: 300px;
-  margin: 1.5rem auto;
-  display: block;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
   font-family: 'IM Fell English', serif;
+  font-weight: bold;
 }
 
 .upgrade-button:hover {
+  background: linear-gradient(135deg, #284785 0%, #3a6bb8 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(27, 54, 100, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .upgrade-button:disabled {
-  opacity: 0.6;
+  background-color: #cccccc !important;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
-.disclaimer {
-  color: #666;
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-  font-style: italic;
+.subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.plan {
+  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%) !important;
+  color: white !important;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #1B3664;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  border-color: #FFD700;
+}
+
+.plan.selected {
+  border-color: #FFD700 !important;
+  background: linear-gradient(135deg, #FFD700 0%, #f0c040 100%) !important;
+  color: #1B3664 !important;
+  transform: translateY(-3px);
+}
+
+.plan h4 {
+  color: inherit !important;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.plan.selected h4 {
+  color: #1B3664 !important;
+}
+
+.price {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-bottom: 1rem !important;
+  color: inherit !important;
+}
+
+.plan.selected .price {
+  color: #1B3664 !important;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.plan li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: inherit !important;
+}
+
+.plan li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #FFD700 !important;
+  font-weight: bold;
+}
+
+.plan.selected li {
+  color: #1B3664 !important;
+}
+
+.plan.selected li:before {
+  color: #1B3664 !important;
+}
+
+.plan-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.plan.selected .plan-badge {
+  color: rgba(27, 54, 100, 0.8) !important;
+  background-color: rgba(27, 54, 100, 0.1);
 }
 
 .loading {

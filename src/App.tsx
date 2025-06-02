@@ -120,7 +120,7 @@ function MainLayout() {
 
               <div className="hero-testimonial">
                 <p className="testimonial-text">
-                  "No more driving back to the office to look up laws. No more Ctrl+F through Word docs. 
+                  "No more driving back to the office to look up laws.  
                   I can handle complex citations confidently right in the field."
                 </p>
                 <p className="testimonial-author">— Built by a working W&M Inspector</p>
@@ -145,7 +145,7 @@ function MainLayout() {
                     "What's the fine for incorrect pricing on 12 items?"
                   </div>
                   <div className="chat-bubble ai">
-                    "Under Mass. Gen. Laws Ch. 98, §§56-57, you can issue fines of $200 per violation. For 12 items, that's $2,400 total. Quote section 56A for your citation authority..."
+                    "Based on the Massachusetts weights and measures laws, the fine for incorrect pricing on 12 items depends on the type of establishment and pricing system being used: ## For Food Stores/Food Departments Using Consumer Price Scanner Systems: - **Fine: $2,400** (12 items × $200 per violation) - **Legal Authority:** M.G.L. c. 94, § 184D(b) - **Regulation:** 202 CMR 7.00 (Price Disclosure regulations)..."
                   </div>
                 </div>
               </div>
