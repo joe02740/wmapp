@@ -107,13 +107,13 @@ def get_usage():
         ''', (user_id,))
         total_count = cursor.fetchone()[0]
         
-        # Get recent queries (last 5)
+        # Get recent queries (last 15)
         cursor.execute('''
             SELECT query, scope, tokens_used, created_at 
             FROM usage 
             WHERE user_id = %s 
             ORDER BY created_at DESC 
-            LIMIT 5
+            LIMIT 15
         ''', (user_id,))
         recent_queries = cursor.fetchall()
         

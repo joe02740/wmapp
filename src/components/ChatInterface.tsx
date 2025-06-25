@@ -188,10 +188,16 @@ const ChatInterface = ({ loadSessionId }: ChatInterfaceProps) => {
       <div className="chat-interface-layout">
         {/* Chat History Sidebar */}
         <div className={`chat-history-sidebar ${showChatHistory ? 'mobile-open' : ''}`}>
-          <ChatHistory 
-            onSelectSession={loadChatSession}
-            currentSessionId={currentSessionId}
-          />
+          {user ? (
+            <ChatHistory 
+              onSelectSession={loadChatSession}
+              currentSessionId={currentSessionId}
+            />
+          ) : (
+            <div style={{ padding: '1rem', color: '#1B3664' }}>
+              Please sign in to view chat history
+            </div>
+          )}
         </div>
         
         {/* Main Chat Area */}
