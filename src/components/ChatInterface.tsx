@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import ChatHistory from './ChatHistory';
 import { API_BASE } from '../config';
@@ -9,7 +9,11 @@ interface Message {
   sender: 'user' | 'ai';
 }
 
-const ChatInterface = () => {
+interface ChatInterfaceProps {
+  loadSessionId?: number | null;
+}
+
+const ChatInterface = ({ loadSessionId }: ChatInterfaceProps) => {
   const { user } = useUser();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -19,6 +23,14 @@ const ChatInterface = () => {
   const [usageLimitMessage, setUsageLimitMessage] = useState('');
   const [currentSessionId, setCurrentSessionId] = useState<number | null>(null);
   const [sessionTitle, setSessionTitle] = useState<string>('');
+  const [showChatHistory, setShowChatHistory] = useState(false);
+
+  // Load specific session if requested
+  useEffect(() => {
+    if (loadSessionId && loadSessionId > 0) {
+      loadChatSession(loadSessionId);
+    }
+  }, [loadSessionId]);
 
   // Generate title from first message
   const generateTitle = (firstMessage: string): string => {
@@ -66,6 +78,7 @@ const ChatInterface = () => {
       setMessages([]);
       setCurrentSessionId(null);
       setSessionTitle('');
+      setShowChatHistory(false); // Hide on mobile after selection
       return;
     }
 
@@ -76,6 +89,7 @@ const ChatInterface = () => {
         setMessages(data.messages);
         setCurrentSessionId(sessionId);
         setSessionTitle(data.title);
+        setShowChatHistory(false); // Hide on mobile after loading
       }
     } catch (error) {
       console.error('Error loading chat session:', error);
@@ -108,7 +122,7 @@ const ChatInterface = () => {
           query: currentInput,
           scope: searchScope,
           user_id: user?.id,
-          session_id: currentSessionId  // ADD THIS LINE
+          session_id: currentSessionId
         }),
       });
 
@@ -162,73 +176,95 @@ const ChatInterface = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: 'calc(100vh - 150px)' }}>
-      <ChatHistory 
-        onSelectSession={loadChatSession}
-        currentSessionId={currentSessionId}
-      />
-      
-      <div className="chat-interface" style={{ flex: 1 }}>
-        <div className="search-options">
-          <select 
-            value={searchScope}
-            onChange={(e) => setSearchScope(e.target.value)}
-            className="scope-selector"
-          >
-            <option value="mass_laws">Massachusetts W&M Laws</option>
-            <option value="hb44">NIST Handbook 44 - Coming Soon</option>
-            <option value="hb130">NIST Handbook 130 - Coming Soon</option>
-            <option value="hb133">NIST Handbook 133 - Coming Soon</option>
-          </select>
-        </div>
+    <div className="chat-interface-container">
+      {/* Mobile chat history toggle button */}
+      <button 
+        className="mobile-history-toggle"
+        onClick={() => setShowChatHistory(!showChatHistory)}
+      >
+        📋 Chat History
+      </button>
 
-        <div className="chat-messages">
-          {messages.map((msg, index) => (
-            <div 
-              key={index} 
-              className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+      <div className="chat-interface-layout">
+        {/* Chat History Sidebar */}
+        <div className={`chat-history-sidebar ${showChatHistory ? 'mobile-open' : ''}`}>
+          <ChatHistory 
+            onSelectSession={loadChatSession}
+            currentSessionId={currentSessionId}
+          />
+        </div>
+        
+        {/* Main Chat Area */}
+        <div className="chat-interface">
+          <div className="search-options">
+            <select 
+              value={searchScope}
+              onChange={(e) => setSearchScope(e.target.value)}
+              className="scope-selector"
             >
-              {msg.text}
+              <option value="mass_laws">Massachusetts W&M Laws</option>
+              <option value="hb44">NIST Handbook 44 - Coming Soon</option>
+              <option value="hb130">NIST Handbook 130 - Coming Soon</option>
+              <option value="hb133">NIST Handbook 133 - Coming Soon</option>
+            </select>
+          </div>
+
+          <div className="chat-messages">
+            {messages.map((msg, index) => (
+              <div 
+                key={index} 
+                className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+              >
+                {msg.text}
+              </div>
+            ))}
+            {isLoading && <div className="loading-indicator">🔍 Analyzing regulations...</div>}
+          </div>
+
+          {usageLimitReached && (
+            <div className="usage-limit-warning">
+              <p>{usageLimitMessage}</p>
+              <button 
+                className="upgrade-button"
+                onClick={() => {
+                  // Navigate to profile view - you might need to update this
+                  const profileBtn = document.querySelector('li[class="active"]');
+                  if (profileBtn) {
+                    (profileBtn as HTMLElement).click();
+                  }
+                }}
+              >
+                View Subscription Options
+              </button>
             </div>
-          ))}
-          {isLoading && <div className="loading-indicator">🔍 Analyzing regulations...</div>}
-        </div>
+          )}
 
-        {usageLimitReached && (
-          <div className="usage-limit-warning">
-            <p>{usageLimitMessage}</p>
+          <div className="chat-input">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={`Ask about ${searchScope}...`}
+              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              disabled={isLoading}
+            />
             <button 
-              className="upgrade-button"
-              onClick={() => {
-                // Navigate to profile view - you might need to update this
-                const profileBtn = document.querySelector('li[class="active"]');
-                if (profileBtn) {
-                  (profileBtn as HTMLElement).click();
-                }
-              }}
+              onClick={handleSendMessage}
+              disabled={isLoading || !input.trim()}
             >
-              View Subscription Options
+              Send
             </button>
           </div>
-        )}
-
-        <div className="chat-input">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={`Ask about ${searchScope}...`}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            disabled={isLoading}
-          />
-          <button 
-            onClick={handleSendMessage}
-            disabled={isLoading || !input.trim()}
-          >
-            Send
-          </button>
         </div>
       </div>
+
+      {/* Mobile overlay for chat history */}
+      {showChatHistory && (
+        <div 
+          className="mobile-overlay"
+          onClick={() => setShowChatHistory(false)}
+        />
+      )}
     </div>
   );
 };

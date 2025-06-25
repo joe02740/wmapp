@@ -1,7 +1,46 @@
-.chat-interface {
+.chat-interface-container {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 150px);
+  width: 100%;
+  position: relative;
+}
+
+.mobile-history-toggle {
+  display: none;
+  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%);
+  color: #FFD700;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'IM Fell English', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  z-index: 1001;
+}
+
+.mobile-history-toggle:hover {
+  background: linear-gradient(135deg, #284785 0%, #3a6bb8 100%);
+}
+
+.chat-interface-layout {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.chat-history-sidebar {
+  min-width: 250px;
+  height: 100%;
+  border-right: 1px solid #e1e5e9;
+  z-index: 1000;
+}
+
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   width: 100%;
   position: relative;
 }
@@ -203,12 +242,64 @@
   transform: translateY(-2px);
 }
 
+/* Mobile overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
+  .mobile-history-toggle {
+    display: block;
+  }
+  
+  .chat-history-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: white;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .chat-history-sidebar.mobile-open {
+    left: 0;
+  }
+  
+  .mobile-overlay {
+    display: block;
+  }
+  
+  .chat-interface-layout {
+    height: calc(100% - 3rem); /* Account for toggle button */
+  }
+  
   .chat-interface {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 180px);
+    width: 100%;
   }
   
   .message {
     max-width: 90%;
+    font-size: 1rem;
+  }
+  
+  .chat-input {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .chat-input button {
+    width: 100%;
   }
 }

@@ -10,6 +10,7 @@ function MainLayout() {
   const { user } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'chat' | 'profile' | 'help' | 'landing'>('landing');
+  const [loadSessionId, setLoadSessionId] = useState<number | null>(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -18,6 +19,15 @@ function MainLayout() {
   const handleMenuClick = (view: 'chat' | 'profile' | 'help' | 'landing') => {
     setCurrentView(view);
     setMenuOpen(false);
+    // Clear session ID when manually navigating
+    if (view !== 'chat') {
+      setLoadSessionId(null);
+    }
+  };
+
+  const handleNavigateToChat = (sessionId?: number) => {
+    setLoadSessionId(sessionId || null);
+    setCurrentView('chat');
   };
 
   const renderCurrentView = () => {
@@ -25,16 +35,13 @@ function MainLayout() {
     if (user) {
       switch (currentView) {
         case 'profile':
-          return <UserProfile onNavigateToChat={(sessionId) => {
-            setCurrentView('chat');
-            // You can pass sessionId to ChatInterface if needed later
-          }} />;
+          return <UserProfile onNavigateToChat={handleNavigateToChat} />;
         case 'help':
           return <HelpPage />;
         case 'landing':
-          return <ChatInterface />; // If signed in and go to landing, show chat
+          return <ChatInterface loadSessionId={loadSessionId} />; // If signed in and go to landing, show chat
         default:
-          return <ChatInterface />;
+          return <ChatInterface loadSessionId={loadSessionId} />;
       }
     } 
     
