@@ -17,6 +17,8 @@
   font-size: 0.9rem;
   cursor: pointer;
   margin-bottom: 1rem;
+  margin-left: auto; /* Align to right */
+  width: fit-content;
   z-index: 1001;
 }
 
@@ -263,17 +265,17 @@
   .chat-history-sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
+    right: -250px; /* Changed from left to right */
     width: 250px;
     height: 100vh;
     background-color: white;
-    transition: left 0.3s ease;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    transition: right 0.3s ease; /* Changed from left to right */
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Changed shadow direction */
+    z-index: 800; /* Lower than hamburger menu (which should be ~1000+) */
   }
   
   .chat-history-sidebar.mobile-open {
-    left: 0;
+    right: 0; /* Changed from left to right */
   }
   
   .mobile-overlay {

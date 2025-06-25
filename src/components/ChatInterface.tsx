@@ -182,7 +182,7 @@ const ChatInterface = ({ loadSessionId }: ChatInterfaceProps) => {
         className="mobile-history-toggle"
         onClick={() => setShowChatHistory(!showChatHistory)}
       >
-        📋 Chat History
+        📋 History {showChatHistory ? '→' : '←'}
       </button>
 
       <div className="chat-interface-layout">
