@@ -25,7 +25,10 @@ function MainLayout() {
     if (user) {
       switch (currentView) {
         case 'profile':
-          return <UserProfile />;
+          return <UserProfile onNavigateToChat={(sessionId) => {
+            setCurrentView('chat');
+            // You can pass sessionId to ChatInterface if needed later
+          }} />;
         case 'help':
           return <HelpPage />;
         case 'landing':
@@ -161,7 +164,7 @@ function LandingPage() {
             </button>
           </SignInButton>
           <p className="cta-subtext">
-            No credit card required • Upgrade to Professional for $20/month
+            No credit card required • Upgrade to Professional for $5/month
           </p>
         </div>
       </div>

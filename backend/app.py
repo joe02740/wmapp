@@ -120,10 +120,10 @@ def get_usage():
         cursor.close()
         conn.close()
         
-        # Define limits based on tier
+        # Define limits based on tier (UPDATED)
         limits = {
             'free': {'daily': 2, 'monthly': 6},
-            'paid': {'daily': 50, 'monthly': 500}
+            'paid': {'daily': 25, 'monthly': 75}  # Updated from 50/500 to 25/75
         }
         
         user_limits = limits.get(user['subscription_tier'], limits['free'])
@@ -549,10 +549,10 @@ def check_usage_limit(user_id):
         month_count = cursor.fetchone()[0]
         cursor.close()
         conn.close()
-        # Define limits based on tier
+        # Updated limits based on new pricing
         limits = {
             'free': {'daily': 2, 'monthly': 6},
-            'paid': {'daily': 50, 'monthly': 500}
+            'paid': {'daily': 25, 'monthly': 75}  # Updated from 50/500 to 25/75
         }
         # Check limits
         if tier in limits:

@@ -1,135 +1,4 @@
-.user-profile {
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  max-width: 1000px;
-  margin: 0 auto;
-  font-family: 'IM Fell English', serif;
-}
-
-.user-profile h2 {
-  color: #1B3664;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-  font-size: 2rem;
-}
-
-.profile-section {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.profile-section:last-child {
-  border-bottom: none;
-}
-
-.profile-section h3 {
-  color: #1B3664;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.subscription-info p {
-  color: #1B3664;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.tier-badge {
-  background-color: #1B3664;
-  color: #FFD700;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.usage-stats p {
-  color: #1B3664;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.meter-text {
-  color: #1B3664;
-  font-size: 0.9rem;
-  text-align: right;
-  margin-top: 0.25rem;
-}
-
-.total-usage {
-  color: #1B3664;
-  font-weight: bold;
-  text-align: right;
-  margin-top: 1rem;
-  font-size: 1.1rem;
-}
-
-.recent-queries p {
-  color: #1B3664;
-  font-style: italic;
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.query-item {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border-left: 4px solid #1B3664;
-  margin-bottom: 1rem;
-}
-
-.query-text {
-  color: #1B3664;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.query-meta {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.85rem;
-  color: #666;
-}
-
-.query-meta span {
-  color: #666;
-}
-
-.upgrade-button {
-  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%) !important;
-  color: #FFD700 !important;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 1rem;
-  transition: background-color 0.2s, transform 0.2s;
-  font-family: 'IM Fell English', serif;
-  font-weight: bold;
-}
-
-.upgrade-button:hover {
-  background: linear-gradient(135deg, #284785 0%, #3a6bb8 100%) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.upgrade-button:disabled {
-  background-color: #cccccc !important;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
+/* Fixed subscription plans styling - add this to UserProfile.css */
 
 .subscription-plans {
   display: grid;
@@ -230,19 +99,30 @@
   background-color: rgba(27, 54, 100, 0.1);
 }
 
-.loading {
-  text-align: center;
-  color: #1B3664;
-  font-size: 1.2rem;
-  padding: 2rem;
+.upgrade-button {
+  background: linear-gradient(135deg, #1B3664 0%, #2c5aa0 100%) !important;
+  color: #FFD700 !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
+  font-family: 'IM Fell English', serif;
+  font-weight: bold;
 }
 
-.error {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #f5c6cb;
-  text-align: center;
-  margin: 1rem 0;
+.upgrade-button:hover {
+  background: linear-gradient(135deg, #284785 0%, #3a6bb8 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upgrade-button:disabled {
+  background-color: #cccccc !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }

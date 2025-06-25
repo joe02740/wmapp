@@ -23,7 +23,11 @@ interface UsageData {
   }[];
 }
 
-const UserProfile = () => {
+interface UserProfileProps {
+  onNavigateToChat?: (sessionId?: number) => void;
+}
+
+const UserProfile = ({ onNavigateToChat }: UserProfileProps) => {
   const { user } = useUser();
   const [usageData, setUsageData] = useState<UsageData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,12 +35,6 @@ const UserProfile = () => {
   const [selectedTier, setSelectedTier] = useState<string>('');
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   
-  // Plan prices map
-  //const tierPrices: { [key: string]: number } = {
-    //'free': 0,
-    //'paid': 20.00
-  //};
-
   useEffect(() => {
     if (user) {
       fetchUsageData();
@@ -54,9 +52,6 @@ const UserProfile = () => {
   const fetchUsageData = async () => {
     if (!user) return;
     
-    console.log('User object:', user); // Add this line
-    console.log('User ID:', user.id);  // Add this line
-    
     try {
       setLoading(true);
       const response = await fetch(`${API_BASE}/api/usage?user_id=${user.id}`);
@@ -73,6 +68,47 @@ const UserProfile = () => {
       setError('Failed to load your usage data. Please try again later.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Find chat session that contains this query
+  const findChatSession = async (queryText: string) => {
+    if (!user) return null;
+    
+    try {
+      const response = await fetch(`${API_BASE}/api/chat-history?user_id=${user.id}`);
+      if (!response.ok) return null;
+      
+      const data = await response.json();
+      
+      // Search through sessions to find one containing this query
+      for (const session of data.sessions) {
+        const sessionResponse = await fetch(`${API_BASE}/api/chat-session/${session.id}?user_id=${user.id}`);
+        if (sessionResponse.ok) {
+          const sessionData = await sessionResponse.json();
+          // Check if any message in this session matches our query
+          const hasQuery = sessionData.messages.some((msg: any) => 
+            msg.sender === 'user' && msg.text.includes(queryText.substring(0, 50))
+          );
+          if (hasQuery) {
+            return session.id;
+          }
+        }
+      }
+      return null;
+    } catch (error) {
+      console.error('Error finding chat session:', error);
+      return null;
+    }
+  };
+
+  const handleQueryClick = async (queryText: string) => {
+    const sessionId = await findChatSession(queryText);
+    if (sessionId && onNavigateToChat) {
+      onNavigateToChat(sessionId);
+    } else {
+      // If no session found or navigation not available, show message
+      alert('Chat session not found. This query might be from an older session that was not saved.');
     }
   };
 
@@ -204,13 +240,19 @@ const UserProfile = () => {
             {usageData.recent_queries.length > 0 ? (
               <div className="recent-queries">
                 {usageData.recent_queries.map((query, index) => (
-                  <div key={index} className="query-item">
+                  <div 
+                    key={index} 
+                    className="query-item clickable-query" 
+                    onClick={() => handleQueryClick(query.query)}
+                    title="Click to open chat session"
+                  >
                     <div className="query-text">"{query.query}"</div>
                     <div className="query-meta">
                       <span>{query.scope}</span>
                       <span>{formatDate(query.created_at)} at {formatTime(query.created_at)}</span>
                       <span>{query.tokens_used} tokens</span>
                     </div>
+                    <div className="query-hint">💬 Click to view conversation</div>
                   </div>
                 ))}
               </div>
@@ -235,10 +277,10 @@ const UserProfile = () => {
               
               <div className={`plan ${selectedTier === 'paid' ? 'selected' : ''}`} onClick={() => setSelectedTier('paid')}>
                 <h4>Professional</h4>
-                <p className="price">$20 / month</p>
+                <p className="price">$5 / month</p>
                 <ul>
-                  <li>50 queries per day</li>
-                  <li>500 queries per month</li>
+                  <li>25 queries per day</li>
+                  <li>75 queries per month</li>
                   <li>Priority support</li>
                   <li>Advanced features</li>
                 </ul>
