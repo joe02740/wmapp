@@ -262,28 +262,30 @@
     display: block;
   }
   
+  .chat-interface-layout {
+    height: calc(100% - 3rem); /* Account for toggle button */
+  }
+  
   .chat-history-sidebar {
-    position: fixed;
+    position: fixed !important; /* Override desktop positioning */
     top: 0;
-    right: -250px; /* Changed from left to right */
+    right: -250px;
     width: 250px;
+    max-width: 250px;
     height: 100vh;
     background-color: white;
-    transition: right 0.3s ease; /* Changed from left to right */
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Changed shadow direction */
-    z-index: 800; /* Lower than hamburger menu (which should be ~1000+) */
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 800 !important; /* Higher z-index for mobile overlay */
+    border-right: none;
   }
   
   .chat-history-sidebar.mobile-open {
-    right: 0; /* Changed from left to right */
+    right: 0;
   }
   
   .mobile-overlay {
     display: block;
-  }
-  
-  .chat-interface-layout {
-    height: calc(100% - 3rem); /* Account for toggle button */
   }
   
   .chat-interface {
@@ -299,6 +301,8 @@
   .chat-input {
     flex-direction: column;
     gap: 0.5rem;
+    display: flex;
+    width: 100%;
   }
   
   .chat-input button {
