@@ -70,13 +70,23 @@ function MainLayout() {
           Weights & Measures Helper
         </h1>
         
-        <div className="auth-buttons">
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+        <div className="header-actions">
+          <a 
+            href="mailto:joe@thinkpack.ai?subject=W&M Helper Support Request" 
+            className="contact-button"
+            title="Contact Support"
+          >
+            📧 Contact Us
+          </a>
+          
+          <div className="auth-buttons">
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
       </header>
       
@@ -177,15 +187,12 @@ function LandingPage() {
       </div>
 
       <div className="hero-visual">
-        <div className="phone-mockup">
-          <div className="chat-preview">
-            <div className="chat-bubble user">
-              "What's the fine for incorrect pricing on 12 items?"
-            </div>
-            <div className="chat-bubble ai">
-              "Based on the Massachusetts weights and measures laws, For Food Stores/Food Departments Using Consumer Price Scanner Systems: - **Fine: $2,400**  **Legal Authority:** M.G.L. c. 94, § 184D(b) - **Regulation:** 202 CMR 7.00 (Price Disclosure regulations)..."
-            </div>
-          </div>
+        <div className="screenshot-container">
+          <img 
+            src="/screenshot-mobile.png" 
+            alt="W&M Helper mobile app in action showing real legal query and AI response"
+            className="mobile-screenshot"
+          />
         </div>
       </div>
     </div>
