@@ -30,10 +30,6 @@ const HelpPage = ({ onNavigateToProfile }: HelpPageProps) => {
                 <span>One-tap access from home screen</span>
               </div>
               <div className="benefit-item">
-                <span className="benefit-icon">📵</span>
-                <span>Works offline after initial load</span>
-              </div>
-              <div className="benefit-item">
                 <span className="benefit-icon">🖥️</span>
                 <span>Full-screen experience (no browser bars)</span>
               </div>

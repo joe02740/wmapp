@@ -8,7 +8,7 @@ const getAPIBase = () => {
   
   // Default to production URL in production, empty string for local proxy in dev
   return import.meta.env.PROD 
-    ? 'https://nbwm-backend.onrender.com' 
+    ? 'https://wmapp.fly.dev' 
     : '';
 };
 

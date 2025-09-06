@@ -18,6 +18,7 @@
     "react-router-dom": "^7.5.3"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",

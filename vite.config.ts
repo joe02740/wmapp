@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://nbwm-backend.onrender.com',
+        target: 'https://wmapp.fly.dev',
         changeOrigin: true,
         secure: false,
       }
