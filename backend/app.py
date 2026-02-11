@@ -388,13 +388,14 @@ print("10. Save chat session route defined")
 
 @app.route('/api/query', methods=['POST'])
 def handle_query():
-    logger.info("=== QUERY ROUTE CALLED ===")  # Debug log
+    logger.info("=== QUERY ROUTE CALLED ===")
     data = request.json
     user_query = data.get('query')
     scope = data.get('scope', 'mass_laws')
     user_id = data.get('user_id')
+    conversation_history = data.get('conversation_history', [])
     
-    logger.info(f"Query: {user_query[:50]}... | User: {user_id} | Scope: {scope}")
+    logger.info(f"Query: {user_query[:50]}... | User: {user_id} | Scope: {scope} | History: {len(conversation_history)} messages")
     
     if not user_query or not user_id:
         return jsonify({'error': 'Query and user ID are required'}), 400
@@ -420,18 +421,42 @@ def handle_query():
             return jsonify({'error': 'Laws file not found. Please contact support.'}), 500
             
         # Create Anthropic client
-        logger.info("Creating Anthropic client...")
         client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
         
-        # Make the Claude query with prompt caching (upgraded to Sonnet 4)
-        logger.info("Making Anthropic API call...")
+        # Build conversation messages with full history for multi-turn memory
+        claude_messages = []
+        for msg in conversation_history:
+            role = 'user' if msg.get('sender') == 'user' else 'assistant'
+            text = msg.get('text', '')
+            if text:  # Skip empty messages
+                claude_messages.append({"role": role, "content": text})
+        
+        # Add the current user query
+        claude_messages.append({"role": "user", "content": user_query})
+        
+        # Ensure messages alternate properly (Claude requires user/assistant alternation)
+        # Merge consecutive same-role messages if any
+        cleaned_messages = []
+        for msg in claude_messages:
+            if cleaned_messages and cleaned_messages[-1]["role"] == msg["role"]:
+                cleaned_messages[-1]["content"] += "\n" + msg["content"]
+            else:
+                cleaned_messages.append(msg)
+        
+        # Ensure first message is from user
+        if cleaned_messages and cleaned_messages[0]["role"] != "user":
+            cleaned_messages = cleaned_messages[1:]
+        
+        logger.info(f"Sending {len(cleaned_messages)} messages to Claude (with conversation history)")
+        
+        # Make the Claude query with prompt caching (Claude Sonnet 4.5)
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1024,
+            model="claude-sonnet-4-5-20250929",
+            max_tokens=2048,
             system=[
                 {
                     "type": "text",
-                    "text": "You are an AI assistant specialized in Massachusetts weights and measures laws. Provide accurate and helpful information based on the given context. Please also assume you are chatting with someone who is a Weights and Measures official.\n"
+                    "text": "You are an AI assistant specialized in Massachusetts weights and measures laws. Provide accurate and helpful information based on the given context. Please also assume you are chatting with someone who is a Weights and Measures official. When referencing specific laws or regulations, cite the section numbers. You have full conversation history, so feel free to reference previous questions and answers in this chat.\n"
                 },
                 {
                     "type": "text", 
@@ -439,11 +464,17 @@ def handle_query():
                     "cache_control": {"type": "ephemeral"}
                 }
             ],
-            messages=[{"role": "user", "content": user_query}]
+            messages=cleaned_messages
         )
         
         response_text = response.content[0].text
         logger.info(f"Got response: {len(response_text)} characters")
+        
+        # Log cache performance
+        if hasattr(response, 'usage'):
+            cache_creation = getattr(response.usage, 'cache_creation_input_tokens', 0)
+            cache_read = getattr(response.usage, 'cache_read_input_tokens', 0)
+            logger.info(f"Cache stats - creation: {cache_creation}, read: {cache_read}")
         
         # Record usage
         tokens_used = response.usage.input_tokens + response.usage.output_tokens if hasattr(response, 'usage') else len(user_query.split()) * 2

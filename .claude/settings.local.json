@@ -6,7 +6,8 @@
       "Bash(pip install:*)",
       "Bash(venvScriptspip.exe install:*)",
       "Bash(./venv/Scripts/pip.exe install:*)",
-      "Bash(flyctl:*)"
+      "Bash(flyctl:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

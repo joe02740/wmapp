@@ -21,3 +21,11 @@ coverage.xml
 .mypy_cache
 .pytest_cache
 .hypothesis
+app.log
+wm_helper.db
+fly.toml
+Dockerfile
+init_db()
+listmodels.py
+minimal_test_app.py
+test_import.py

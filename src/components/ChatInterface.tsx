@@ -122,7 +122,8 @@ const ChatInterface = ({ loadSessionId }: ChatInterfaceProps) => {
           query: currentInput,
           scope: searchScope,
           user_id: user?.id,
-          session_id: currentSessionId
+          session_id: currentSessionId,
+          conversation_history: messages  // Send full chat history for multi-turn memory
         }),
       });
 
@@ -251,7 +252,7 @@ const ChatInterface = ({ loadSessionId }: ChatInterfaceProps) => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={`Ask about ${searchScope}...`}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               disabled={isLoading}
             />
             <button 
