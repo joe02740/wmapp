@@ -423,6 +423,16 @@ def handle_query():
         # Create Anthropic client
         client = anthropic.Anthropic(api_key=app.config['ANTHROPIC_API_KEY'])
         
+        # Build user context from past conversations
+        user_context = build_user_context(user_id, exclude_session_id=data.get('session_id'))
+        
+        # Build the base system instruction with optional user context
+        system_instruction = "You are an AI assistant specialized in Massachusetts weights and measures laws. Provide accurate and helpful information based on the given context. Please also assume you are chatting with someone who is a Weights and Measures official. When referencing specific laws or regulations, cite the section numbers. You have full conversation history, so feel free to reference previous questions and answers in this chat.\n"
+        
+        if user_context:
+            system_instruction += f"\n{user_context}\n"
+            logger.info("Injected user context into system prompt")
+        
         # Build conversation messages with full history for multi-turn memory
         claude_messages = []
         for msg in conversation_history:
@@ -456,7 +466,7 @@ def handle_query():
             system=[
                 {
                     "type": "text",
-                    "text": "You are an AI assistant specialized in Massachusetts weights and measures laws. Provide accurate and helpful information based on the given context. Please also assume you are chatting with someone who is a Weights and Measures official. When referencing specific laws or regulations, cite the section numbers. You have full conversation history, so feel free to reference previous questions and answers in this chat.\n"
+                    "text": system_instruction
                 },
                 {
                     "type": "text", 
@@ -497,6 +507,117 @@ def handle_query():
 print("11. Query route defined")
 
 # Helper functions
+def build_user_context(user_id, exclude_session_id=None):
+    """
+    Build a weighted summary of the user's past chat sessions.
+    Recent sessions get more detail, older ones just get the topic.
+    Returns a string to inject into the system prompt, or empty string if no history.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Get the user's last 15 chat sessions (excluding current one)
+        if exclude_session_id:
+            cursor.execute('''
+                SELECT cs.id, cs.title, cs.updated_at,
+                       COUNT(cm.id) as msg_count
+                FROM chat_sessions cs
+                LEFT JOIN chat_messages cm ON cm.session_id = cs.id
+                WHERE cs.user_id = %s AND cs.id != %s
+                GROUP BY cs.id, cs.title, cs.updated_at
+                ORDER BY cs.updated_at DESC
+                LIMIT 15
+            ''', (user_id, exclude_session_id))
+        else:
+            cursor.execute('''
+                SELECT cs.id, cs.title, cs.updated_at,
+                       COUNT(cm.id) as msg_count
+                FROM chat_sessions cs
+                LEFT JOIN chat_messages cm ON cm.session_id = cs.id
+                WHERE cs.user_id = %s
+                GROUP BY cs.id, cs.title, cs.updated_at
+                ORDER BY cs.updated_at DESC
+                LIMIT 15
+            ''', (user_id,))
+        
+        sessions = cursor.fetchall()
+        
+        if not sessions:
+            cursor.close()
+            conn.close()
+            return ""
+        
+        summary_parts = []
+        
+        for i, (session_id, title, updated_at, msg_count) in enumerate(sessions):
+            date_str = updated_at.strftime('%b %d, %Y') if updated_at else 'Unknown date'
+            
+            if i < 3:
+                # RECENT (last 3 sessions): Include title + key Q&A snippets
+                cursor.execute('''
+                    SELECT message, sender FROM chat_messages
+                    WHERE session_id = %s
+                    ORDER BY created_at ASC
+                    LIMIT 6
+                ''', (session_id,))
+                msgs = cursor.fetchall()
+                
+                # Build a compact summary of the conversation
+                key_points = []
+                for msg_text, sender in msgs:
+                    if sender == 'user' and msg_text:
+                        # Truncate long questions
+                        snippet = msg_text[:120] + '...' if len(msg_text) > 120 else msg_text
+                        key_points.append(f"  Asked: {snippet}")
+                    elif sender == 'ai' and msg_text:
+                        # Just grab the first sentence or two of the AI response
+                        first_part = msg_text[:150].split('. ')
+                        brief = '. '.join(first_part[:2])
+                        if not brief.endswith('.'):
+                            brief += '...'
+                        key_points.append(f"  Answer summary: {brief}")
+                
+                points_str = '\n'.join(key_points[:4])  # Max 4 points per session
+                summary_parts.append(f"[{date_str}] {title}\n{points_str}")
+            
+            elif i < 8:
+                # MEDIUM (sessions 4-8): Title + first question only
+                cursor.execute('''
+                    SELECT message FROM chat_messages
+                    WHERE session_id = %s AND sender = 'user'
+                    ORDER BY created_at ASC
+                    LIMIT 1
+                ''', (session_id,))
+                first_q = cursor.fetchone()
+                q_text = ""
+                if first_q and first_q[0]:
+                    q_text = first_q[0][:80] + '...' if len(first_q[0]) > 80 else first_q[0]
+                    q_text = f" - Asked: {q_text}"
+                summary_parts.append(f"[{date_str}] {title}{q_text}")
+            
+            else:
+                # OLDER (sessions 9-15): Just the title/topic
+                summary_parts.append(f"[{date_str}] {title}")
+        
+        cursor.close()
+        conn.close()
+        
+        if not summary_parts:
+            return ""
+        
+        context = "=== USER'S PAST CONVERSATION HISTORY (most recent first) ===\n"
+        context += "This official has previously asked about the following topics. "
+        context += "Use this context to provide more personalized and relevant answers.\n\n"
+        context += "\n\n".join(summary_parts)
+        
+        logger.info(f"Built user context for {user_id}: {len(summary_parts)} sessions, {len(context)} chars")
+        return context
+        
+    except Exception as e:
+        logger.error(f"Error building user context: {str(e)}")
+        return ""  # Fail gracefully - don't block the query
+
 def get_or_create_user(user_id, email=None, name=None):
     try:
         conn = get_db_connection()
